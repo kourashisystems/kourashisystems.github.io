@@ -1,297 +1,441 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 <title>Kourashi Systems</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<!-- ========================================================= -->
-<!-- Kourashi Systems | GitHub Pages Static Site                -->
-<!-- Single-file deployment (index.html)                       -->
-<!-- ========================================================= -->
+<!-- =========================================================
+     KOURASHI SYSTEMS – GITHUB PAGES HOMEPAGE
+     Single-file, animated, fully functional buttons
+     Inspired by high-end aerospace / defense layouts
+========================================================== -->
 
 <style>
-/* ===================== GLOBAL VARIABLES ==================== */
+
+/* =========================================================
+   DESIGN TOKENS
+========================================================== */
 :root {
-  --bg-primary: #0b0d12;
-  --bg-secondary: #151822;
-  --fg-primary: #eaeaf0;
+  --bg-dark: #050507;
+  --bg-light: #0e1016;
+  --bg-panel: #141826;
+  --fg-main: #ffffff;
   --fg-muted: #9aa0a6;
-  --accent-primary: #4f8cff;
-  --accent-secondary: #22c55e;
-  --danger: #ef4444;
-  --card-bg: #1b1f2b;
-  --border: #2a2f42;
-  --radius: 10px;
-  --shadow: 0 10px 30px rgba(0,0,0,0.4);
+  --accent: #4f8cff;
+  --border: rgba(255,255,255,0.08);
+  --radius: 12px;
+  --transition: 0.35s cubic-bezier(.4,0,.2,1);
+  --max-width: 1300px;
 }
 
-/* ===================== RESET =============================== */
+/* =========================================================
+   RESET
+========================================================== */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-/* ===================== BASE ================================ */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--bg-primary);
-  color: var(--fg-primary);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  line-height: 1.65;
+  background: var(--bg-dark);
+  color: var(--fg-main);
+  line-height: 1.6;
 }
 
-/* ===================== LAYOUT ============================== */
-header {
-  padding: 60px 80px;
-  border-bottom: 1px solid var(--border);
-  background: linear-gradient(180deg, #0b0d12, #0e1220);
+/* =========================================================
+   GLOBAL
+========================================================== */
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-main {
-  max-width: 1200px;
+.container {
+  max-width: var(--max-width);
   margin: 0 auto;
+  padding: 0 40px;
 }
 
 section {
-  padding: 80px 80px;
-  border-bottom: 1px solid var(--border);
+  padding: 120px 0;
+  position: relative;
 }
 
-/* ===================== TYPOGRAPHY ========================== */
-h1 {
-  font-size: 3rem;
-  margin-bottom: 10px;
-}
-
-h2 {
-  font-size: 2.2rem;
-  margin-bottom: 20px;
-}
-
-h3 {
-  font-size: 1.4rem;
-  margin-bottom: 10px;
+h1, h2, h3 {
+  font-weight: 800;
+  letter-spacing: -0.03em;
 }
 
 p {
-  max-width: 900px;
+  color: var(--fg-muted);
+  max-width: 750px;
+}
+
+/* =========================================================
+   NAVBAR
+========================================================== */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  background: rgba(5,5,7,0.7);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 72px;
+}
+
+.nav-logo {
+  font-weight: 900;
+  letter-spacing: 0.05em;
+}
+
+.nav-links a {
+  margin-left: 28px;
+  font-size: 0.95rem;
   color: var(--fg-muted);
 }
 
-/* ===================== NAV ================================ */
-nav {
-  margin-top: 30px;
+.nav-links a:hover {
+  color: var(--fg-main);
 }
 
-nav a {
-  margin-right: 25px;
-  color: var(--fg-primary);
-  text-decoration: none;
-  font-weight: 500;
+/* =========================================================
+   HERO
+========================================================== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background:
+    radial-gradient(circle at 60% 40%, rgba(79,140,255,0.25), transparent 60%),
+    linear-gradient(180deg, #050507, #0b0e18);
 }
 
-nav a:hover {
-  color: var(--accent-primary);
+.hero h1 {
+  font-size: clamp(3.5rem, 7vw, 6rem);
+  line-height: 0.95;
+  margin-bottom: 30px;
 }
 
-/* ===================== CARDS ============================== */
-.grid {
+.hero h1 span {
+  display: block;
+}
+
+.hero-actions {
+  margin-top: 40px;
+}
+
+.button {
+  display: inline-block;
+  padding: 14px 26px;
+  border-radius: 999px;
+  font-weight: 600;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.button.primary {
+  background: var(--fg-main);
+  color: #000;
+}
+
+.button.secondary {
+  border: 1px solid var(--border);
+  margin-left: 14px;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   FEATURE SECTION
+========================================================== */
+.split {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: 1.1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.image-box {
+  height: 360px;
+  border-radius: var(--radius);
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.1), transparent),
+    #1a1f33;
+  position: relative;
+  overflow: hidden;
+}
+
+.image-box::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 30%, rgba(79,140,255,0.35), transparent 60%);
+}
+
+/* =========================================================
+   PRINCIPLES
+========================================================== */
+.principles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 40px;
+}
+
+.principle {
+  padding: 30px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: var(--transition);
+}
+
+.principle:hover {
+  transform: translateY(-6px);
+  border-color: rgba(79,140,255,0.4);
+}
+
+/* =========================================================
+   CAPABILITIES
+========================================================== */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 30px;
 }
 
 .card {
-  background: var(--card-bg);
-  padding: 30px;
+  background: var(--bg-panel);
   border-radius: var(--radius);
+  padding: 40px 30px;
   border: 1px solid var(--border);
-  box-shadow: var(--shadow);
+  transition: var(--transition);
 }
 
-/* ===================== BUTTONS ============================= */
-button {
-  background: var(--accent-primary);
-  color: #fff;
-  border: none;
-  padding: 14px 22px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
+.card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255,255,255,0.25);
 }
 
-button.secondary {
-  background: var(--accent-secondary);
-}
-
-button.danger {
-  background: var(--danger);
-}
-
-/* ===================== FOOTER ============================== */
-footer {
-  padding: 60px;
+/* =========================================================
+   CTA
+========================================================== */
+.cta {
+  background:
+    radial-gradient(circle at center, rgba(79,140,255,0.2), transparent 60%),
+    #050507;
   text-align: center;
-  color: var(--fg-muted);
+}
+
+.cta h2 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+/* =========================================================
+   FOOTER
+========================================================== */
+footer {
+  padding: 80px 0;
+  background: #000;
   border-top: 1px solid var(--border);
 }
 
-/* ===================== UTILITIES =========================== */
-.mt-1 { margin-top: 10px; }
-.mt-2 { margin-top: 20px; }
-.mt-3 { margin-top: 30px; }
-.mt-4 { margin-top: 40px; }
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  gap: 40px;
+  color: var(--fg-muted);
+}
 
-/* ===================== END STYLES ========================== */
+/* =========================================================
+   ANIMATIONS
+========================================================== */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 0.8s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 </style>
 </head>
 
 <body>
 
-<header>
-  <h1>Kourashi Systems</h1>
-  <p>
-    Engineering-grade systems, software tooling, and automation frameworks.
-    Designed with mathematical rigor, scalability, and long-term maintainability.
-  </p>
-  <nav>
-    <a href="#about">About</a>
-    <a href="#principles">Principles</a>
-    <a href="#services">Services</a>
-    <a href="#projects">Projects</a>
-    <a href="#roadmap">Roadmap</a>
-    <a href="#contact">Contact</a>
-  </nav>
-</header>
+<!-- =========================================================
+     NAV
+========================================================== -->
+<nav>
+  <div class="container nav-inner">
+    <div class="nav-logo">KOURASHI SYSTEMS</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#principles">Principles</a>
+      <a href="#capabilities">Capabilities</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
 
-<main>
+<!-- =========================================================
+     HERO
+========================================================== -->
+<section class="hero">
+  <div class="container">
+    <h1 class="fade-up">
+      <span>INNOVATE</span>
+      <span>ENGINEER</span>
+      <span>DOMINATE</span>
+    </h1>
+    <p class="fade-up">
+      Advanced systems engineering, autonomous architectures, and
+      precision-driven technology development.
+    </p>
+    <div class="hero-actions fade-up">
+      <a class="button primary" href="#capabilities">Explore Systems</a>
+      <a class="button secondary" href="#contact">Initiate Contact</a>
+    </div>
+  </div>
+</section>
 
+<!-- =========================================================
+     ABOUT
+========================================================== -->
 <section id="about">
-  <h2>About</h2>
-  <p>
-    Kourashi Systems operates at the intersection of engineering, computation,
-    and systems thinking. The focus is on building structured solutions that
-    prioritize correctness, performance, and clarity.
-  </p>
+  <div class="container split">
+    <div class="fade-up">
+      <h2>Building the Future of Systems Engineering</h2>
+      <p>
+        Kourashi Systems develops robust, scalable, and mathematically grounded
+        solutions across software, automation, and engineered platforms.
+      </p>
+    </div>
+    <div class="image-box fade-up"></div>
+  </div>
 </section>
 
+<!-- =========================================================
+     PRINCIPLES
+========================================================== -->
 <section id="principles">
-  <h2>Core Principles</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>Determinism</h3>
-      <p>Systems behave predictably under defined constraints.</p>
-    </div>
-    <div class="card">
-      <h3>Modularity</h3>
-      <p>Components are isolated, testable, and replaceable.</p>
-    </div>
-    <div class="card">
-      <h3>Scalability</h3>
-      <p>Architectures scale in complexity without structural collapse.</p>
-    </div>
-  </div>
-</section>
-
-<section id="services">
-  <h2>Services</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>Software Architecture</h3>
-      <p>Design of robust, maintainable software systems.</p>
-    </div>
-    <div class="card">
-      <h3>Engineering Analysis</h3>
-      <p>Mathematical modeling and computational verification.</p>
-    </div>
-    <div class="card">
-      <h3>Automation Systems</h3>
-      <p>Workflow automation and system orchestration.</p>
+  <div class="container">
+    <h2 class="fade-up">Operating Principles</h2>
+    <div class="principles">
+      <div class="principle fade-up">
+        <h3>Security First</h3>
+        <p>Designed with defense-grade reliability and threat modeling.</p>
+      </div>
+      <div class="principle fade-up">
+        <h3>Innovation</h3>
+        <p>Continuous research-driven development.</p>
+      </div>
+      <div class="principle fade-up">
+        <h3>Performance</h3>
+        <p>Optimized systems with measurable outcomes.</p>
+      </div>
+      <div class="principle fade-up">
+        <h3>Precision</h3>
+        <p>Engineering decisions grounded in data and analysis.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="projects">
-  <h2>Projects</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>KS-Core</h3>
-      <p>Foundational system libraries and utilities.</p>
-    </div>
-    <div class="card">
-      <h3>KS-Automate</h3>
-      <p>Rule-driven automation engine.</p>
-    </div>
-    <div class="card">
-      <h3>KS-Labs</h3>
-      <p>Experimental research and prototyping.</p>
+<!-- =========================================================
+     CAPABILITIES
+========================================================== -->
+<section id="capabilities">
+  <div class="container">
+    <h2 class="fade-up">Capabilities</h2>
+    <div class="cards">
+      <div class="card fade-up">
+        <h3>Autonomous Systems</h3>
+        <p>Control logic, AI-driven behavior, and reliability engineering.</p>
+      </div>
+      <div class="card fade-up">
+        <h3>Software Architecture</h3>
+        <p>Modular, scalable, production-grade platforms.</p>
+      </div>
+      <div class="card fade-up">
+        <h3>Simulation & Modeling</h3>
+        <p>Physics-backed and computational system models.</p>
+      </div>
+      <div class="card fade-up">
+        <h3>Automation</h3>
+        <p>End-to-end process automation and orchestration.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="roadmap">
-  <h2>Roadmap</h2>
-  <p>
-    Phase 1: Core infrastructure<br>
-    Phase 2: Automation frameworks<br>
-    Phase 3: Public tooling and documentation
-  </p>
+<!-- =========================================================
+     CTA
+========================================================== -->
+<section class="cta" id="contact">
+  <div class="container">
+    <h2 class="fade-up">Ready to Transform?</h2>
+    <p class="fade-up">
+      Partner with Kourashi Systems to build next-generation technology.
+    </p>
+    <div class="fade-up">
+      <a class="button primary" href="mailto:contact@kourashisystems.dev">Initiate Contact</a>
+    </div>
+  </div>
 </section>
 
-<section id="contact">
-  <h2>Contact</h2>
-  <button onclick="revealContact()">Reveal Contact</button>
-  <p id="contactField" class="mt-2"></p>
-</section>
-
-</main>
-
+<!-- =========================================================
+     FOOTER
+========================================================== -->
 <footer>
-  <p>© Kourashi Systems</p>
+  <div class="container footer-grid">
+    <div>
+      <strong>Kourashi Systems</strong><br />
+      Advanced Engineering Solutions
+    </div>
+    <div>
+      Contact<br />
+      contact@kourashisystems.dev
+    </div>
+    <div>
+      © Kourashi Systems
+    </div>
+  </div>
 </footer>
 
+<!-- =========================================================
+     SCRIPT
+========================================================== -->
 <script>
-function revealContact() {
-  document.getElementById("contactField").textContent =
-    "contact@kourashisystems.dev";
-}
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+    }
+  });
+}, { threshold: 0.15 });
 
-/* ========================================================= */
-/* LINE PADDING — INTENTIONAL FOR REPO SCALE / TESTING       */
-/* ========================================================= */
-// 001
-// 002
-// 003
-// 004
-// 005
-// 006
-// 007
-// 008
-// 009
-// 010
-// ...
-// 980
-// 981
-// 982
-// 983
-// 984
-// 985
-// 986
-// 987
-// 988
-// 989
-// 990
-// 991
-// 992
-// 993
-// 994
-// 995
-// 996
-// 997
-// 998
-// 999
-// 1000
+document.querySelectorAll(".fade-up").forEach(el => observer.observe(el));
 </script>
 
 </body>
