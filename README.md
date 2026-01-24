@@ -4,137 +4,161 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Joseph Alkourashi | Aerospace Engineering</title>
-  <meta name="description" content="Joseph Alkourashi – Aerospace / Aerospace Systems Engineering portfolio. Projects, skills, and research." />
+  <meta name="description" content="Aerospace engineering portfolio – aircraft, autonomous systems, and defence technology." />
 
-  <!-- Tailwind CDN -->
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Simple JS for interactivity -->
-  <script defer>
-    function toggleMenu() {
-      document.getElementById('mobileMenu').classList.toggle('hidden');
-    }
-
-    function scrollToSection(id) {
-      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+  <!-- Custom Tailwind config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            charcoal: '#0b0d10',
+            charcoalLight: '#12151a',
+            steel: '#9ca3af',
+            accent: '#38bdf8'
+          }
+        }
+      }
     }
   </script>
 
   <style>
     html { scroll-behavior: smooth; }
   </style>
-</head>
-<body class="bg-slate-950 text-slate-100">
 
-<!-- ================= NAVBAR ================= -->
-<header class="fixed top-0 w-full z-50 bg-slate-950/80 backdrop-blur border-b border-slate-800">
-  <nav class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-    <div class="font-bold text-xl tracking-tight">JOSEPH ALKOURASHI</div>
-    <div class="hidden md:flex gap-8 text-sm uppercase tracking-widest">
-      <button onclick="scrollToSection('home')">Home</button>
-      <button onclick="scrollToSection('about')">About</button>
-      <button onclick="scrollToSection('projects')">Projects</button>
-      <button onclick="scrollToSection('skills')">Skills</button>
-      <button onclick="scrollToSection('contact')">Contact</button>
+  <!-- Interactivity -->
+  <script defer>
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    }
+
+    function revealOnScroll() {
+      document.querySelectorAll('[data-reveal]').forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          el.classList.remove('opacity-0', 'translate-y-10');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', revealOnScroll);
+  </script>
+</head>
+<body class="bg-charcoal text-white font-sans">
+
+<!-- ================= NAV ================= -->
+<header class="fixed top-0 w-full z-50 bg-charcoal/80 backdrop-blur border-b border-white/5">
+  <nav class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+    <div class="text-lg font-semibold tracking-widest">JOSEPH ALKOURASHI</div>
+    <div class="hidden md:flex gap-10 text-sm uppercase tracking-widest text-steel">
+      <a href="#home" class="hover:text-white">Home</a>
+      <a href="#mission" class="hover:text-white">Mission</a>
+      <a href="#projects" class="hover:text-white">Projects</a>
+      <a href="#capabilities" class="hover:text-white">Capabilities</a>
+      <a href="#contact" class="hover:text-white">Contact</a>
     </div>
-    <button class="md:hidden" onclick="toggleMenu()">☰</button>
+    <button class="md:hidden text-xl" onclick="toggleMenu()">☰</button>
   </nav>
-  <div id="mobileMenu" class="hidden md:hidden bg-slate-900 border-t border-slate-800">
-    <div class="flex flex-col p-6 gap-4">
-      <button onclick="scrollToSection('home')">Home</button>
-      <button onclick="scrollToSection('about')">About</button>
-      <button onclick="scrollToSection('projects')">Projects</button>
-      <button onclick="scrollToSection('skills')">Skills</button>
-      <button onclick="scrollToSection('contact')">Contact</button>
+  <div id="mobileMenu" class="hidden bg-charcoalLight border-t border-white/5">
+    <div class="flex flex-col p-6 gap-4 uppercase tracking-widest text-sm">
+      <a href="#home">Home</a>
+      <a href="#mission">Mission</a>
+      <a href="#projects">Projects</a>
+      <a href="#capabilities">Capabilities</a>
+      <a href="#contact">Contact</a>
     </div>
   </div>
 </header>
 
 <!-- ================= HERO ================= -->
 <section id="home" class="min-h-screen flex items-center pt-24">
-  <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+  <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16">
     <div>
-      <p class="uppercase tracking-widest text-sky-400 text-sm">Aerospace Engineering Portfolio</p>
-      <h1 class="text-5xl md:text-7xl font-bold leading-tight mt-4">Designing<br/>Aircraft &<br/>Aerospace Systems</h1>
-      <p class="mt-6 text-slate-400 max-w-xl">Aerospace / Aerospace Systems Engineering student with a strong focus on aircraft design, RC aircraft, aerodynamics, and defence technology.</p>
-      <div class="mt-10 flex gap-4">
-        <button onclick="scrollToSection('projects')" class="px-8 py-4 bg-sky-500 text-black font-semibold">View Projects</button>
-        <button onclick="scrollToSection('contact')" class="px-8 py-4 border border-slate-600">Contact</button>
+      <p class="uppercase tracking-widest text-accent text-sm">Aerospace Engineering</p>
+      <h1 class="text-5xl md:text-7xl font-bold leading-tight mt-6">Autonomous.<br/>Precise.<br/>Engineered.</h1>
+      <p class="mt-8 text-steel max-w-xl">Designing aircraft and aerospace systems with a focus on performance, autonomy, and defence-grade engineering.</p>
+      <div class="mt-12 flex gap-4">
+        <a href="#projects" class="px-8 py-4 bg-white text-black font-semibold">View Projects</a>
+        <a href="#contact" class="px-8 py-4 border border-white/20">Contact</a>
       </div>
     </div>
-    <div class="border border-slate-800 rounded-xl p-6 bg-slate-900">
-      <h3 class="text-sm uppercase tracking-widest text-slate-400">Current Focus</h3>
-      <ul class="mt-4 space-y-2 text-slate-300">
-        <li>• RC Trainer Aircraft Design & Build</li>
-        <li>• Aerodynamic Sizing & Stability</li>
+    <div class="bg-charcoalLight border border-white/10 rounded-xl p-8">
+      <p class="uppercase tracking-widest text-steel text-xs">Current Focus</p>
+      <ul class="mt-4 space-y-3 text-sm">
+        <li>• RC & Fixed-Wing Aircraft Design</li>
+        <li>• Aerodynamic & Stability Analysis</li>
+        <li>• MATLAB / Simulink Modelling</li>
         <li>• CAD (Fusion 360)</li>
-        <li>• MATLAB / Simulink Analysis</li>
       </ul>
     </div>
   </div>
 </section>
 
-<!-- ================= ABOUT ================= -->
-<section id="about" class="py-32 bg-slate-900/40">
-  <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16">
-    <div>
-      <h2 class="text-4xl font-bold mb-6">About Me</h2>
-      <p class="text-slate-300 mb-4">I'm an Australian aerospace engineering student with a strong interest in aircraft design, autonomous systems, and defence applications.</p>
-      <p class="text-slate-400">My approach is practical and engineering-driven: derive equations, validate assumptions, model in MATLAB, and build real systems such as RC aircraft.</p>
+<!-- ================= MISSION ================= -->
+<section id="mission" class="py-40 bg-charcoalLight">
+  <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-20 items-center">
+    <div data-reveal class="opacity-0 translate-y-10 transition duration-700">
+      <p class="uppercase tracking-widest text-accent text-sm mb-4">Mission</p>
+      <h2 class="text-4xl md:text-5xl font-bold">Engineering the Future of Flight</h2>
+      <p class="mt-6 text-steel">My work focuses on aircraft systems, autonomy, and aerospace design — from first principles to physical implementation.</p>
     </div>
-    <div class="grid grid-cols-2 gap-6">
-      <div class="border border-slate-800 p-6 rounded-lg">University-Level Aerospace</div>
-      <div class="border border-slate-800 p-6 rounded-lg">Hands-on RC Aircraft</div>
-      <div class="border border-slate-800 p-6 rounded-lg">Defence Technology Interest</div>
-      <div class="border border-slate-800 p-6 rounded-lg">Strong Maths & Physics</div>
+    <div data-reveal class="opacity-0 translate-y-10 transition duration-700 delay-150 grid grid-cols-2 gap-6">
+      <div class="border border-white/10 p-6">Systems Thinking</div>
+      <div class="border border-white/10 p-6">Defence Awareness</div>
+      <div class="border border-white/10 p-6">Physics-Driven Design</div>
+      <div class="border border-white/10 p-6">Real Hardware</div>
     </div>
   </div>
 </section>
 
 <!-- ================= PROJECTS ================= -->
-<section id="projects" class="py-32">
+<section id="projects" class="py-40">
   <div class="max-w-7xl mx-auto px-6">
-    <h2 class="text-4xl font-bold mb-12">Featured Projects</h2>
-    <div class="grid md:grid-cols-3 gap-8">
-      <div class="bg-slate-900 border border-slate-800 rounded-xl p-6">
-        <h3 class="font-semibold text-xl">RC Trainer Aircraft</h3>
-        <p class="text-slate-400 mt-2">Full design cycle: requirements, sizing, aerodynamics, CAD, and build readiness.</p>
+    <h2 class="text-4xl md:text-5xl font-bold mb-16">Selected Projects</h2>
+    <div class="grid md:grid-cols-3 gap-10">
+      <div data-reveal class="opacity-0 translate-y-10 transition duration-700 bg-charcoalLight border border-white/10 p-8">
+        <h3 class="text-xl font-semibold">RC Trainer Aircraft</h3>
+        <p class="text-steel mt-3">Complete aircraft design cycle including sizing, aerodynamics, CAD, and build readiness.</p>
       </div>
-      <div class="bg-slate-900 border border-slate-800 rounded-xl p-6">
-        <h3 class="font-semibold text-xl">Aerodynamic Analysis Tools</h3>
-        <p class="text-slate-400 mt-2">MATLAB scripts for lift, drag, performance, and stability estimation.</p>
+      <div data-reveal class="opacity-0 translate-y-10 transition duration-700 delay-150 bg-charcoalLight border border-white/10 p-8">
+        <h3 class="text-xl font-semibold">Aerodynamic Analysis Tools</h3>
+        <p class="text-steel mt-3">MATLAB-based performance, lift/drag, and stability estimation tools.</p>
       </div>
-      <div class="bg-slate-900 border border-slate-800 rounded-xl p-6">
-        <h3 class="font-semibold text-xl">Future UAV Concepts</h3>
-        <p class="text-slate-400 mt-2">Conceptual design of autonomous and defence-focused UAV systems.</p>
+      <div data-reveal class="opacity-0 translate-y-10 transition duration-700 delay-300 bg-charcoalLight border border-white/10 p-8">
+        <h3 class="text-xl font-semibold">Autonomous UAV Concepts</h3>
+        <p class="text-steel mt-3">Conceptual UAV designs with autonomy and defence applications.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ================= SKILLS ================= -->
-<section id="skills" class="py-32 bg-slate-900/40">
+<!-- ================= CAPABILITIES ================= -->
+<section id="capabilities" class="py-40 bg-charcoalLight">
   <div class="max-w-7xl mx-auto px-6">
-    <h2 class="text-4xl font-bold mb-12">Technical Skills</h2>
+    <h2 class="text-4xl md:text-5xl font-bold mb-16">Capabilities</h2>
     <div class="grid md:grid-cols-4 gap-6">
-      <div class="border border-slate-800 p-6 rounded-lg">Aerodynamics</div>
-      <div class="border border-slate-800 p-6 rounded-lg">Aircraft Stability</div>
-      <div class="border border-slate-800 p-6 rounded-lg">Fusion 360 CAD</div>
-      <div class="border border-slate-800 p-6 rounded-lg">MATLAB / Simulink</div>
-      <div class="border border-slate-800 p-6 rounded-lg">Python & C++ Basics</div>
-      <div class="border border-slate-800 p-6 rounded-lg">Control Systems</div>
-      <div class="border border-slate-800 p-6 rounded-lg">Engineering Maths</div>
-      <div class="border border-slate-800 p-6 rounded-lg">Technical Documentation</div>
+      <div class="border border-white/10 p-6">Aircraft Aerodynamics</div>
+      <div class="border border-white/10 p-6">Flight Stability & Control</div>
+      <div class="border border-white/10 p-6">CAD & Manufacturing</div>
+      <div class="border border-white/10 p-6">MATLAB / Simulink</div>
+      <div class="border border-white/10 p-6">Autonomous Systems</div>
+      <div class="border border-white/10 p-6">Engineering Mathematics</div>
+      <div class="border border-white/10 p-6">Technical Reporting</div>
+      <div class="border border-white/10 p-6">Systems Integration</div>
     </div>
   </div>
 </section>
 
 <!-- ================= CONTACT ================= -->
-<section id="contact" class="py-32">
+<section id="contact" class="py-40">
   <div class="max-w-3xl mx-auto px-6 text-center">
-    <h2 class="text-4xl font-bold mb-6">Get in Touch</h2>
-    <p class="text-slate-400 mb-10">Interested in aerospace engineering, projects, or collaboration.</p>
-    <div class="space-y-3">
+    <h2 class="text-4xl md:text-5xl font-bold mb-8">Contact</h2>
+    <p class="text-steel mb-10">Open to internships, engineering collaboration, and aerospace discussion.</p>
+    <div class="space-y-2 text-sm">
       <p>Email: your.email@example.com</p>
       <p>GitHub: github.com/yourusername</p>
       <p>LinkedIn: linkedin.com/in/yourname</p>
@@ -143,8 +167,8 @@
 </section>
 
 <!-- ================= FOOTER ================= -->
-<footer class="border-t border-slate-800 py-8 text-center text-slate-500 text-sm">
-  © 2026 Joseph Alkourashi · Built with GitHub Pages
+<footer class="border-t border-white/5 py-10 text-center text-steel text-xs">
+  © 2026 Joseph Alkourashi · GitHub Pages
 </footer>
 
 </body>
