@@ -4,183 +4,262 @@
 <meta charset="UTF-8">
 <title>Kourashi Systems</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ========================================================= -->
+<!-- Kourashi Systems | GitHub Pages Static Site                -->
+<!-- Single-file deployment (index.html)                       -->
+<!-- ========================================================= -->
+
 <style>
-/* ========================================================= */
-/* Kourashi Systems – GitHub Pages Static Website             */
-/* ========================================================= */
+/* ===================== GLOBAL VARIABLES ==================== */
 :root {
-  --bg: #0e0e11;
-  --fg: #e6e6eb;
-  --muted: #9aa0a6;
-  --accent: #4f8cff;
-  --card: #1a1a21;
+  --bg-primary: #0b0d12;
+  --bg-secondary: #151822;
+  --fg-primary: #eaeaf0;
+  --fg-muted: #9aa0a6;
+  --accent-primary: #4f8cff;
+  --accent-secondary: #22c55e;
+  --danger: #ef4444;
+  --card-bg: #1b1f2b;
+  --border: #2a2f42;
+  --radius: 10px;
+  --shadow: 0 10px 30px rgba(0,0,0,0.4);
 }
+
+/* ===================== RESET =============================== */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
+
+/* ===================== BASE ================================ */
 body {
-  background: var(--bg);
-  color: var(--fg);
-  font-family: Arial, Helvetica, sans-serif;
-  line-height: 1.6;
+  background: var(--bg-primary);
+  color: var(--fg-primary);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.65;
 }
+
+/* ===================== LAYOUT ============================== */
 header {
-  padding: 40px;
-  border-bottom: 1px solid #222;
+  padding: 60px 80px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, #0b0d12, #0e1220);
 }
-header h1 {
-  font-size: 2.5rem;
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
 }
-header p {
-  color: var(--muted);
-  max-width: 700px;
-}
-nav {
-  margin-top: 20px;
-}
-nav a {
-  color: var(--fg);
-  margin-right: 20px;
-  text-decoration: none;
-}
-nav a:hover {
-  color: var(--accent);
-}
+
 section {
-  padding: 60px 40px;
+  padding: 80px 80px;
+  border-bottom: 1px solid var(--border);
 }
-.section-title {
-  font-size: 2rem;
-  margin-bottom: 20px;
-}
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
-}
-.card {
-  background: var(--card);
-  padding: 20px;
-  border-radius: 8px;
-}
-.card h3 {
+
+/* ===================== TYPOGRAPHY ========================== */
+h1 {
+  font-size: 3rem;
   margin-bottom: 10px;
 }
-.card p {
-  color: var(--muted);
+
+h2 {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
 }
-footer {
-  padding: 40px;
-  border-top: 1px solid #222;
-  color: var(--muted);
-  text-align: center;
+
+h3 {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
 }
+
+p {
+  max-width: 900px;
+  color: var(--fg-muted);
+}
+
+/* ===================== NAV ================================ */
+nav {
+  margin-top: 30px;
+}
+
+nav a {
+  margin-right: 25px;
+  color: var(--fg-primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+nav a:hover {
+  color: var(--accent-primary);
+}
+
+/* ===================== CARDS ============================== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.card {
+  background: var(--card-bg);
+  padding: 30px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+/* ===================== BUTTONS ============================= */
 button {
-  background: var(--accent);
+  background: var(--accent-primary);
   color: #fff;
   border: none;
-  padding: 12px 20px;
-  border-radius: 6px;
+  padding: 14px 22px;
+  border-radius: 8px;
   cursor: pointer;
+  font-weight: 600;
 }
-button:hover {
-  opacity: 0.9;
+
+button.secondary {
+  background: var(--accent-secondary);
 }
-/* ========================================================= */
-/* Utility spacing                                           */
-/* ========================================================= */
+
+button.danger {
+  background: var(--danger);
+}
+
+/* ===================== FOOTER ============================== */
+footer {
+  padding: 60px;
+  text-align: center;
+  color: var(--fg-muted);
+  border-top: 1px solid var(--border);
+}
+
+/* ===================== UTILITIES =========================== */
 .mt-1 { margin-top: 10px; }
 .mt-2 { margin-top: 20px; }
 .mt-3 { margin-top: 30px; }
-/* ========================================================= */
-/* End base styles                                           */
-/* ========================================================= */
+.mt-4 { margin-top: 40px; }
+
+/* ===================== END STYLES ========================== */
 </style>
 </head>
+
 <body>
 
 <header>
   <h1>Kourashi Systems</h1>
   <p>
-    Engineering-focused systems design, software tooling, and technical
-    problem solving. Built for scale, precision, and long-term reliability.
+    Engineering-grade systems, software tooling, and automation frameworks.
+    Designed with mathematical rigor, scalability, and long-term maintainability.
   </p>
   <nav>
     <a href="#about">About</a>
+    <a href="#principles">Principles</a>
     <a href="#services">Services</a>
     <a href="#projects">Projects</a>
+    <a href="#roadmap">Roadmap</a>
     <a href="#contact">Contact</a>
   </nav>
 </header>
 
+<main>
+
 <section id="about">
-  <h2 class="section-title">About</h2>
+  <h2>About</h2>
   <p>
-    Kourashi Systems is a technical initiative focused on structured
-    engineering solutions, automation, and software-backed systems thinking.
+    Kourashi Systems operates at the intersection of engineering, computation,
+    and systems thinking. The focus is on building structured solutions that
+    prioritize correctness, performance, and clarity.
   </p>
 </section>
 
-<section id="services">
-  <h2 class="section-title">Services</h2>
-  <div class="cards">
+<section id="principles">
+  <h2>Core Principles</h2>
+  <div class="grid">
     <div class="card">
-      <h3>Software Systems</h3>
-      <p>Design and implementation of maintainable software architectures.</p>
+      <h3>Determinism</h3>
+      <p>Systems behave predictably under defined constraints.</p>
+    </div>
+    <div class="card">
+      <h3>Modularity</h3>
+      <p>Components are isolated, testable, and replaceable.</p>
+    </div>
+    <div class="card">
+      <h3>Scalability</h3>
+      <p>Architectures scale in complexity without structural collapse.</p>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <h2>Services</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Software Architecture</h3>
+      <p>Design of robust, maintainable software systems.</p>
     </div>
     <div class="card">
       <h3>Engineering Analysis</h3>
-      <p>Mathematical and computational analysis for engineering problems.</p>
+      <p>Mathematical modeling and computational verification.</p>
     </div>
     <div class="card">
-      <h3>Automation</h3>
-      <p>Process automation using scripting and system integration.</p>
+      <h3>Automation Systems</h3>
+      <p>Workflow automation and system orchestration.</p>
     </div>
   </div>
 </section>
 
 <section id="projects">
-  <h2 class="section-title">Projects</h2>
-  <div class="cards">
+  <h2>Projects</h2>
+  <div class="grid">
     <div class="card">
-      <h3>System Alpha</h3>
-      <p>Prototype modular system for scalable applications.</p>
+      <h3>KS-Core</h3>
+      <p>Foundational system libraries and utilities.</p>
     </div>
     <div class="card">
-      <h3>System Beta</h3>
-      <p>Data-driven engineering support tooling.</p>
+      <h3>KS-Automate</h3>
+      <p>Rule-driven automation engine.</p>
     </div>
     <div class="card">
-      <h3>System Gamma</h3>
-      <p>Experimental automation framework.</p>
+      <h3>KS-Labs</h3>
+      <p>Experimental research and prototyping.</p>
     </div>
   </div>
 </section>
 
-<section id="contact">
-  <h2 class="section-title">Contact</h2>
-  <p>For technical collaboration or inquiries:</p>
-  <button class="mt-2" onclick="showContact()">Reveal Contact</button>
-  <p id="contactInfo" class="mt-2"></p>
+<section id="roadmap">
+  <h2>Roadmap</h2>
+  <p>
+    Phase 1: Core infrastructure<br>
+    Phase 2: Automation frameworks<br>
+    Phase 3: Public tooling and documentation
+  </p>
 </section>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <button onclick="revealContact()">Reveal Contact</button>
+  <p id="contactField" class="mt-2"></p>
+</section>
+
+</main>
 
 <footer>
   <p>© Kourashi Systems</p>
 </footer>
 
 <script>
-function showContact() {
-  document.getElementById("contactInfo").textContent =
+function revealContact() {
+  document.getElementById("contactField").textContent =
     "contact@kourashisystems.dev";
 }
 
 /* ========================================================= */
-/* Padding lines below to reach ~1000 lines for repository   */
-/* structure testing, scrolling, and styling expansion.     */
+/* LINE PADDING — INTENTIONAL FOR REPO SCALE / TESTING       */
 /* ========================================================= */
-
 // 001
 // 002
 // 003
@@ -191,97 +270,28 @@ function showContact() {
 // 008
 // 009
 // 010
-// 011
-// 012
-// 013
-// 014
-// 015
-// 016
-// 017
-// 018
-// 019
-// 020
-// 021
-// 022
-// 023
-// 024
-// 025
-// 026
-// 027
-// 028
-// 029
-// 030
-// 031
-// 032
-// 033
-// 034
-// 035
-// 036
-// 037
-// 038
-// 039
-// 040
-// 041
-// 042
-// 043
-// 044
-// 045
-// 046
-// 047
-// 048
-// 049
-// 050
-// 051
-// 052
-// 053
-// 054
-// 055
-// 056
-// 057
-// 058
-// 059
-// 060
-// 061
-// 062
-// 063
-// 064
-// 065
-// 066
-// 067
-// 068
-// 069
-// 070
-// 071
-// 072
-// 073
-// 074
-// 075
-// 076
-// 077
-// 078
-// 079
-// 080
-// 081
-// 082
-// 083
-// 084
-// 085
-// 086
-// 087
-// 088
-// 089
-// 090
-// 091
-// 092
-// 093
-// 094
-// 095
-// 096
-// 097
-// 098
-// 099
-// 100
-// …
+// ...
+// 980
+// 981
+// 982
+// 983
+// 984
+// 985
+// 986
+// 987
+// 988
+// 989
+// 990
+// 991
+// 992
+// 993
+// 994
+// 995
+// 996
+// 997
+// 998
+// 999
+// 1000
 </script>
 
 </body>
