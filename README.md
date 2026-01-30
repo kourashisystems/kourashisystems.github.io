@@ -8,18 +8,18 @@
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Tailwind config -->
+  <!-- Tailwind Config -->
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            charcoal: '#0b0d10',
-            charcoal2: '#12151b',
-            accent: '#6ee7ff'
+            charcoal: '#111111',
+            lightbg: '#ffffff',
+            accent: '#1f2937'
           },
           fontFamily: {
-            mono: ['ui-monospace', 'SFMono-Regular']
+            mono: ['ui-monospace', 'SFMono-Regular', 'Menlo']
           }
         }
       }
@@ -27,56 +27,73 @@
   </script>
 
   <style>
-    /* GLOBAL */
     html { scroll-behavior: smooth; }
-    body { background:#0b0d10; }
-
-    /* SCROLL REVEAL */
-    .reveal { opacity:0; transform:translateY(30px); transition:all .8s ease }
-    .reveal.active { opacity:1; transform:none }
+    body { background: #ffffff; color: #111111; }
 
     /* GRID BACKDROP */
     .grid-bg {
       background-image:
-        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+        linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
       background-size: 60px 60px;
+    }
+
+    /* SCROLL REVEAL */
+    .reveal { opacity: 0; transform: translateY(40px); transition: all 0.9s ease; }
+    .reveal.active { opacity: 1; transform: none; }
+
+    /* TERMINAL */
+    .terminal {
+      background: #f5f5f5;
+      border: 1px solid #ccc;
+      font-size: 0.9rem;
+    }
+
+    /* SLIDER */
+    input[type=range]::-webkit-slider-thumb {
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      background: #111;
+      cursor: pointer;
     }
   </style>
 </head>
 
-<body class="text-gray-200 font-mono">
+<body class="font-mono">
 
 <!-- NAV -->
-<header class="fixed top-0 w-full z-50 backdrop-blur bg-black/40 border-b border-white/10">
+<header class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur border-b border-black/10">
   <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-    <span class="text-lg tracking-widest">APEX AEROSPACE</span>
+    <span class="tracking-widest">APEX AEROSPACE</span>
     <nav class="hidden md:flex gap-8 text-sm">
-      <a href="#about" class="hover:text-accent">About</a>
-      <a href="#systems" class="hover:text-accent">Systems</a>
-      <a href="#projects" class="hover:text-accent">Projects</a>
-      <a href="#metrics" class="hover:text-accent">Metrics</a>
-      <a href="#contact" class="hover:text-accent">Contact</a>
+      <a href="#about">About</a>
+      <a href="#systems">Systems</a>
+      <a href="#projects">Projects</a>
+      <a href="#tools">Tools</a>
+      <a href="#data">Data</a>
+      <a href="#contact">Contact</a>
     </nav>
     <button id="menuBtn" class="md:hidden">☰</button>
   </div>
 </header>
 
 <!-- MOBILE MENU -->
-<div id="mobileMenu" class="hidden fixed inset-0 bg-black/90 z-40 flex flex-col items-center justify-center gap-8 text-xl">
+<div id="mobileMenu" class="hidden fixed inset-0 bg-white z-40 flex flex-col items-center justify-center gap-8 text-xl">
   <a onclick="toggleMenu()" href="#about">About</a>
   <a onclick="toggleMenu()" href="#systems">Systems</a>
   <a onclick="toggleMenu()" href="#projects">Projects</a>
-  <a onclick="toggleMenu()" href="#metrics">Metrics</a>
+  <a onclick="toggleMenu()" href="#tools">Tools</a>
+  <a onclick="toggleMenu()" href="#data">Data</a>
   <a onclick="toggleMenu()" href="#contact">Contact</a>
 </div>
 
 <!-- HERO -->
 <section class="h-screen flex items-center justify-center grid-bg">
   <div class="text-center reveal">
-    <h1 class="text-5xl md:text-7xl mb-6">Autonomous<br/>Aerospace Systems</h1>
-    <p class="max-w-xl mx-auto text-gray-400 mb-10">Designing, simulating, and building aircraft systems with a defence-grade engineering mindset.</p>
-    <a href="#projects" class="px-8 py-3 border border-white/20 hover:bg-white/10 transition">View Systems</a>
+    <h1 class="text-6xl mb-6">Autonomous Aerospace Systems</h1>
+    <p class="max-w-xl mx-auto text-gray-600 mb-10">Charcoal-on-white engineering platform for experimental aircraft, autonomy, and systems design.</p>
+    <a href="#projects" class="px-8 py-3 border border-black hover:bg-black hover:text-white transition">View Work</a>
   </div>
 </section>
 
@@ -84,30 +101,26 @@
 <section id="about" class="py-32 max-w-6xl mx-auto px-6">
   <div class="reveal">
     <h2 class="text-3xl mb-6">Mission</h2>
-    <p class="text-gray-400 leading-relaxed">
-      Apex Aerospace develops experimental aircraft platforms with an emphasis on
-      aerodynamic efficiency, stability, control, and manufacturability. All work
-      follows structured systems engineering principles inspired by modern defence programs.
-    </p>
+    <p class="text-gray-700 leading-relaxed">Apex Aerospace focuses on experimental aircraft platforms built from first principles. All work follows structured systems engineering: requirements, trade studies, modelling, prototyping, and test.</p>
   </div>
 </section>
 
 <!-- SYSTEMS -->
-<section id="systems" class="py-32 bg-charcoal2">
+<section id="systems" class="py-32 bg-gray-50">
   <div class="max-w-7xl mx-auto px-6">
     <h2 class="text-3xl mb-12 reveal">Core Systems</h2>
     <div class="grid md:grid-cols-3 gap-10">
-      <div class="border border-white/10 p-6 reveal">
+      <div class="border p-6 reveal">
         <h3 class="mb-4">Aerodynamics</h3>
-        <p class="text-gray-400">Airfoil selection, Reynolds analysis, lift/drag modelling, XFOIL validation.</p>
+        <p class="text-gray-600">Airfoil analysis, Reynolds scaling, lift-drag modelling.</p>
       </div>
-      <div class="border border-white/10 p-6 reveal">
+      <div class="border p-6 reveal">
         <h3 class="mb-4">Stability & Control</h3>
-        <p class="text-gray-400">Static margins, tail volume coefficients, longitudinal & lateral dynamics.</p>
+        <p class="text-gray-600">Static margins, dynamic modes, control authority sizing.</p>
       </div>
-      <div class="border border-white/10 p-6 reveal">
+      <div class="border p-6 reveal">
         <h3 class="mb-4">Structures</h3>
-        <p class="text-gray-400">Foam-composite structures, load paths, FEA-informed design decisions.</p>
+        <p class="text-gray-600">Load paths, material selection, mass optimisation.</p>
       </div>
     </div>
   </div>
@@ -115,28 +128,54 @@
 
 <!-- PROJECTS -->
 <section id="projects" class="py-32 max-w-7xl mx-auto px-6">
-  <h2 class="text-3xl mb-12 reveal">Featured Platforms</h2>
+  <h2 class="text-3xl mb-12 reveal">Projects</h2>
   <div class="grid md:grid-cols-2 gap-12">
-    <div onclick="openModal('p1')" class="cursor-pointer border border-white/10 p-8 reveal hover:bg-white/5">
+    <div class="border p-8 reveal hover:bg-gray-50">
       <h3 class="mb-3">RC Trainer Aircraft</h3>
-      <p class="text-gray-400">High-wing, stable training platform designed from first principles.</p>
+      <p class="text-gray-600">High-wing trainer designed using classical aircraft sizing methods.</p>
     </div>
-    <div onclick="openModal('p2')" class="cursor-pointer border border-white/10 p-8 reveal hover:bg-white/5">
+    <div class="border p-8 reveal hover:bg-gray-50">
       <h3 class="mb-3">Autonomous Testbed</h3>
-      <p class="text-gray-400">Concept UAV platform for future autonomy integration.</p>
+      <p class="text-gray-600">Concept UAV for autonomy, sensing, and control development.</p>
     </div>
   </div>
 </section>
 
-<!-- METRICS -->
-<section id="metrics" class="py-32 bg-charcoal2">
-  <div class="max-w-6xl mx-auto px-6 text-center">
-    <h2 class="text-3xl mb-16 reveal">Engineering Output</h2>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-12">
-      <div class="reveal"><div class="text-5xl counter" data-target="120">0</div><p>CAD Hours</p></div>
-      <div class="reveal"><div class="text-5xl counter" data-target="35">0</div><p>MATLAB Scripts</p></div>
-      <div class="reveal"><div class="text-5xl counter" data-target="4">0</div><p>Aircraft Concepts</p></div>
-      <div class="reveal"><div class="text-5xl counter" data-target="1">0</div><p>Built Prototype</p></div>
+<!-- TOOLS -->
+<section id="tools" class="py-32 bg-gray-50">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-3xl mb-12 reveal">Engineering Tools</h2>
+    <div class="grid md:grid-cols-2 gap-12">
+      <div class="border p-6 reveal">
+        <label>Velocity (m/s)</label>
+        <input id="vel" type="range" min="5" max="40" value="15" class="w-full mb-4" />
+        <label>Wing Area (m²)</label>
+        <input id="area" type="range" min="0.3" max="2" step="0.1" value="0.8" class="w-full mb-4" />
+        <button onclick="computeLift()" class="border px-6 py-2">Compute Lift</button>
+      </div>
+      <div class="border p-6 reveal">
+        <h3 class="mb-4">Lift Output (N)</h3>
+        <div id="liftOut" class="text-4xl">—</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DATA -->
+<section id="data" class="py-32 max-w-6xl mx-auto px-6">
+  <h2 class="text-3xl mb-12 reveal">Live Engineering Data</h2>
+  <canvas id="plot" width="600" height="300" class="border reveal"></canvas>
+</section>
+
+<!-- TERMINAL -->
+<section class="py-32 bg-gray-50">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-3xl mb-6 reveal">System Console</h2>
+    <div class="terminal p-4 reveal">
+      <p>> Initialising systems...</p>
+      <p>> Aerodynamic model loaded</p>
+      <p>> Control laws stable</p>
+      <p>> Awaiting commands</p>
     </div>
   </div>
 </section>
@@ -144,26 +183,16 @@
 <!-- CONTACT -->
 <section id="contact" class="py-32 max-w-4xl mx-auto px-6 text-center">
   <h2 class="text-3xl mb-6 reveal">Contact</h2>
-  <p class="text-gray-400 mb-8">Engineering collaboration & technical discussion.</p>
-  <a href="mailto:youremail@example.com" class="border px-8 py-3 hover:bg-white/10 transition">Get in Touch</a>
+  <p class="text-gray-600 mb-8">Technical collaboration & engineering discussion.</p>
+  <a href="mailto:you@example.com" class="border px-8 py-3 hover:bg-black hover:text-white transition">Get in Touch</a>
 </section>
 
-<!-- PROJECT MODALS -->
-<div id="modal" class="hidden fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-6">
-  <div class="max-w-2xl border border-white/10 p-8 relative">
-    <button onclick="closeModal()" class="absolute top-4 right-4">✕</button>
-    <div id="modalContent"></div>
-  </div>
-</div>
-
 <script>
-  /* MOBILE MENU */
   const menuBtn = document.getElementById('menuBtn');
   const mobileMenu = document.getElementById('mobileMenu');
   menuBtn.onclick = toggleMenu;
   function toggleMenu(){ mobileMenu.classList.toggle('hidden') }
 
-  /* SCROLL REVEAL */
   const reveals = document.querySelectorAll('.reveal');
   window.addEventListener('scroll', () => {
     reveals.forEach(el => {
@@ -172,37 +201,20 @@
     })
   })
 
-  /* COUNTERS */
-  const counters = document.querySelectorAll('.counter');
-  let counterStarted = false;
-  window.addEventListener('scroll', () => {
-    if(counterStarted) return;
-    const metrics = document.getElementById('metrics').getBoundingClientRect().top;
-    if(metrics < window.innerHeight){
-      counterStarted = true;
-      counters.forEach(counter => {
-        const target = +counter.dataset.target;
-        let val = 0;
-        const step = target / 100;
-        const interval = setInterval(() => {
-          val += step;
-          counter.innerText = Math.floor(val);
-          if(val >= target){ counter.innerText = target; clearInterval(interval) }
-        }, 20)
-      })
-    }
-  })
-
-  /* MODALS */
-  function openModal(id){
-    const content = {
-      p1:`<h3 class='text-xl mb-4'>RC Trainer Aircraft</h3><p class='text-gray-400'>Designed using classical aerodynamic theory, sized via wing loading and power-to-weight trade studies. Built as a physical prototype.</p>`,
-      p2:`<h3 class='text-xl mb-4'>Autonomous Testbed</h3><p class='text-gray-400'>Conceptual UAV platform designed to support future autonomy and sensor integration.</p>`
-    }
-    document.getElementById('modalContent').innerHTML = content[id];
-    document.getElementById('modal').classList.remove('hidden');
+  function computeLift(){
+    const rho = 1.225;
+    const v = document.getElementById('vel').value;
+    const s = document.getElementById('area').value;
+    const cl = 0.6;
+    const L = 0.5 * rho * v * v * s * cl;
+    document.getElementById('liftOut').innerText = L.toFixed(1);
   }
-  function closeModal(){ document.getElementById('modal').classList.add('hidden') }
+
+  const canvas = document.getElementById('plot');
+  const ctx = canvas.getContext('2d');
+  ctx.moveTo(0,150);
+  ctx.lineTo(600,150);
+  ctx.stroke();
 </script>
 
 </body>
