@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Kourashi Systems</title>
+<meta name="description" content="Kourashi Systems develops aircraft and space systems. Based in Australia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --white:#FFFFFF;
+  --paper:#F1F1F0;
+  --char:#191919;        /* charcoal black */
+  --char-deep:#0F0F0F;   /* deeper black for hero + footer */
+  --rule-light:#D9D9D9;
+  --rule-dark:#363636;
+  --mute-light:#575757;
+  --mute-dark:#A6A6A6;
+  --sans:"Inter Tight","Helvetica Now Display","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --mono:"JetBrains Mono","SF Mono",ui-monospace,Menlo,Consolas,monospace;
+  --pad:clamp(1.25rem,4vw,3rem);
+  --sect:clamp(4.5rem,10vw,9rem);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{font-family:var(--sans);background:var(--white);color:var(--char);font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+[id]{scroll-margin-top:5.5rem}
+.skip{position:absolute;left:-999px;top:0;background:var(--white);color:var(--char);padding:.6rem 1rem;z-index:100}
+.skip:focus{left:0}
+.wrap{max-width:1320px;margin:0 auto;padding-inline:var(--pad)}
+h1,h2,h3{font-weight:700;letter-spacing:-.035em}
+h1{font-size:clamp(2.75rem,7.4vw,6.75rem);line-height:.96;max-width:14ch}
+h2{font-size:clamp(2.1rem,4.8vw,4.25rem);line-height:1}
+h3{font-size:1.4rem;line-height:1.2;letter-spacing:-.025em}
+.lede{font-size:clamp(1.05rem,1.5vw,1.3rem);line-height:1.5;max-width:52ch;letter-spacing:-.005em}
+.on-dark{background:var(--char);color:var(--white)}
+.view[hidden]{display:none}
+
+/* Bracket labels, e.g. [AIR-01] */
+.tag{display:block;font-family:var(--mono);font-size:.75rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;line-height:1.4;color:var(--mute-light)}
+.hero .tag,.page-head .tag,.on-dark .tag,footer .tag{color:var(--mute-dark)}
+h1+.tag,.tag+h1,.tag+h2{margin-top:0}
+.tag.gap{margin-bottom:1.3rem}
+
+/* Buttons */
+.btn{display:inline-block;padding:.95rem 1.6rem;font-weight:600;font-size:.98rem;border:1.5px solid currentColor;border-radius:2px;transition:background .2s,color .2s;cursor:pointer;background:none}
+.btn-solid{background:var(--white);color:var(--char);border-color:var(--white)}
+.btn-solid:hover{background:transparent;color:var(--white)}
+.btn-line{color:var(--white)}
+.btn-line:hover{background:var(--white);color:var(--char)}
+.btn-dark{background:var(--char);color:var(--white);border-color:var(--char)}
+.btn-dark:hover{background:transparent;color:var(--char)}
+
+/* Nav */
+.nav{position:fixed;inset:0 0 auto 0;z-index:50;color:var(--white);transition:background .25s}
+.nav.solid,.nav.open{background:rgba(15,15,15,.96)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:4.5rem}
+.brand{display:flex;align-items:center;gap:.7rem;font-weight:800;letter-spacing:.14em;font-size:.9rem}
+.brand svg{width:26px;height:26px}
+.brand span{font-weight:400}
+.links{display:flex;gap:2rem;align-items:center;font-weight:500;font-size:.95rem}
+.links a:not(.btn){opacity:.8}
+.links a:not(.btn):hover,.links a[aria-current="page"]{opacity:1}
+.links a[aria-current="page"]{text-decoration:underline;text-underline-offset:7px;text-decoration-thickness:2px}
+.links .btn{padding:.55rem 1.1rem;font-size:.9rem}
+.menu-btn{display:none;background:none;border:0;color:inherit;width:44px;height:44px;cursor:pointer}
+.menu-btn svg{width:26px;height:26px}
+@media (max-width:900px){
+  .menu-btn{display:block}
+  .links{display:none;position:absolute;top:4.5rem;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--char-deep);padding:.5rem var(--pad) 1.6rem}
+  .nav.open .links{display:flex}
+  .links a:not(.btn){padding:.9rem 0;border-bottom:1px solid var(--rule-dark);opacity:1}
+  .links .btn{margin-top:1.2rem;text-align:center;padding:.9rem 1.1rem}
+}
+
+/* Hero */
+.hero{position:relative;min-height:100vh;background:var(--char-deep);color:var(--white);display:flex;align-items:flex-end;overflow:hidden}
+@supports (min-height:100svh){.hero{min-height:100svh}}
+#terrain{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(0deg,rgba(15,15,15,.97) 0%,rgba(15,15,15,.84) 32%,rgba(15,15,15,0) 68%),
+             linear-gradient(180deg,rgba(15,15,15,.7) 0%,rgba(15,15,15,0) 18%)}
+.hero .wrap{position:relative;z-index:2;width:100%;padding-bottom:clamp(2.5rem,7vh,5rem);padding-top:8rem}
+.hero p.lede{margin-top:1.6rem;color:var(--mute-dark)}
+.hero .cta{margin-top:2.2rem;display:flex;flex-wrap:wrap;gap:.9rem}
+.readout{position:absolute;z-index:2;right:var(--pad);bottom:clamp(2.5rem,7vh,5rem);text-align:right}
+.readout b{display:block;font-size:3rem;font-weight:700;color:var(--white);font-variant-numeric:tabular-nums;letter-spacing:-.04em;line-height:1.1}
+@media (max-width:900px){.readout{display:none}}
+
+/* Sections */
+section{padding-block:var(--sect)}
+section.pad{padding-block:clamp(3rem,7vw,6rem)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,6rem);align-items:start}
+@media (max-width:860px){.split{grid-template-columns:1fr}}
+
+/* Page heads */
+.page-head{background:var(--char);color:var(--white);padding:9.5rem 0 clamp(3rem,7vw,6rem)}
+.page-head h1{max-width:16ch;font-size:clamp(2.75rem,7.4vw,6.75rem)}
+.page-head .lede{margin-top:1.4rem;color:var(--mute-dark)}
+.crumbs{font-family:var(--mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mute-dark);margin-bottom:2.2rem}
+.crumbs a:hover{text-decoration:underline;text-underline-offset:4px}
+.crumbs span{margin-inline:.6rem}
+
+/* Project cards */
+.row-head{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;margin-bottom:1.6rem;padding-bottom:1rem;border-bottom:2px solid var(--char)}
+.row-head a{font-weight:600;text-decoration:underline;text-underline-offset:5px}
+.group+.group{margin-top:clamp(3rem,6vw,5rem)}
+.grid{display:grid;gap:1.75rem 1.25rem}
+.grid.c4{grid-template-columns:repeat(4,1fr)}
+.grid.c3{grid-template-columns:repeat(3,1fr)}
+.grid.c2{grid-template-columns:repeat(2,1fr)}
+@media (max-width:1100px){.grid.c4{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:860px){.grid.c3{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:600px){.grid.c4,.grid.c3,.grid.c2{grid-template-columns:1fr}}
+.card{display:block}
+.art{position:relative;background:var(--char);border-radius:2px;overflow:hidden;aspect-ratio:4/3}
+.grid.c2 .art{aspect-ratio:16/9}
+.art svg{width:100%;height:100%;display:block}
+.art .tag{position:absolute;left:.95rem;top:.85rem;z-index:2;color:#fff;text-shadow:0 0 8px rgba(15,15,15,.95)}
+.card .meta{padding-top:1rem}
+.card .name{font-weight:700;font-size:1.35rem;letter-spacing:-.025em;line-height:1.15}
+.card .desc{color:var(--mute-light);margin-top:.3rem;font-size:.98rem;line-height:1.45}
+.card:hover .name{text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:2px}
+
+/* Project page */
+.panel{background:var(--char);border-radius:2px;padding:clamp(1rem,3vw,2.5rem)}
+.panel svg{display:block;width:100%;height:auto}
+.panel svg text{font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;fill:#fff;text-transform:uppercase}
+.art.big{aspect-ratio:2/1}
+.facts{border-top:2px solid var(--char)}
+.facts div{display:grid;grid-template-columns:10rem 1fr;gap:1rem;padding:.95rem 0;border-bottom:1px solid var(--rule-light);align-items:baseline}
+.facts dt{font-family:var(--mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mute-light)}
+.facts dd{font-weight:500}
+.facts dd.tbc{font-weight:400;color:var(--mute-light)}
+.overview h2{margin-bottom:1.4rem}
+.visual{padding-block:clamp(2.5rem,5vw,4rem) 0}
+.steps-sec{background:var(--paper)}
+.steps-sec h2{max-width:16ch;margin-bottom:clamp(2.5rem,5vw,4.5rem)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,3vw,3rem);list-style:none}
+.steps li{border-top:2px solid var(--char);padding-top:1.2rem}
+.steps .tag{margin-bottom:2.4rem}
+.steps p{margin-top:.7rem;color:var(--mute-light);max-width:34ch}
+@media (max-width:860px){.steps{grid-template-columns:1fr}.steps .tag{margin-bottom:1rem}}
+
+/* Company */
+#company .split{align-items:end}
+#company h2{max-width:14ch}
+#company .side p{color:var(--mute-dark);max-width:44ch;margin-bottom:1.8rem}
+
+/* Leadership */
+.people{display:grid;grid-template-columns:repeat(4,1fr);gap:2.25rem 1.25rem}
+@media (max-width:1000px){.people{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.people{grid-template-columns:1fr}}
+.photo{aspect-ratio:4/5;background:var(--paper);border-radius:2px;display:flex;flex-direction:column;justify-content:space-between;padding:.95rem;color:var(--mute-light);font-size:.9rem}
+.person h3{margin-top:1.1rem;font-size:1.4rem}
+.person .role{font-weight:600;margin-top:.15rem}
+.person .bio{color:var(--mute-light);margin-top:.6rem;font-size:.98rem;line-height:1.5}
+
+/* Careers */
+.roles{list-style:none;border-top:2px solid var(--char)}
+.roles a{display:grid;grid-template-columns:6.5rem 1.6fr 1fr auto;gap:1rem;align-items:center;padding:1.5rem .25rem;border-bottom:1px solid var(--rule-light);transition:background .2s,padding .2s}
+.roles a:hover{background:var(--paper);padding-inline:1rem}
+.roles .t{font-size:clamp(1.15rem,2vw,1.6rem);font-weight:600;letter-spacing:-.025em}
+.roles .m{color:var(--mute-light)}
+.roles .a{font-weight:600}
+.note{margin-top:1.8rem;font-size:.95rem;color:var(--mute-light);max-width:70ch}
+@media (max-width:700px){
+  .roles a{grid-template-columns:1fr auto;row-gap:.3rem}
+  .roles .tag{grid-column:1/-1}
+  .roles .t{grid-column:1}
+  .roles .a{grid-column:2;grid-row:2}
+  .roles .m{grid-column:1;grid-row:3}
+}
+.band{background:var(--paper);padding-block:clamp(2.5rem,5vw,4rem)}
+.band .wrap{display:flex;justify-content:space-between;align-items:center;gap:1.5rem 3rem;flex-wrap:wrap}
+.band h3{font-size:1.6rem}
+.band p.d{color:var(--mute-light);margin-top:.3rem}
+
+/* Footer */
+footer{background:var(--char-deep);color:var(--white);padding-block:clamp(3.5rem,7vw,6rem) 2rem}
+footer .top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2.5rem;padding-bottom:3.5rem;border-bottom:1px solid var(--rule-dark)}
+@media (max-width:760px){footer .top{grid-template-columns:1fr}}
+footer h3{font-size:2.2rem;max-width:12ch;line-height:1.02}
+footer h4{font-family:var(--mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;font-weight:500;color:var(--mute-dark);margin-bottom:.9rem}
+footer li{list-style:none;margin-bottom:.4rem}
+footer li a:hover{text-decoration:underline;text-underline-offset:4px}
+footer .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding-top:1.5rem;font-size:.9rem;color:var(--mute-dark)}
+</style>
+</head>
+<body>
+<a class="skip" href="#/" data-scroll="#main">Skip to content</a>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="brand" href="#/" aria-label="Kourashi Systems home">
+      <svg viewBox="0 0 26 26" aria-hidden="true"><path d="M13 2 L24 22 L13 17 L2 22 Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+      KOURASHI <span>SYSTEMS</span>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="links">
+      <svg viewBox="0 0 26 26" aria-hidden="true"><path d="M3 8h20M3 13h20M3 18h20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <nav class="links" id="links" aria-label="Main">
+      <a href="#/air" data-route="air">Air</a>
+      <a href="#/space" data-route="space">Space</a>
+      <a href="#/leadership" data-route="leadership">Leadership</a>
+      <a href="#/careers" data-route="careers">Careers</a>
+      <a class="btn btn-line" href="#/" data-scroll="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- HOME -->
+  <div class="view" id="v-home" hidden>
+    <div class="hero">
+      <canvas id="terrain" aria-hidden="true"></canvas>
+      <div class="wrap">
+        <span class="tag gap">[KOURASHI-00]</span>
+        <h1>Aerospace and defence from Australia.</h1>
+        <p class="lede">Kourashi Systems develops aircraft and space systems. Our first aircraft finds its way by the landscape beneath it.</p>
+        <div class="cta">
+          <a class="btn btn-solid" href="#/" data-scroll="#projects">Explore projects</a>
+          <a class="btn btn-line" href="#/leadership">Meet the leadership</a>
+        </div>
+      </div>
+      <div class="readout" aria-hidden="true"><span class="tag">[Landmarks matched]</span><b id="matched">0</b></div>
+    </div>
+
+    <section id="projects">
+      <div class="wrap">
+        <span class="tag gap">[PROJECTS-01]</span>
+        <h2 style="margin-bottom:clamp(2.5rem,5vw,4rem)">Our projects.</h2>
+        <div class="group">
+          <div class="row-head"><h3>Air</h3><a href="#/air">View all air projects</a></div>
+          <div class="grid c4" id="home-air"></div>
+        </div>
+        <div class="group">
+          <div class="row-head"><h3>Space</h3><a href="#/space">View all space projects</a></div>
+          <div class="grid c2" id="home-space"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="on-dark" id="company">
+      <div class="wrap">
+        <span class="tag gap">[COMPANY-02]</span>
+        <div class="split">
+          <h2>We are building an Australian aerospace and defence company.</h2>
+          <div class="side">
+            <p>Our first aircraft is built. More air and space programs are in development, led by the team behind them.</p>
+            <a class="btn btn-solid" href="#/leadership">Meet the leadership</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="band">
+      <div class="wrap">
+        <div><span class="tag" style="margin-bottom:.6rem">[CAREERS-03]</span><h3>We are hiring.</h3><p class="d">Engineering and flight operations roles across our air and space programs.</p></div>
+        <a class="btn btn-dark" href="#/careers">View careers</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- AIR -->
+  <div class="view" id="v-air" hidden>
+    <div class="page-head"><div class="wrap">
+      <p class="crumbs"><a href="#/">Home</a><span>/</span>Air</p>
+      <h1 tabindex="-1">Air</h1>
+      <p class="lede">Aircraft and autonomy programs from Kourashi Systems.</p>
+    </div></div>
+    <section class="pad"><div class="wrap"><div class="grid c4" id="air-grid"></div></div></section>
+  </div>
+
+  <!-- SPACE -->
+  <div class="view" id="v-space" hidden>
+    <div class="page-head"><div class="wrap">
+      <p class="crumbs"><a href="#/">Home</a><span>/</span>Space</p>
+      <h1 tabindex="-1">Space</h1>
+      <p class="lede">Space programs from Kourashi Systems.</p>
+    </div></div>
+    <section class="pad"><div class="wrap"><div class="grid c2" id="space-grid"></div></div></section>
+  </div>
+
+  <!-- LEADERSHIP -->
+  <div class="view" id="v-leadership" hidden>
+    <div class="page-head"><div class="wrap">
+      <p class="crumbs"><a href="#/">Home</a><span>/</span>Leadership</p>
+      <h1 tabindex="-1">Leadership</h1>
+      <p class="lede">The people building Kourashi Systems.</p>
+    </div></div>
+    <section class="pad"><div class="wrap"><div class="people" id="people"></div></div></section>
+  </div>
+
+  <!-- CAREERS -->
+  <div class="view" id="v-careers" hidden>
+    <div class="page-head"><div class="wrap">
+      <p class="crumbs"><a href="#/">Home</a><span>/</span>Careers</p>
+      <h1 tabindex="-1">Careers</h1>
+      <p class="lede">We are hiring engineers and operators to work across our air and space programs.</p>
+    </div></div>
+    <section class="pad"><div class="wrap">
+      <ul class="roles">
+        <li><a href="mailto:careers@kourashisystems.com.au?subject=Computer%20vision%20engineer"><span class="tag">[ROLE-01]</span><span class="t">Computer vision engineer</span><span class="m">Autonomy</span><span class="a">Apply</span></a></li>
+        <li><a href="mailto:careers@kourashisystems.com.au?subject=Flight%20software%20engineer"><span class="tag">[ROLE-02]</span><span class="t">Flight software engineer</span><span class="m">Software</span><span class="a">Apply</span></a></li>
+        <li><a href="mailto:careers@kourashisystems.com.au?subject=Airframe%20engineer"><span class="tag">[ROLE-03]</span><span class="t">Airframe and structures engineer</span><span class="m">Hardware</span><span class="a">Apply</span></a></li>
+        <li><a href="mailto:careers@kourashisystems.com.au?subject=Flight%20test%20lead"><span class="tag">[ROLE-04]</span><span class="t">Flight test lead</span><span class="m">Operations</span><span class="a">Apply</span></a></li>
+        <li><a href="mailto:careers@kourashisystems.com.au?subject=General%20application"><span class="tag">[ROLE-05]</span><span class="t">Don't see your role?</span><span class="m">Send us a general application</span><span class="a">Apply</span></a></li>
+      </ul>
+      <p class="note">Some roles may require Australian citizenship and the ability to obtain a security clearance.</p>
+    </div></section>
+  </div>
+
+  <!-- PROJECT (rendered by script) -->
+  <div class="view" id="v-project" hidden></div>
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="top">
+      <div><span class="tag gap">[CONTACT-04]</span><h3>Talk to Kourashi Systems.</h3></div>
+      <div>
+        <h4>[Contact]</h4>
+        <ul>
+          <li><a href="mailto:contact@kourashisystems.com.au">contact@kourashisystems.com.au</a></li>
+          <li><a href="mailto:careers@kourashisystems.com.au">careers@kourashisystems.com.au</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>[Explore]</h4>
+        <ul>
+          <li><a href="#/air">Air</a></li>
+          <li><a href="#/space">Space</a></li>
+          <li><a href="#/leadership">Leadership</a></li>
+          <li><a href="#/careers">Careers</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="base">
+      <span>&copy; 2026 Kourashi Systems. Australia.</span>
+      <span>Privacy</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Content (edit here) ---------- */
+  var TBC='To be confirmed';
+  var airFacts=[['Type',TBC],['Status',TBC],['Role',TBC],['Endurance',TBC],['Payload',TBC]];
+  var spaceFacts=[['Type',TBC],['Status',TBC],['Role',TBC],['Orbit',TBC],['Payload',TBC]];
+  var placeholder='A short description of this program will go here.';
+  var projects=[
+    {id:'air-01',domain:'air',label:'AIR-01',name:'Visual-navigation aircraft',seed:1,
+     short:'Navigates by the landscape beneath it.',
+     lede:'A small uncrewed aircraft with a camera aimed straight down. It uses that camera, and the landscape around it, to navigate to a target location on its own.',
+     overview:['Our first aircraft. A camera points straight down, and onboard software compares what it sees with the landscape around it to work out where the aircraft is and where it needs to go.'],
+     facts:[['Type','Uncrewed aircraft'],['Status',TBC],['Navigation','Visual, downward-facing camera'],['Endurance',TBC],['Payload',TBC]]},
+    {id:'air-02',domain:'air',label:'AIR-02',name:'Project name to come',seed:2,short:'Details to come.',lede:placeholder,overview:['Program overview to come.'],facts:airFacts},
+    {id:'air-03',domain:'air',label:'AIR-03',name:'Project name to come',seed:3,short:'Details to come.',lede:placeholder,overview:['Program overview to come.'],facts:airFacts},
+    {id:'air-04',domain:'air',label:'AIR-04',name:'Project name to come',seed:4,short:'Details to come.',lede:placeholder,overview:['Program overview to come.'],facts:airFacts},
+    {id:'space-01',domain:'space',label:'SPACE-01',name:'Project name to come',seed:1,short:'Details to come.',lede:placeholder,overview:['Program overview to come.'],facts:spaceFacts},
+    {id:'space-02',domain:'space',label:'SPACE-02',name:'Project name to come',seed:2,short:'Details to come.',lede:placeholder,overview:['Program overview to come.'],facts:spaceFacts}
+  ];
+  var people=[
+    {name:'Name to come',role:'Founder and Chief Executive'},
+    {name:'Name to come',role:'Chief Technology Officer'},
+    {name:'Name to come',role:'Head of Air Programs'},
+    {name:'Name to come',role:'Head of Space Programs'}
+  ];
+  var byId={};projects.forEach(function(p){byId[p.id]=p});
+  function pad2(n){return n<10?'0'+n:''+n}
+
+  /* ---------- Marching squares (shared by hero + card art) ---------- */
+  function march(fn,vw,vh,step,L0,L1,dL,every){
+    var cols=Math.ceil(vw/step)+1,rows=Math.ceil(vh/step)+1,g=new Float32Array(cols*rows),i,j,out=[];
+    for(j=0;j<rows;j++)for(i=0;i<cols;i++)g[j*cols+i]=fn(i*step,j*step);
+    for(var L=L0,k=0;L<L1;L+=dL,k++){
+      var s=[];
+      for(j=0;j<rows-1;j++)for(i=0;i<cols-1;i++){
+        var a=g[j*cols+i],b=g[j*cols+i+1],c=g[(j+1)*cols+i+1],d=g[(j+1)*cols+i];
+        var idx=(a>L?8:0)|(b>L?4:0)|(c>L?2:0)|(d>L?1:0);
+        if(idx===0||idx===15)continue;
+        var x=i*step,y=j*step;
+        var T=[x+step*(L-a)/(b-a),y],R=[x+step,y+step*(L-b)/(c-b)],B=[x+step*(L-d)/(c-d),y+step],Lf=[x,y+step*(L-a)/(d-a)],p;
+        switch(idx){
+          case 1:case 14:p=[Lf,B];break;
+          case 2:case 13:p=[B,R];break;
+          case 3:case 12:p=[Lf,R];break;
+          case 4:case 11:p=[T,R];break;
+          case 5:p=[T,R,Lf,B];break;
+          case 6:case 9:p=[T,B];break;
+          case 7:case 8:p=[T,Lf];break;
+          case 10:p=[T,Lf,B,R];break;
+        }
+        for(var q=0;q<p.length;q+=2)s.push(p[q][0],p[q][1],p[q+1][0],p[q+1][1]);
+      }
+      out.push({major:k%every===0,s:s});
+    }
+    return out;
+  }
+
+  /* ---------- Card / page art ---------- */
+  var artCache={};
+  function hfun(x,y,s){
+    var nx=x/260+s*1.9,ny=y/260+s*2.7;
+    return .55*Math.sin(nx*1.7+.6*Math.sin(ny*1.3))+.38*Math.sin(ny*2.1-nx*.8+1.2+s)+.22*Math.sin((nx+ny)*3.3+.4*s)
+          +.5*Math.exp(-(Math.pow(nx-1.4-s*.2,2)+Math.pow(ny-.6,2))*1.6);
+  }
+  function contourSVG(seed,vw,vh,step){
+    var key='c'+seed+'|'+vw+'|'+vh;if(artCache[key])return artCache[key];
+    var lv=march(function(x,y){return hfun(x,y,seed)},vw,vh,step,-1.1,1.5,.19,4),dm='',dM='';
+    lv.forEach(function(l){
+      var d='';for(var n=0;n<l.s.length;n+=4)d+='M'+l.s[n].toFixed(1)+' '+l.s[n+1].toFixed(1)+'L'+l.s[n+2].toFixed(1)+' '+l.s[n+3].toFixed(1);
+      if(l.major)dM+=d;else dm+=d;
+    });
+    return artCache[key]='<svg viewBox="0 0 '+vw+' '+vh+'" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">'+
+      '<path d="'+dm+'" fill="none" stroke="rgba(255,255,255,.28)" stroke-width="1" vector-effect="non-scaling-stroke"/>'+
+      '<path d="'+dM+'" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="1.4" vector-effect="non-scaling-stroke"/></svg>';
+  }
+  function spaceSVG(s){
+    var rot=-24+s*22,cx=200,cy=150,o='',k,rx,ry;
+    o+='<circle cx="200" cy="470" r="260" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.55)" stroke-width="1.2" vector-effect="non-scaling-stroke"/>';
+    for(k=0;k<4;k++){
+      rx=90+k*52;ry=32+k*20;
+      o+='<ellipse cx="'+cx+'" cy="'+cy+'" rx="'+rx+'" ry="'+ry+'" transform="rotate('+rot+' '+cx+' '+cy+')" fill="none" stroke="rgba(255,255,255,'+(k===1?.6:.24)+')" stroke-width="1" vector-effect="non-scaling-stroke"/>';
+    }
+    var r=rot*Math.PI/180,ang=1.1+s*1.9,px=142*Math.cos(ang),py=52*Math.sin(ang);
+    var X=cx+px*Math.cos(r)-py*Math.sin(r),Y=cy+px*Math.sin(r)+py*Math.cos(r);
+    o+='<circle cx="'+X.toFixed(1)+'" cy="'+Y.toFixed(1)+'" r="9" fill="none" stroke="rgba(255,255,255,.5)" vector-effect="non-scaling-stroke"/><circle cx="'+X.toFixed(1)+'" cy="'+Y.toFixed(1)+'" r="3.5" fill="#fff"/>';
+    return '<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">'+o+'</svg>';
+  }
+  function artFor(p,big){
+    if(p.domain==='air')return big?contourSVG(p.seed,900,420,10):contourSVG(p.seed,400,300,9);
+    return spaceSVG(p.seed);
+  }
+  var AIRCRAFT='<svg viewBox="0 0 800 420" role="img" aria-label="Top-down illustration of the aircraft with the downward-facing camera marked">'+
+    '<path d="M400 40 L468 132 L735 300 L742 328 L566 318 L458 304 L432 352 L368 352 L342 304 L234 318 L58 328 L65 300 L332 132 Z" fill="rgba(255,255,255,.05)" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/>'+
+    '<path d="M400 40 L400 352" stroke="rgba(255,255,255,.25)" stroke-width="1"/>'+
+    '<ellipse cx="400" cy="205" rx="26" ry="82" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.6)" stroke-width="1.2"/>'+
+    '<circle cx="400" cy="222" r="9" fill="none" stroke="#fff" stroke-width="1.5"/>'+
+    '<path d="M409 216 L560 108 L780 108" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1"/>'+
+    '<text x="24" y="38" fill-opacity=".7">[AIR-01]</text>'+
+    '<text x="560" y="97">[Downward-facing camera]</text></svg>';
+
+  /* ---------- Renderers ---------- */
+  function card(p){
+    return '<a class="card" href="#/project/'+p.id+'"><div class="art"><span class="tag">['+p.label+']</span>'+artFor(p,false)+'</div>'+
+      '<div class="meta"><div class="name">'+p.name+'</div><p class="desc">'+p.short+'</p></div></a>';
+  }
+  function cards(domain){return projects.filter(function(p){return p.domain===domain}).map(card).join('')}
+
+  function projectView(p){
+    var dn=p.domain==='air'?'Air':'Space',idx=projects.indexOf(p),more=[],k;
+    for(k=1;k<=3;k++)more.push(projects[(idx+k)%projects.length]);
+    var first=p.id==='air-01';
+    var visual=first?'<div class="panel">'+AIRCRAFT+'</div>':'<div class="art big"><span class="tag">['+p.label+']</span>'+artFor(p,true)+'</div>';
+    var facts=p.facts.map(function(f){return '<div><dt>'+f[0]+'</dt><dd'+(f[1]===TBC?' class="tbc"':'')+'>'+f[1]+'</dd></div>'}).join('');
+    var steps=first?
+      '<section class="steps-sec"><div class="wrap"><span class="tag gap">[SEQUENCE-01]</span><h2>How it finds its way.</h2><ol class="steps">'+
+      '<li><span class="tag">[STEP-01]</span><h3>It looks down.</h3><p>A camera pointed at the ground streams the terrain below the aircraft.</p></li>'+
+      '<li><span class="tag">[STEP-02]</span><h3>It recognises where it is.</h3><p>Software compares that view with the surrounding landscape to work out the aircraft\'s position.</p></li>'+
+      '<li><span class="tag">[STEP-03]</span><h3>It steers to its destination.</h3><p>The aircraft corrects course as it flies and heads for the location it was given.</p></li>'+
+      '</ol></div></section>':'';
+    return '<div class="page-head"><div class="wrap">'+
+      '<p class="crumbs"><a href="#/">Home</a><span>/</span><a href="#/'+p.domain+'">'+dn+'</a><span>/</span>'+p.label+'</p>'+
+      '<span class="tag gap">['+p.label+']</span>'+
+      '<h1 tabindex="-1">'+p.name+'</h1><p class="lede">'+p.lede+'</p></div></div>'+
+      '<div class="visual"><div class="wrap">'+visual+'</div></div>'+
+      '<section class="pad overview"><div class="wrap"><div class="split"><div><span class="tag gap">[OVERVIEW-01]</span><h2>Overview</h2>'+
+      p.overview.map(function(t){return '<p class="lede">'+t+'</p>'}).join('')+
+      '</div><dl class="facts">'+facts+'</dl></div></div></section>'+steps+
+      '<section class="pad" style="padding-top:0"><div class="wrap"><div class="row-head"><h3>More projects</h3><a href="#/'+p.domain+'">All '+dn.toLowerCase()+' projects</a></div><div class="grid c3">'+more.map(card).join('')+'</div></div></section>';
+  }
+
+  var filled={};
+  function fillOnce(key,fn){if(!filled[key]){filled[key]=1;fn()}}
+  function ensure(name){
+    if(name==='home')fillOnce('home',function(){$('home-air').innerHTML=cards('air');$('home-space').innerHTML=cards('space')});
+    if(name==='air')fillOnce('air',function(){$('air-grid').innerHTML=cards('air')});
+    if(name==='space')fillOnce('space',function(){$('space-grid').innerHTML=cards('space')});
+    if(name==='leadership')fillOnce('people',function(){
+      $('people').innerHTML=people.map(function(p,i){
+        return '<div class="person"><div class="photo"><span class="tag">[LDR-'+pad2(i+1)+']</span><span>Portrait to come</span></div><h3>'+p.name+'</h3><p class="role">'+p.role+'</p><p class="bio">Short biography to come.</p></div>';
+      }).join('');
+    });
+  }
+
+  /* ---------- Hero terrain animation ---------- */
+  var Hero=(function(){
+    var hero=document.querySelector('.hero'),cv=$('terrain'),ctx=cv.getContext&&cv.getContext('2d'),readout=$('matched');
+    if(!ctx)return{start:function(){},stop:function(){}};
+    var W,H,dpr,dim,bright,lm=[],lastCount=-1,active=false,visible=true,raf=0,t0=performance.now(),PERIOD=48000;
+    var names=['Ridgeline','Creek bend','Dam wall','Track junction','Homestead','Salt pan','Fence line','Quarry','Water tank','Rock outcrop'];
+    var frac=[[.08,.3],[.2,.5],[.3,.2],[.42,.44],[.5,.16],[.6,.5],[.7,.26],[.78,.54],[.88,.2],[.93,.44]];
+    function height(x,y){
+      var nx=x/700,ny=y/700;
+      return .55*Math.sin(nx*1.7+.6*Math.sin(ny*1.3))+.38*Math.sin(ny*2.1-nx*.8+1.2)+.22*Math.sin((nx+ny)*3.3+.4)
+        +.5*Math.exp(-(Math.pow(nx-1.4,2)+Math.pow(ny-.5,2))*1.6)-.4*Math.exp(-(Math.pow(nx-.6,2)+Math.pow(ny-.9,2))*2);
+    }
+    function paint(c,levels,minorA,majorA,minorW,majorW){
+      c.setTransform(dpr,0,0,dpr,0,0);c.clearRect(0,0,W,H);c.lineCap='round';
+      [false,true].forEach(function(major){
+        c.beginPath();
+        levels.forEach(function(lv){
+          if(lv.major!==major)return;
+          for(var n=0;n<lv.s.length;n+=4){c.moveTo(lv.s[n],lv.s[n+1]);c.lineTo(lv.s[n+2],lv.s[n+3]);}
+        });
+        c.lineWidth=major?majorW:minorW;c.strokeStyle='rgba(255,255,255,'+(major?majorA:minorA)+')';c.stroke();
+      });
+    }
+    function build(){
+      W=hero.clientWidth;H=hero.clientHeight;if(!W||!H)return false;
+      dpr=Math.min(window.devicePixelRatio||1,2);cv.width=W*dpr;cv.height=H*dpr;
+      dim=document.createElement('canvas');bright=document.createElement('canvas');
+      dim.width=bright.width=W*dpr;dim.height=bright.height=H*dpr;
+      var lv=march(height,W,H,10,-1.2,1.6,.1,5);
+      paint(dim.getContext('2d'),lv,.10,.24,.8,1.1);
+      paint(bright.getContext('2d'),lv,.55,.95,.9,1.4);
+      lm=frac.map(function(f,n){return{x:W*f[0],y:H*f[1],name:'['+names[n].toUpperCase()+']'}});
+      return true;
+    }
+    function pos(t){var a=t*Math.PI*2;return[W*(.5+.36*Math.sin(a)),H*(.34+.17*Math.sin(2*a+.5))]}
+    function draw(now){
+      var t=(((now-t0)%PERIOD)/PERIOD),p=pos(t),x=p[0],y=p[1],p2=pos(t+.003),ang=Math.atan2(p2[1]-y,p2[0]-x);
+      var fw=W<600?170:Math.min(280,W*.3),fh=fw*.66,k,q;
+      ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);ctx.drawImage(dim,0,0,W,H);
+      ctx.lineWidth=1.2;ctx.strokeStyle='#fff';
+      var prev=[x,y];
+      for(k=1;k<=70;k++){q=pos(t-k*.0012);ctx.globalAlpha=.5*(1-k/70);ctx.beginPath();ctx.moveTo(prev[0],prev[1]);ctx.lineTo(q[0],q[1]);ctx.stroke();prev=q;}
+      ctx.fillStyle='#fff';
+      for(k=2;k<=26;k+=2){q=pos(t+k*.0025);ctx.globalAlpha=.55*(1-k/28);ctx.beginPath();ctx.arc(q[0],q[1],1.4,0,6.283);ctx.fill();}
+      ctx.globalAlpha=1;
+      ctx.save();ctx.translate(x,y);ctx.rotate(ang);ctx.beginPath();ctx.rect(-fw/2,-fh/2,fw,fh);ctx.clip();
+      ctx.rotate(-ang);ctx.translate(-x,-y);ctx.drawImage(bright,0,0,W,H);ctx.restore();
+      ctx.save();ctx.translate(x,y);ctx.rotate(ang);
+      ctx.fillStyle='rgba(255,255,255,.05)';ctx.fillRect(-fw/2,-fh/2,fw,fh);
+      ctx.strokeStyle='#fff';ctx.lineWidth=1.6;
+      var cl=18,hx=fw/2,hy=fh/2;ctx.beginPath();
+      [[-1,-1],[1,-1],[1,1],[-1,1]].forEach(function(c){ctx.moveTo(c[0]*hx,c[1]*(hy-cl));ctx.lineTo(c[0]*hx,c[1]*hy);ctx.lineTo(c[0]*(hx-cl),c[1]*hy);});
+      ctx.stroke();
+      ctx.fillStyle='#fff';ctx.beginPath();ctx.moveTo(9,0);ctx.lineTo(-6,-5);ctx.lineTo(-6,5);ctx.closePath();ctx.fill();
+      ctx.restore();
+      var count=0,ca=Math.cos(-ang),sa=Math.sin(-ang);
+      ctx.font='500 10px "JetBrains Mono", ui-monospace, Menlo, monospace';
+      lm.forEach(function(m){
+        var dx=m.x-x,dy=m.y-y,lx=dx*ca-dy*sa,ly=dx*sa+dy*ca;
+        if(Math.abs(lx)<fw/2-6&&Math.abs(ly)<fh/2-6){
+          count++;ctx.strokeStyle='#fff';ctx.lineWidth=1.3;ctx.strokeRect(m.x-7,m.y-7,14,14);
+          ctx.save();ctx.shadowColor='rgba(15,15,15,.95)';ctx.shadowBlur=5;ctx.fillStyle='#fff';ctx.fillText(m.name,m.x+13,m.y+4);ctx.restore();
+        }else{ctx.strokeStyle='rgba(255,255,255,.3)';ctx.lineWidth=1;ctx.strokeRect(m.x-3,m.y-3,6,6);}
+      });
+      if(count!==lastCount&&readout){readout.textContent=count;lastCount=count;}
+    }
+    function loop(now){if(!active){raf=0;return}if(visible)draw(now);raf=requestAnimationFrame(loop)}
+    function start(){
+      active=true;if(!build())return;
+      if(reduce){draw(t0+PERIOD*.14)}else if(!raf){raf=requestAnimationFrame(loop)}
+    }
+    function stop(){active=false;if(raf){cancelAnimationFrame(raf);raf=0}}
+    if('IntersectionObserver' in window)new IntersectionObserver(function(e){visible=e[0].isIntersecting}).observe(hero);
+    var rt;window.addEventListener('resize',function(){
+      if(!active)return;clearTimeout(rt);rt=setTimeout(function(){if(build()&&reduce)draw(t0+PERIOD*.14)},200);
+    });
+    return{start:start,stop:stop};
+  })();
+
+  /* ---------- Router ---------- */
+  var nav=$('nav'),menuBtn=$('menuBtn'),first=true,pending=null;
+  function onScroll(){nav.classList.toggle('solid',window.scrollY>40)}
+  window.addEventListener('scroll',onScroll,{passive:true});
+  function closeMenu(){nav.classList.remove('open');menuBtn.setAttribute('aria-expanded','false')}
+  menuBtn.addEventListener('click',function(){
+    var o=nav.classList.toggle('open');menuBtn.setAttribute('aria-expanded',o?'true':'false');
+  });
+
+  function parse(){
+    var h=location.hash;if(h.indexOf('#/')!==0)return{name:'home'};
+    var p=h.slice(2).split('/');
+    if(p[0]==='project'&&p[1])return{name:'project',id:p[1]};
+    if(['air','space','leadership','careers'].indexOf(p[0])>-1)return{name:p[0]};
+    return{name:'home'};
+  }
+  var titles={home:'Kourashi Systems',air:'Air',space:'Space',leadership:'Leadership',careers:'Careers'};
+
+  function render(){
+    var r=parse(),view,title,navKey=r.name;
+    Array.prototype.forEach.call(document.querySelectorAll('.view'),function(v){v.hidden=true});
+    if(r.name==='project'){
+      var p=byId[r.id];if(!p){location.replace('#/');return}
+      $('v-project').innerHTML=projectView(p);view=$('v-project');title=p.label;navKey=p.domain;
+    }else{ensure(r.name);view=$('v-'+r.name);title=titles[r.name]}
+    view.hidden=false;
+    if(r.name==='home')Hero.start();else Hero.stop();
+    Array.prototype.forEach.call(document.querySelectorAll('.links a[data-route]'),function(a){
+      if(a.getAttribute('data-route')===navKey)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');
+    });
+    closeMenu();
+    document.title=(r.name==='home'?'':title+' | ')+'Kourashi Systems';
+    if(pending){var s=pending;pending=null;setTimeout(function(){scrollToSel(s)},30)}
+    else if(!first){
+      window.scrollTo({top:0,behavior:'instant'});
+      var h1=view.querySelector('h1');if(h1)h1.focus({preventScroll:true});
+    }
+    first=false;onScroll();
+  }
+
+  function scrollToSel(sel){
+    var el=document.querySelector(sel);
+    if(el)el.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
+    if(sel==='#main'){var h=document.querySelector('.view:not([hidden]) h1');if(h)h.focus({preventScroll:true})}
+  }
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('[data-scroll]');if(!a)return;
+    e.preventDefault();closeMenu();
+    var sel=a.getAttribute('data-scroll');
+    if((sel==='#projects'||sel==='#company')&&parse().name!=='home'){pending=sel;location.hash='#/';return}
+    scrollToSel(sel);
+  });
+
+  window.addEventListener('hashchange',render);
+  render();
+})();
+</script>
+<noscript><p style="padding:2rem">This site needs JavaScript enabled.</p></noscript>
+</body>
+</html>
