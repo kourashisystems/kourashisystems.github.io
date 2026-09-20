@@ -85,7 +85,7 @@ h3{font-size:1.4rem;line-height:1.2;letter-spacing:-.025em}
 .kbtn kbd{font-family:var(--mono);font-size:.7rem;border:1px solid currentColor;border-radius:2px;padding:0 .3rem}
 .menu-btn{display:none;background:none;border:0;color:inherit;width:44px;height:44px;cursor:pointer}
 .menu-btn svg{width:26px;height:26px}
-@media (max-width:980px){
+@media (max-width:1100px){
   .menu-btn{display:block}
   .links{display:none;position:absolute;top:calc(var(--navh) + env(safe-area-inset-top,0px));left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--panel-deep);padding:.5rem var(--pad) 1.6rem}
   .nav.open .links{display:flex}
@@ -106,7 +106,7 @@ h3{font-size:1.4rem;line-height:1.2;letter-spacing:-.025em}
 .hero .cta{margin-top:2.2rem;display:flex;flex-wrap:wrap;gap:.9rem}
 .readout{position:absolute;z-index:2;right:var(--pad);bottom:clamp(2.5rem,7vh,5rem);text-align:right}
 .readout b{display:block;font-size:3rem;font-weight:700;color:var(--on-panel);font-variant-numeric:tabular-nums;letter-spacing:-.04em;line-height:1.1}
-@media (max-width:980px){.readout{display:none}}
+@media (max-width:1100px){.readout{display:none}}
 
 /* Sections */
 section{padding-block:var(--sect)}
@@ -198,7 +198,7 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border:0;border-radiu
 .sticky{position:sticky;top:calc(var(--navh) + 2rem)}
 .story-panel{background:var(--panel);border-radius:2px;padding:clamp(1rem,2.5vw,2rem)}
 .story-panel svg{width:100%;height:auto;display:block}
-.story-panel svg text{font-family:var(--mono);font-size:12px;letter-spacing:.06em;fill:#fff;text-transform:uppercase}
+.story-panel svg text{font-family:var(--mono);font-size:12px;letter-spacing:.06em;fill:currentColor;text-transform:uppercase}
 .sstep{border-top:2px solid var(--fg);padding:1.3rem 0 clamp(4rem,22vh,11rem);opacity:.4;transition:opacity .35s}
 .sstep.on{opacity:1}
 .sstep:last-child{padding-bottom:0}
@@ -223,7 +223,7 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border:0;border-radiu
 /* Project page */
 .panel{background:var(--panel);border-radius:2px;padding:clamp(1rem,3vw,2.5rem)}
 .panel svg{display:block;width:100%;height:auto}
-.panel svg text{font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;fill:#fff;text-transform:uppercase}
+.panel svg text{font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;fill:currentColor;text-transform:uppercase}
 .art.big{aspect-ratio:2/1}
 .facts{border-top:2px solid var(--fg)}
 .facts div{display:grid;grid-template-columns:10rem 1fr;gap:1rem;padding:.95rem 0;border-bottom:1px solid var(--rule);align-items:baseline}
@@ -337,6 +337,103 @@ footer .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;
   .reveal{opacity:1;transform:none;transition:none}
   .sg{transition:none}
 }
+
+/* ================= v3: domain themes, detail pages, roadmap, news, form ================= */
+:root{--scrim:rgba(15,15,15,.6)}
+
+/* Space = white primary. Fixed values so the theme holds in dark mode too. */
+.space,.card.space{
+  --bg:#FFFFFF;--fg:#191919;--paper:#F1F1F0;--rule:#D9D9D9;--mute:#575757;
+  --panel:#FFFFFF;--panel-deep:#F1F1F0;--on-panel:#191919;--mute-panel:#575757;--rule-panel:#D9D9D9;
+  --scrim:rgba(255,255,255,.72);
+}
+.space{background:var(--bg);color:var(--fg)}
+.card.space{--panel:#F1F1F0;--panel-deep:#F1F1F0;--scrim:rgba(241,241,240,.82)}
+.card.space .art{border:1px solid var(--rule)}
+.space .page-head{border-bottom:1px solid var(--rule)}
+.space .demo,.space .viewer,.space .map-wrap,.space .panel,.space .story-panel,.space .art{border:1px solid var(--rule)}
+.art,.panel,.map-wrap,.story-panel{color:var(--on-panel)}
+.art .tag{color:var(--on-panel);text-shadow:0 0 8px var(--panel)}
+.art .stage{color:var(--on-panel);border-color:currentColor;background:var(--scrim)}
+.hint{background:var(--scrim);color:var(--mute-panel)}
+.hot{border-color:currentColor;background:var(--scrim);color:var(--on-panel)}
+.hot:hover,.hot[aria-pressed="true"]{background:var(--on-panel);color:var(--panel)}
+.hot-card{background:var(--scrim);color:var(--on-panel);border-color:var(--rule-panel)}
+.hot-card p{color:var(--mute-panel)}
+
+/* Nav over the white space pages */
+.nav.light{color:#191919}
+.nav.light.solid,.nav.light.open{background:rgba(255,255,255,.96)}
+.nav.light .brand img{filter:invert(1)}
+.nav.light .kbtn{border-color:#D9D9D9;color:#575757}
+.nav.light .kbtn:hover{color:#191919;border-color:#191919}
+.nav.light .btn-line{color:#191919}
+.nav.light .btn-line:hover{background:#191919;color:#fff}
+@media (max-width:1100px){
+  .nav.light .links{background:#F1F1F0}
+  .nav.light .links a:not(.btn){border-bottom-color:#D9D9D9}
+}
+
+/* Status tracker */
+.track{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin-top:clamp(2rem,4vw,3rem);max-width:760px}
+.track li{border-top:2px solid currentColor;padding-top:.7rem;opacity:.35}
+.track li.done{opacity:.7}
+.track li.now{opacity:1}
+.track li b{display:block;font-size:.98rem;letter-spacing:-.01em;margin-top:.15rem}
+.track .dot{display:inline-block;width:9px;height:9px;border-radius:50%;border:1.5px solid currentColor;margin-bottom:.5rem}
+.track li.done .dot,.track li.now .dot{background:currentColor}
+@media (max-width:700px){.track{grid-template-columns:repeat(2,1fr)}}
+
+/* Specs in two columns */
+.facts.cols{display:grid;grid-template-columns:1fr 1fr;gap:0 clamp(1.5rem,4vw,3.5rem)}
+@media (max-width:760px){.facts.cols{grid-template-columns:1fr}}
+
+/* Gallery */
+.shot figcaption{padding-top:.8rem;font-weight:600;font-size:1rem}
+.shot .art{display:grid;place-items:center}
+.shot-note{position:absolute;z-index:2;font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--on-panel);background:var(--scrim);padding:.4rem .7rem;border:1px solid currentColor;border-radius:2px}
+
+/* News */
+.news{border-top:2px solid var(--fg);padding-top:1.1rem}
+.news h3{margin-top:.5rem;font-size:1.25rem}
+.news p{color:var(--mute);margin-top:.5rem;font-size:.98rem;line-height:1.5}
+.news-list{display:grid;gap:2rem 1.25rem;grid-template-columns:1fr}
+.news-list .news{padding-bottom:1.6rem}
+.news-list .news p{max-width:70ch;font-size:1.05rem}
+
+/* Roadmap */
+.rm{border-top:2px solid var(--fg);margin-top:.4rem}
+.rm-years{display:grid;grid-template-columns:repeat(var(--cols),1fr);margin-left:15rem;padding:.7rem 0;border-bottom:1px solid var(--rule);
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;color:var(--mute)}
+.rm-row{display:grid;grid-template-columns:15rem 1fr;gap:1rem;align-items:center;padding:.8rem 0;border-bottom:1px solid var(--rule);transition:background .2s}
+.rm-row:hover{background:var(--paper)}
+.rm-lbl b{display:block;font-size:1rem;letter-spacing:-.02em;margin-top:.1rem}
+.rm-track{display:grid;grid-template-columns:repeat(var(--cols),1fr);align-items:center}
+.rm-bar{border:1.5px dashed var(--fg);border-radius:2px;min-height:32px;display:flex;align-items:center;padding:0 .7rem;opacity:.8}
+.rm-bar i{font-style:normal;font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rm-row.air .rm-bar{background:var(--fg);color:var(--bg);border-style:solid;opacity:1}
+.rm-row.space .rm-bar{background:var(--paper);color:var(--fg);border-style:solid;border-color:var(--rule)}
+.rm-row.air .rm-bar.solid{box-shadow:inset 0 0 0 2px var(--bg)}
+@media (max-width:820px){
+  .rm-years{margin-left:0}
+  .rm-row{grid-template-columns:1fr;gap:.45rem;padding:1rem 0}
+}
+
+/* Contact form */
+.form{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form .full{grid-column:1/-1}
+.form label{display:block}
+.form .lab{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:.4rem;display:block}
+.form input,.form select,.form textarea{width:100%;background:none;border:1.5px solid var(--rule);border-radius:2px;padding:.85rem .9rem;font-size:1rem;color:var(--fg)}
+.form textarea{min-height:140px;resize:vertical;font-family:inherit}
+.form input:focus,.form select:focus,.form textarea:focus{outline:none;border-color:var(--fg)}
+.form select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%);
+  background-position:calc(100% - 20px) 55%,calc(100% - 14px) 55%;background-size:6px 6px,6px 6px;background-repeat:no-repeat}
+.form-actions{display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;grid-column:1/-1}
+.form-note{font-family:var(--mono);font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:var(--mute)}
+@media (max-width:700px){.form{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -356,6 +453,7 @@ footer .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;
       <a href="#/leadership" data-route="leadership">Leadership</a>
       <a href="#/careers" data-route="careers">Careers</a>
       <a href="#/investors" data-route="investors">Investors</a>
+      <a href="#/news" data-route="news">Updates</a>
       <button class="kbtn" id="palBtn" aria-label="Search (Control or Command + K)"><span>Search</span><kbd id="kbdHint">⌘K</kbd></button>
       <a class="btn btn-line" href="#/" data-scroll="#contact">Contact</a>
     </nav>
@@ -451,9 +549,53 @@ footer .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;
       </div>
     </section>
 
+    <!-- Roadmap -->
+    <section class="pad" id="roadmap-sec" style="padding-top:0">
+      <div class="wrap">
+        <span class="tag gap">[ROADMAP-05]</span>
+        <h2 style="margin-bottom:1.2rem">Every program, by year.</h2>
+        <p class="lede" style="margin-bottom:2.5rem">Air programs are the solid bars, space programs the light ones. Dates move as scope is confirmed.</p>
+        <div class="reveal" id="roadmap"></div>
+      </div>
+    </section>
+
+    <!-- Updates -->
+    <section class="pad" style="padding-top:0">
+      <div class="wrap">
+        <div class="row-head"><h3>Latest updates</h3><a href="#/news">All updates</a></div>
+        <div class="grid c3" id="newsHome"></div>
+      </div>
+    </section>
+
+    <!-- Contact form -->
+    <section class="pad" id="contact">
+      <div class="wrap">
+        <span class="tag gap">[CONTACT-07]</span>
+        <div class="split" style="align-items:start">
+          <div>
+            <h2 style="margin-bottom:1.2rem">Talk to us.</h2>
+            <p class="lede">Tell us who you are and what you need. It reaches the right inbox — capability, partnership, investment, careers or media.</p>
+            <p class="fineprint">[No data leaves your device: this opens a message in your own email app]</p>
+          </div>
+          <form class="form" id="cform" novalidate>
+            <label><span class="lab">[Name]</span><input name="name" type="text" autocomplete="name"></label>
+            <label><span class="lab">[Organisation]</span><input name="org" type="text" autocomplete="organization"></label>
+            <label><span class="lab">[Email]</span><input name="email" type="email" autocomplete="email"></label>
+            <label><span class="lab">[Enquiry]</span><select name="kind"></select></label>
+            <label class="full"><span class="lab">[Message]</span><textarea name="msg" placeholder="What do you need from us?"></textarea></label>
+            <div class="form-actions">
+              <button class="btn btn-dark" type="submit">Send message</button>
+              <button class="btn" type="button" data-copy>Copy instead</button>
+              <span class="form-note" id="cformNote"></span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
     <div class="band">
       <div class="wrap">
-        <div><span class="tag" style="margin-bottom:.6rem">[CAREERS-05]</span><h3>We are hiring.</h3><p class="d">Engineering and flight operations roles across our air and space programs.</p></div>
+        <div><span class="tag" style="margin-bottom:.6rem">[CAREERS-08]</span><h3>We are hiring.</h3><p class="d">Engineering and flight operations roles across our air and space programs.</p></div>
         <a class="btn btn-dark" href="#/careers">View careers</a>
       </div>
     </div>
@@ -511,6 +653,16 @@ footer .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;
     </div></section>
   </div>
 
+  <!-- NEWS -->
+  <div class="view" id="v-news" hidden>
+    <div class="page-head"><div class="wrap">
+      <p class="crumbs"><a href="#/">Home</a><span>/</span>Updates</p>
+      <h1 tabindex="-1">Updates</h1>
+      <p class="lede">What has changed at Kourashi Systems, newest first.</p>
+    </div></div>
+    <section class="pad"><div class="wrap"><div class="news-list" id="newsList"></div></div></section>
+  </div>
+
   <!-- INVESTORS -->
   <div class="view" id="v-investors" hidden>
     <div class="page-head"><div class="wrap">
@@ -561,6 +713,9 @@ footer .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;
     </div></section>
 
     <section class="pad"><div class="wrap">
+      <span class="tag gap">[ROADMAP-04]</span>
+      <h2 style="margin-bottom:1.6rem">The roadmap.</h2>
+      <div id="invRoadmap" style="margin-bottom:clamp(3rem,6vw,5rem)"></div>
       <div class="row-head"><h3>What to look at first</h3><a href="#/">All programs</a></div>
       <div class="grid c3" id="invCards"></div>
       <p class="note">Nothing on this page is an offer of securities or an invitation to invest, and none of it is financial advice. Figures marked as to be confirmed are not yet settled.</p>
@@ -571,7 +726,7 @@ footer .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;
   <div class="view" id="v-project" hidden></div>
 </main>
 
-<footer id="contact">
+<footer id="site-footer">
   <div class="wrap">
     <div class="top">
       <div>
@@ -594,6 +749,7 @@ footer .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;
           <li><a href="#/leadership">Leadership</a></li>
           <li><a href="#/careers">Careers</a></li>
           <li><a href="#/investors">Investors</a></li>
+          <li><a href="#/news">Updates</a></li>
         </ul>
       </div>
     </div>
@@ -619,27 +775,90 @@ var $=function(id){return document.getElementById(id)};
 var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
 var TBC='To be confirmed';
 
-/* ---------------- Content (edit here) ---------------- */
-var STAGES={built:'Built',dev:'In development',concept:'Concept',tbc:'Stage to come'};
-var airFacts=[['Type',TBC],['Status',TBC],['Role',TBC],['Endurance',TBC],['Payload',TBC]];
-var spaceFacts=[['Type',TBC],['Status',TBC],['Role',TBC],['Orbit',TBC],['Payload',TBC]];
-var placeholder='A short description of this program will go here.';
+/* ================= CONTENT — edit here ================= */
+var STAGES={concept:'Concept',dev:'In development',testing:'In testing',built:'Built'};
+var STAGE_ORDER=['concept','dev','testing','built'];
+
 var projects=[
-  {id:'air-01',domain:'air',label:'AIR-01',name:'Visual-navigation aircraft',seed:1,stage:'built',from:2026,
+  {id:'air-01',domain:'air',label:'AIR-01',name:'Visual-navigation aircraft',seed:1,stage:'built',span:[2026,2027],
    short:'Navigates by the landscape beneath it.',
    lede:'A small uncrewed aircraft with a camera aimed straight down. It uses that camera, and the landscape around it, to navigate to a target location on its own.',
-   overview:['Our first aircraft. A camera points straight down, and onboard software compares what it sees with the landscape around it to work out where the aircraft is and where it needs to go.'],
-   facts:[['Type','Uncrewed aircraft'],['Status','Built'],['Navigation','Visual, downward-facing camera'],['Endurance',TBC],['Payload',TBC]]},
-  {id:'air-02',domain:'air',label:'AIR-02',name:'Project name to come',seed:2,stage:'tbc',from:null,short:'Details to come.',lede:placeholder,overview:['Program overview to come.'],facts:airFacts},
-  {id:'air-03',domain:'air',label:'AIR-03',name:'Project name to come',seed:3,stage:'tbc',from:null,short:'Details to come.',lede:placeholder,overview:['Program overview to come.'],facts:airFacts},
-  {id:'air-04',domain:'air',label:'AIR-04',name:'Project name to come',seed:4,stage:'tbc',from:null,short:'Details to come.',lede:placeholder,overview:['Program overview to come.'],facts:airFacts},
-  {id:'space-01',domain:'space',label:'SPACE-01',name:'Orbital aperture satellite',seed:1,stage:'concept',from:2028,
+   problem:'Most uncrewed aircraft navigate by satellite. Satellite navigation can be jammed, spoofed or simply unavailable, and when it goes, the aircraft is lost. An aircraft that can work out where it is from the ground below it does not have that single point of failure.',
+   overview:['Our first aircraft. A camera points straight down, and onboard software compares what it sees with the landscape around it to work out where the aircraft is and where it needs to go.',
+             'Everything needed for navigation is carried on the aircraft. No radio link, no satellite fix, no ground station in the loop.'],
+   how:[['It looks down.','A camera pointed at the ground streams the terrain below the aircraft.'],
+        ['It recognises where it is.','Software compares that view with the surrounding landscape to work out the aircraft\u2019s position.'],
+        ['It steers to its destination.','The aircraft corrects course as it flies and heads for the location it was given.']],
+   facts:[['Type','Uncrewed aircraft'],['Status','Built'],['Navigation','Visual, downward-facing camera'],['Endurance',TBC],['Payload',TBC]],
+   specs:[['Wingspan',TBC],['Take-off weight',TBC],['Cruise speed',TBC],['Endurance',TBC],['Range',TBC],['Launch',TBC],['Recovery',TBC],['Payload capacity',TBC],['Navigation sensor','Downward-facing camera'],['Onboard compute',TBC],['Link','Not required in flight'],['Operating altitude',TBC]],
+   gallery:['Aircraft on the bench','Camera bay','Ground testing']},
+
+  {id:'air-02',domain:'air',label:'AIR-02',name:'Long-endurance surveillance aircraft',seed:2,stage:'dev',span:[2027,2029],
+   short:'Stays up longer, watches a wider area.',
+   lede:'A larger uncrewed aircraft built around the same navigation approach, intended to hold a wide area under watch for far longer than AIR-01 can.',
+   problem:'Wide-area surveillance across Australian distances means hours in the air, often well beyond radio range and over country with no infrastructure. That rules out anything that needs a constant link home.',
+   overview:['An air program in development. It carries the AIR-01 navigation stack into a larger airframe with more fuel, more payload and a longer time on station.',
+             'Airframe, propulsion and endurance targets are still being set.'],
+   how:[['It launches without infrastructure.','Intended to operate from unprepared sites rather than runways.'],
+        ['It navigates the same way.','The same downward-facing camera approach proven on AIR-01.'],
+        ['It holds a pattern.','Designed to stay over an assigned area and keep sending back what it sees.']],
+   facts:[['Type','Uncrewed aircraft'],['Status','In development'],['Role','Wide-area surveillance'],['Endurance',TBC],['Payload',TBC]],
+   specs:[['Wingspan',TBC],['Take-off weight',TBC],['Cruise speed',TBC],['Endurance',TBC],['Range',TBC],['Launch',TBC],['Recovery',TBC],['Payload capacity',TBC],['Navigation sensor','Downward-facing camera'],['Onboard compute',TBC],['Link',TBC],['Operating altitude',TBC]],
+   gallery:['Concept airframe','Payload bay','Ground station']},
+
+  {id:'air-03',domain:'air',label:'AIR-03',name:'Navigation retrofit kit',seed:3,stage:'concept',span:[2028,2030],
+   short:'Puts our navigation into aircraft that already fly.',
+   lede:'A self-contained kit — camera, compute and software — that gives an existing uncrewed aircraft the ability to navigate visually, without redesigning the airframe.',
+   problem:'Operators already own fleets of aircraft that stop working properly the moment satellite navigation is denied. Replacing those fleets is slow and expensive. Upgrading them is not.',
+   overview:['An early-stage program. The kit is intended to bolt into an existing aircraft and feed position to its autopilot in the format it already expects.',
+             'Interfaces, form factor and supported aircraft are to be confirmed.'],
+   how:[['It mounts to the airframe.','A camera and compute module sized to fit existing payload bays.'],
+        ['It speaks the autopilot\u2019s language.','Position is handed to the aircraft in the format its flight controller already uses.'],
+        ['It takes over when the fix drops.','Intended to keep the aircraft navigating when satellite navigation is unavailable.']],
+   facts:[['Type','Retrofit payload'],['Status','Concept'],['Role','Navigation in GPS-denied conditions'],['Host aircraft',TBC],['Interface',TBC]],
+   specs:[['Mass',TBC],['Power draw',TBC],['Dimensions',TBC],['Camera',TBC],['Compute',TBC],['Interface',TBC],['Supported aircraft',TBC],['Environmental rating',TBC]],
+   gallery:['Kit layout','Mounting','Integration testing']},
+
+  {id:'air-04',domain:'air',label:'AIR-04',name:'Multi-aircraft coordination',seed:4,stage:'concept',span:[2029,2031],
+   short:'Several aircraft, one shared picture.',
+   lede:'Software that lets a group of aircraft share what each of them can see, so the group covers an area together rather than flying the same route four times.',
+   problem:'One aircraft sees one patch of ground. Covering a real search area usually means flying the same aircraft over it again and again, or flying several that do not know about each other.',
+   overview:['A software program at concept stage. Each aircraft contributes what it has recognised on the ground, and the group divides the area between them.',
+             'How they share, over what link, and how much autonomy each aircraft keeps are all open questions.'],
+   how:[['Each aircraft reports what it sees.','Recognised ground features, not raw video.'],
+        ['The group builds one picture.','Contributions are merged into a shared view of the area.'],
+        ['The area is divided up.','Coverage is split so aircraft are not repeating each other\u2019s work.']],
+   facts:[['Type','Software'],['Status','Concept'],['Role','Coordinated coverage'],['Aircraft per group',TBC],['Link',TBC]],
+   specs:[['Aircraft per group',TBC],['Link type',TBC],['Bandwidth',TBC],['Autonomy level',TBC],['Operator load',TBC],['Host platforms',TBC]],
+   gallery:['Coverage pattern','Operator view','Field trial']},
+
+  {id:'space-01',domain:'space',label:'SPACE-01',name:'Orbital aperture satellite',seed:1,stage:'concept',span:[2028,2031],
    short:'Points a sensor at any patch of ground below it.',
    lede:'A satellite that carries a steerable aperture. Ground controllers give it a point on the surface, and it holds that point while it passes overhead.',
-   overview:['An early-stage space program. The satellite keeps a sensor locked on a chosen patch of ground as the spacecraft moves, so a single pass can watch one place rather than a strip.','Orbit, sensor and spacecraft bus are all to be confirmed.'],
-   facts:[['Type','Satellite'],['Status','Concept'],['Role','Steerable Earth sensing'],['Orbit',TBC],['Payload',TBC],['Aperture',TBC]]},
-  {id:'space-02',domain:'space',label:'SPACE-02',name:'Project name to come',seed:2,stage:'tbc',from:null,short:'Details to come.',lede:placeholder,overview:['Program overview to come.'],facts:spaceFacts}
+   problem:'A satellite in a fixed attitude sweeps a strip and moves on. If the thing you care about is one place, most of that pass is wasted.',
+   overview:['An early-stage space program. The satellite keeps a sensor locked on a chosen patch of ground as the spacecraft moves, so a single pass can watch one place rather than a strip.',
+             'Orbit, sensor and spacecraft bus are all to be confirmed.'],
+   how:[['It is given a point.','Controllers task the satellite with a location on the surface.'],
+        ['It holds the point.','The aperture slews as the spacecraft moves so the ground spot stays where it was put.'],
+        ['It hands the data down.','What it collected comes down on the next available downlink.']],
+   facts:[['Type','Satellite'],['Status','Concept'],['Role','Steerable Earth sensing'],['Orbit',TBC],['Payload',TBC],['Aperture',TBC]],
+   specs:[['Orbit',TBC],['Altitude',TBC],['Mass',TBC],['Aperture',TBC],['Ground spot',TBC],['Slew rate',TBC],['Revisit',TBC],['Downlink',TBC],['Bus',TBC],['Design life',TBC]],
+   gallery:['Spacecraft concept','Aperture assembly','Ground segment']},
+
+  {id:'space-02',domain:'space',label:'SPACE-02',name:'Terrain reference payload',seed:2,stage:'concept',span:[2029,2031],
+   short:'Builds the maps our aircraft navigate against.',
+   lede:'A satellite payload that images terrain specifically to produce the reference landscape our aircraft match themselves against, and keeps it current as the ground changes.',
+   problem:'Visual navigation is only as good as the reference it is matching to. Terrain changes — fires, floods, construction, seasons — and a stale reference is a lost aircraft.',
+   overview:['A space program at concept stage, and the piece that ties the company together: it feeds the air programs rather than standing alone.',
+             'Sensor, coverage and refresh rate are to be confirmed.'],
+   how:[['It images the ground.','Coverage is chosen for the areas our aircraft operate over.'],
+        ['It turns imagery into reference.','Processing produces the landscape description the aircraft compare against.'],
+        ['It keeps it current.','Areas are re-imaged so the reference does not go stale.']],
+   facts:[['Type','Satellite payload'],['Status','Concept'],['Role','Reference mapping for visual navigation'],['Orbit',TBC],['Sensor',TBC]],
+   specs:[['Orbit',TBC],['Sensor',TBC],['Ground resolution',TBC],['Swath',TBC],['Coverage',TBC],['Refresh rate',TBC],['Processing',TBC],['Host bus',TBC]],
+   gallery:['Reference tile','Processing chain','Coverage map']}
 ];
+
 var people=[
   {name:'Name to come',role:'Founder and Chief Executive'},
   {name:'Name to come',role:'Chief Technology Officer'},
@@ -653,19 +872,32 @@ var roles=[
   {label:'ROLE-04',title:'Flight test lead',team:'Operations'},
   {label:'ROLE-05',title:"Don't see your role?",team:'General',sub:'Send us a general application'}
 ];
-/* Numbers: set value to a number once it is confirmed. null renders as TBC. */
+/* Updates — newest first. Replace these with real entries. */
+var NEWS=[
+  {date:'2026-09-12',tag:'AIR-01',title:'First aircraft complete',body:'The AIR-01 airframe is built and in ground testing. The navigation software is running on the aircraft rather than on a bench.'},
+  {date:'2026-08-20',tag:'SPACE',title:'Space programs opened',body:'Two space programs have been opened: a satellite with a steerable aperture, and a payload that builds the reference terrain our aircraft navigate against.'},
+  {date:'2026-07-02',tag:'COMPANY',title:'Hiring across four teams',body:'Roles are open in autonomy, software, hardware and flight operations. Some will require Australian citizenship and a security clearance.'},
+  {date:'2026-06-10',tag:'COMPANY',title:'Kourashi Systems formed',body:'The company was formed in Australia to build aircraft and space systems that keep working when satellite navigation does not.'}
+];
+/* Numbers: set value to a number once confirmed. null renders as TBC. */
 var STATS=[
-  {label:'Aircraft built',value:1,suffix:''},
+  {label:'Aircraft built',value:1},
+  {label:'Programs running',value:6},
   {label:'Test flights',value:null},
-  {label:'Flight hours',value:null},
-  {label:'Team size',value:null}
+  {label:'Flight hours',value:null}
 ];
 /* Sites: add {name, kind, lon, lat} once locations are confirmed. */
 var SITES=[];
+var ROADMAP=[2026,2031];
+var EMAILS={general:'contact@kourashisystems.com.au',careers:'careers@kourashisystems.com.au',investors:'investors@kourashisystems.com.au'};
 
 var byId={};projects.forEach(function(p){byId[p.id]=p});
 function pad2(n){return n<10?'0'+n:''+n}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]})}
+function fmtDate(d){
+  var m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],p=d.split('-');
+  return p[2].replace(/^0/,'')+' '+m[+p[1]-1]+' '+p[0];
+}
 
 /* ---------------- Marching squares ---------------- */
 function march(fn,vw,vh,step,L0,L1,dL,every){
@@ -731,19 +963,19 @@ function contourSVG(seed,vw,vh,step){
     if(l.major)dM+=d;else dm+=d;
   });
   return artCache[key]='<svg viewBox="0 0 '+vw+' '+vh+'" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">'+
-    '<path d="'+dm+'" fill="none" stroke="rgba(255,255,255,.28)" stroke-width="1" vector-effect="non-scaling-stroke"/>'+
-    '<path d="'+dM+'" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="1.4" vector-effect="non-scaling-stroke"/></svg>';
+    '<path d="'+dm+'" fill="none" stroke="currentColor" stroke-opacity=".28" stroke-width="1" vector-effect="non-scaling-stroke"/>'+
+    '<path d="'+dM+'" fill="none" stroke="currentColor" stroke-opacity=".8" stroke-width="1.4" vector-effect="non-scaling-stroke"/></svg>';
 }
 function spaceSVG(s){
   var rot=-24+s*22,cx=200,cy=150,o='',k,rx,ry;
-  o+='<circle cx="200" cy="470" r="260" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.55)" stroke-width="1.2" vector-effect="non-scaling-stroke"/>';
+  o+='<circle cx="200" cy="470" r="260" fill="currentColor" fill-opacity=".06" stroke="currentColor" stroke-opacity=".55" stroke-width="1.2" vector-effect="non-scaling-stroke"/>';
   for(k=0;k<4;k++){
     rx=90+k*52;ry=32+k*20;
-    o+='<ellipse cx="'+cx+'" cy="'+cy+'" rx="'+rx+'" ry="'+ry+'" transform="rotate('+rot+' '+cx+' '+cy+')" fill="none" stroke="rgba(255,255,255,'+(k===1?.6:.24)+')" stroke-width="1" vector-effect="non-scaling-stroke"/>';
+    o+='<ellipse cx="'+cx+'" cy="'+cy+'" rx="'+rx+'" ry="'+ry+'" transform="rotate('+rot+' '+cx+' '+cy+')" fill="none" stroke="currentColor" stroke-opacity="'+(k===1?.6:.24)+'" stroke-width="1" vector-effect="non-scaling-stroke"/>';
   }
   var r=rot*Math.PI/180,ang=1.1+s*1.9,px=142*Math.cos(ang),py=52*Math.sin(ang);
   var X=cx+px*Math.cos(r)-py*Math.sin(r),Y=cy+px*Math.sin(r)+py*Math.cos(r);
-  o+='<circle cx="'+X.toFixed(1)+'" cy="'+Y.toFixed(1)+'" r="9" fill="none" stroke="rgba(255,255,255,.5)" vector-effect="non-scaling-stroke"/><circle cx="'+X.toFixed(1)+'" cy="'+Y.toFixed(1)+'" r="3.5" fill="#fff"/>';
+  o+='<circle cx="'+X.toFixed(1)+'" cy="'+Y.toFixed(1)+'" r="9" fill="none" stroke="currentColor" stroke-opacity=".5" vector-effect="non-scaling-stroke"/><circle cx="'+X.toFixed(1)+'" cy="'+Y.toFixed(1)+'" r="3.5" fill="currentColor"/>';
   return '<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">'+o+'</svg>';
 }
 function artFor(p,big){
@@ -898,7 +1130,6 @@ function initCompare(root){
     [rc,ac].forEach(function(c){
       c.setTransform(dpr,0,0,dpr,0,0);c.clearRect(0,0,W,H);
       c.drawImage(L.bri,0,0,W,H);
-      /* camera grain + vignette */
       c.fillStyle='rgba(255,255,255,.035)';
       for(i=0;i<H;i+=3)c.fillRect(0,i,W,1);
       g=c.createRadialGradient(W/2,H/2,Math.min(W,H)*.2,W/2,H/2,Math.max(W,H)*.72);
@@ -907,9 +1138,8 @@ function initCompare(root){
       c.strokeStyle='rgba(255,255,255,.55)';c.lineWidth=1.4;
       c.save();c.translate(W/2,H/2);brackets(c,W/2-14,H/2-14,20);c.restore();
       c.font='500 10px "JetBrains Mono", ui-monospace, Menlo, monospace';c.fillStyle='rgba(255,255,255,.75)';
-      c.fillText('[CAM-01 · NADIR]',20,H-22);
+      c.fillText('[CAM-01 \u00B7 NADIR]',20,H-22);
     });
-    /* annotated layer (revealed on the right) */
     rc.font='500 10px "JetBrains Mono", ui-monospace, Menlo, monospace';
     TERRAINS.desert.marks.forEach(function(m,n){
       if(n%2)return;
@@ -931,10 +1161,14 @@ function initCompare(root){
   build();
 }
 
-/* ---------------- Program board ---------------- */
-var YEARS=[2026,2031];
+/* ---------------- Cards + program board ---------------- */
+function card(p){
+  return '<a class="card '+p.domain+'" href="#/project/'+p.id+'"><div class="art"><span class="tag">['+p.label+']</span>'+
+    '<span class="stage">'+esc(STAGES[p.stage])+'</span>'+artFor(p,false)+'</div>'+
+    '<div class="meta"><div class="name">'+esc(p.name)+'</div><p class="desc">'+esc(p.short)+'</p></div></a>';
+}
 function boardMarkup(id){
-  var stages=['all'].concat(Object.keys(STAGES));
+  var stages=['all'].concat(STAGE_ORDER);
   return '<div class="board-bar">'+
     '<div class="fgroup"><span class="tag">[Domain]</span><div class="chips" data-f="domain" role="group" aria-label="Filter by domain">'+
       ['all','air','space'].map(function(d,i){return '<button class="chip" type="button" data-v="'+d+'" aria-pressed="'+(i===0)+'">'+(d==='all'?'All':d.charAt(0).toUpperCase()+d.slice(1))+'</button>'}).join('')+
@@ -943,17 +1177,12 @@ function boardMarkup(id){
       stages.map(function(s,i){return '<button class="chip" type="button" data-v="'+s+'" aria-pressed="'+(i===0)+'">'+(s==='all'?'All':STAGES[s])+'</button>'}).join('')+
     '</div></div>'+
     '<div class="fgroup" style="flex:1 1 260px"><span class="tag">[Timeline]</span><div class="slider">'+
-      '<input type="range" id="'+id+'-yr" min="'+YEARS[0]+'" max="'+YEARS[1]+'" value="'+YEARS[1]+'" step="1" aria-label="Show programs active by year">'+
+      '<input type="range" id="'+id+'-yr" min="'+ROADMAP[0]+'" max="'+ROADMAP[1]+'" value="'+ROADMAP[1]+'" step="1" aria-label="Show programs active by year">'+
       '<span class="year" id="'+id+'-yrv">All years</span></div></div>'+
   '</div><div class="grid c4" data-grid></div><p class="count-line" data-count></p>';
 }
-function card(p){
-  return '<a class="card" href="#/project/'+p.id+'"><div class="art"><span class="tag">['+p.label+']</span>'+
-    '<span class="stage">'+esc(STAGES[p.stage])+'</span>'+artFor(p,false)+'</div>'+
-    '<div class="meta"><div class="name">'+esc(p.name)+'</div><p class="desc">'+esc(p.short)+'</p></div></a>';
-}
 function Board(el,fixedDomain){
-  var id=el.id,state={domain:fixedDomain||'all',stage:'all',year:YEARS[1]};
+  var id=el.id,state={domain:fixedDomain||'all',stage:'all',year:ROADMAP[1]};
   el.innerHTML=boardMarkup(id);
   var grid=el.querySelector('[data-grid]'),count=el.querySelector('[data-count]');
   if(fixedDomain){
@@ -964,12 +1193,11 @@ function Board(el,fixedDomain){
     var list=projects.filter(function(p){
       if(state.domain!=='all'&&p.domain!==state.domain)return false;
       if(state.stage!=='all'&&p.stage!==state.stage)return false;
-      if(state.year<YEARS[1]&&(!p.from||p.from>state.year))return false;
+      if(state.year<ROADMAP[1]&&p.span[0]>state.year)return false;
       return true;
     });
-    grid.innerHTML=list.length?list.map(card).join(''):'';
-    count.textContent='['+list.length+' of '+projects.length+' programs shown'+(state.year<YEARS[1]?' · active by '+state.year:'')+']';
-    if(!list.length)grid.innerHTML='<p class="board-empty">No programs match these filters yet. Dates for most programs are still to be confirmed.</p>';
+    grid.innerHTML=list.length?list.map(card).join(''):'<p class="board-empty">No programs match these filters.</p>';
+    count.textContent='['+list.length+' of '+projects.length+' programs shown'+(state.year<ROADMAP[1]?' \u00B7 started by '+state.year:'')+']';
   }
   el.addEventListener('click',function(e){
     var b=e.target.closest('.chip');if(!b)return;
@@ -978,8 +1206,73 @@ function Board(el,fixedDomain){
     state[f]=b.getAttribute('data-v');apply();
   });
   var yr=$(id+'-yr'),yrv=$(id+'-yrv');
-  if(yr)yr.addEventListener('input',function(){state.year=+yr.value;yrv.textContent=(state.year>=YEARS[1]?'All years':yr.value);apply()});
+  if(yr)yr.addEventListener('input',function(){state.year=+yr.value;yrv.textContent=(state.year>=ROADMAP[1]?'All years':yr.value);apply()});
   apply();
+}
+
+/* ---------------- Company roadmap ---------------- */
+function initRoadmap(el){
+  if(!el||el.dataset.on)return;el.dataset.on='1';
+  var y0=ROADMAP[0],y1=ROADMAP[1],n=y1-y0+1,years='';
+  for(var y=y0;y<=y1;y++)years+='<span>'+y+'</span>';
+  el.innerHTML='<div class="rm" style="--cols:'+n+'">'+
+    '<div class="rm-years">'+years+'</div>'+
+    projects.map(function(p){
+      var a=(p.span[0]-y0),b=(p.span[1]-y0+1);
+      return '<a class="rm-row '+p.domain+'" href="#/project/'+p.id+'">'+
+        '<span class="rm-lbl"><span class="tag">['+p.label+']</span><b>'+esc(p.name)+'</b></span>'+
+        '<span class="rm-track">'+
+          '<span class="rm-bar'+(p.stage==='built'?' solid':'')+'" style="grid-column:'+(a+1)+' / '+(b+1)+'">'+
+            '<i>'+esc(STAGES[p.stage])+'</i></span>'+
+        '</span></a>';
+    }).join('')+'</div>'+
+    '<p class="fineprint">[Dates are indicative and will move as programs are confirmed]</p>';
+}
+
+/* ---------------- News ---------------- */
+function newsItem(n,full){
+  return '<article class="news"><span class="tag">['+esc(n.tag)+' \u00B7 '+fmtDate(n.date)+']</span>'+
+    '<h3>'+esc(n.title)+'</h3><p>'+esc(n.body)+'</p></article>';
+}
+function initNewsHome(el){
+  if(!el||el.dataset.on)return;el.dataset.on='1';
+  el.innerHTML=NEWS.slice(0,3).map(function(n){return newsItem(n)}).join('');
+}
+function initNewsPage(el){
+  if(!el||el.dataset.on)return;el.dataset.on='1';
+  el.innerHTML=NEWS.map(function(n){return newsItem(n,true)}).join('');
+}
+
+/* ---------------- Contact form ---------------- */
+var ENQUIRY=[
+  {v:'General enquiry',to:'general'},{v:'Defence capability',to:'general'},
+  {v:'Partnership or supply',to:'general'},{v:'Investment',to:'investors'},
+  {v:'Careers',to:'careers'},{v:'Media',to:'general'}
+];
+function initForm(){
+  var f=$('cform');if(!f||f.dataset.on)return;f.dataset.on='1';
+  var sel=f.querySelector('[name=kind]');
+  sel.innerHTML=ENQUIRY.map(function(e,i){return '<option value="'+i+'">'+esc(e.v)+'</option>'}).join('');
+  var note=$('cformNote');
+  function compose(){
+    var d=new FormData(f),k=ENQUIRY[+d.get('kind')||0];
+    var body='Name: '+(d.get('name')||'')+'\nOrganisation: '+(d.get('org')||'')+'\nEmail: '+(d.get('email')||'')+
+      '\nEnquiry: '+k.v+'\n\n'+(d.get('msg')||'');
+    return{to:EMAILS[k.to],subject:'['+k.v+'] '+(d.get('org')||d.get('name')||'Website enquiry'),body:body};
+  }
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var m=compose();
+    location.href='mailto:'+m.to+'?subject='+encodeURIComponent(m.subject)+'&body='+encodeURIComponent(m.body);
+    note.textContent='[Opening your email app — if nothing happens, use copy instead]';
+  });
+  f.querySelector('[data-copy]').addEventListener('click',function(){
+    var m=compose(),text=m.to+'\n'+m.subject+'\n\n'+m.body;
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){note.textContent='[Copied — paste it into an email to '+m.to+']'},
+        function(){note.textContent='[Copy failed — email '+m.to+' directly]'});
+    }else note.textContent='[Email '+m.to+' directly]';
+  });
 }
 
 /* ---------------- Careers filter ---------------- */
@@ -990,7 +1283,7 @@ function initCareers(){
   function apply(){
     var l=roles.filter(function(r){return cur==='All'||r.team===cur});
     list.innerHTML=l.map(function(r){
-      return '<li><a href="mailto:careers@kourashisystems.com.au?subject='+encodeURIComponent(r.title)+'">'+
+      return '<li><a href="mailto:'+EMAILS.careers+'?subject='+encodeURIComponent(r.title)+'">'+
         '<span class="tag">['+r.label+']</span><span class="t">'+esc(r.title)+'</span>'+
         '<span class="m">'+esc(r.sub||r.team)+'</span><span class="a">Apply</span></a></li>';
     }).join('');
@@ -1007,7 +1300,7 @@ function initCareers(){
 /* ---------------- Counters ---------------- */
 function initStats(){
   var el=$('stats');if(!el||el.dataset.on)return;el.dataset.on='1';
-  el.innerHTML=STATS.map(function(s,i){
+  el.innerHTML=STATS.map(function(s){
     var v=s.value;
     return '<div class="stat"><b'+(v===null?' class="tbc"':'')+' data-v="'+(v===null?'':v)+'">'+(v===null?'To be confirmed':'0')+'</b>'+
       '<span class="tag">['+esc(s.label)+']</span></div>';
@@ -1039,15 +1332,15 @@ function initMap(){
   var VW=1000,VH=820,lon0=112,lon1=155,lat0=-9,lat1=-44.5;
   function px(p){return[(p[0]-lon0)/(lon1-lon0)*VW,(p[1]-lat0)/(lat1-lat0)*VH]}
   function path(pts){return pts.map(function(p,i){var q=px(p);return (i?'L':'M')+q[0].toFixed(1)+' '+q[1].toFixed(1)}).join('')+'Z'}
-  var pins=SITES.map(function(s,i){
+  var pins=SITES.map(function(s){
     var q=px([s.lon,s.lat]);
-    return '<g class="site"><circle cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="7" fill="none" stroke="#fff" stroke-width="1.4"/>'+
-      '<circle cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="2.5" fill="#fff"/>'+
-      '<text x="'+(q[0]+14).toFixed(1)+'" y="'+(q[1]+4).toFixed(1)+'" fill="#fff" font-family="JetBrains Mono, ui-monospace, monospace" font-size="15" letter-spacing="1">['+esc((s.name||'').toUpperCase())+' · '+esc((s.kind||'').toUpperCase())+']</text></g>';
+    return '<g class="site"><circle cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="7" fill="none" stroke="currentColor" stroke-width="1.4"/>'+
+      '<circle cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="2.5" fill="currentColor"/>'+
+      '<text x="'+(q[0]+14).toFixed(1)+'" y="'+(q[1]+4).toFixed(1)+'" fill="currentColor" font-family="JetBrains Mono, ui-monospace, monospace" font-size="15" letter-spacing="1">['+esc((s.name||'').toUpperCase())+' \u00B7 '+esc((s.kind||'').toUpperCase())+']</text></g>';
   }).join('');
   el.innerHTML='<svg viewBox="0 0 '+VW+' '+VH+'" role="img" aria-label="Map of Australia showing Kourashi Systems sites">'+
-    '<path d="'+path(AUS)+'" fill="rgba(255,255,255,.05)" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/>'+
-    '<path d="'+path(TAS)+'" fill="rgba(255,255,255,.05)" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/>'+
+    '<path d="'+path(AUS)+'" fill="currentColor" fill-opacity=".05" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>'+
+    '<path d="'+path(TAS)+'" fill="currentColor" fill-opacity=".05" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>'+
     pins+'</svg>'+
     (SITES.length?'':'<p class="empty"><span class="tag">[Sites to be confirmed]</span></p>');
 }
@@ -1056,19 +1349,19 @@ function initMap(){
 var AUDIENCES=[
   {k:'defence',t:'Defence customer',s:'Capability and programs',
    lines:'Start with our air programs and the aircraft we have built. For capability discussions, write to us directly and we will come back with the right people.',
-   links:[['Air programs','#/air'],['Visual-navigation aircraft','#/project/air-01'],['Email us','mailto:contact@kourashisystems.com.au?subject=Defence%20enquiry']]},
+   links:[['Air programs','#/air'],['Visual-navigation aircraft','#/project/air-01'],['Contact us','#/?contact']]},
   {k:'partner',t:'Industry partner',s:'Supply and collaboration',
    lines:'We work with Australian suppliers and research partners across air and space. Tell us what you build and where you think it fits.',
-   links:[['All projects','#/'],['Space programs','#/space'],['Email us','mailto:contact@kourashisystems.com.au?subject=Partnership%20enquiry']]},
+   links:[['All programs','#/'],['Space programs','#/space'],['Contact us','#/?contact']]},
   {k:'engineer',t:'Engineer',s:'Roles and the work',
    lines:'Open roles sit across autonomy, software, hardware and flight operations. If nothing matches, send a general application.',
-   links:[['Open roles','#/careers'],['How the aircraft navigates','#/project/air-01'],['Email careers','mailto:careers@kourashisystems.com.au?subject=Application']]},
+   links:[['Open roles','#/careers'],['How the aircraft navigates','#/project/air-01'],['Email careers','mailto:'+EMAILS.careers+'?subject=Application']]},
   {k:'investor',t:'Investor',s:'The company and the raise',
    lines:'Start with the investor page for where the company is up to and what we are building next. Materials are available on request.',
-   links:[['Investors','#/investors'],['Programs','#/'],['Email investors','mailto:investors@kourashisystems.com.au?subject=Investor%20enquiry']]},
+   links:[['Investors','#/investors'],['Roadmap','#/?roadmap'],['Email investors','mailto:'+EMAILS.investors+'?subject=Investor%20enquiry']]},
   {k:'media',t:'Media',s:'Company and people',
-   lines:'For company background and interviews, start with the leadership page and write to us with your deadline.',
-   links:[['Leadership','#/leadership'],['Company','#/'],['Email us','mailto:contact@kourashisystems.com.au?subject=Media%20enquiry']]}
+   lines:'For company background and interviews, start with the updates and the leadership page, then write to us with your deadline.',
+   links:[['Updates','#/news'],['Leadership','#/leadership'],['Contact us','#/?contact']]}
 ];
 function initAudience(){
   var btns=$('audBtns'),out=$('audOut');if(!btns||btns.dataset.on)return;btns.dataset.on='1';
@@ -1079,7 +1372,10 @@ function initAudience(){
     var a=AUDIENCES.filter(function(x){return x.k===k})[0];if(!a)return;
     Array.prototype.forEach.call(btns.querySelectorAll('button'),function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-k')===k))});
     out.innerHTML='<span class="tag gap">[For '+esc(a.t.toLowerCase())+']</span><p class="lede">'+esc(a.lines)+'</p>'+
-      '<div class="aud-links">'+a.links.map(function(l){return '<a href="'+l[1]+'">'+esc(l[0])+'</a>'}).join('')+'</div>';
+      '<div class="aud-links">'+a.links.map(function(l){
+        var scroll=l[1].indexOf('#/?')===0?' data-scroll="#'+l[1].slice(3)+'" href="#/"':' href="'+l[1]+'"';
+        return '<a'+scroll+'>'+esc(l[0])+'</a>';
+      }).join('')+'</div>';
     out.hidden=false;
     if(save){try{localStorage.setItem('ks-aud',k)}catch(e){}}
   }
@@ -1226,75 +1522,88 @@ function initStory(root){
 
 /* ---------------- Static SVGs ---------------- */
 var AIRCRAFT='<svg viewBox="0 0 800 420" role="img" aria-label="Top-down illustration of the aircraft with the downward-facing camera marked">'+
-  '<path d="M400 40 L468 132 L735 300 L742 328 L566 318 L458 304 L432 352 L368 352 L342 304 L234 318 L58 328 L65 300 L332 132 Z" fill="rgba(255,255,255,.05)" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/>'+
-  '<path d="M400 40 L400 352" stroke="rgba(255,255,255,.25)" stroke-width="1"/>'+
-  '<ellipse cx="400" cy="205" rx="26" ry="82" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.6)" stroke-width="1.2"/>'+
-  '<circle cx="400" cy="222" r="9" fill="none" stroke="#fff" stroke-width="1.5"/>'+
-  '<path d="M409 216 L560 108 L780 108" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1"/>'+
-  '<text x="24" y="38" fill-opacity=".7">[AIR-01]</text>'+
-  '<text x="560" y="97">[Downward-facing camera]</text></svg>';
+  '<path d="M400 40 L468 132 L735 300 L742 328 L566 318 L458 304 L432 352 L368 352 L342 304 L234 318 L58 328 L65 300 L332 132 Z" fill="currentColor" fill-opacity=".05" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>'+
+  '<path d="M400 40 L400 352" stroke="currentColor" stroke-opacity=".25" stroke-width="1"/>'+
+  '<ellipse cx="400" cy="205" rx="26" ry="82" fill="currentColor" fill-opacity=".08" stroke="currentColor" stroke-opacity=".6" stroke-width="1.2"/>'+
+  '<circle cx="400" cy="222" r="9" fill="none" stroke="currentColor" stroke-width="1.5"/>'+
+  '<path d="M409 216 L560 108 L780 108" fill="none" stroke="currentColor" stroke-opacity=".7" stroke-width="1"/>'+
+  '<text x="24" y="38" fill="currentColor" fill-opacity=".7">[AIR-01]</text>'+
+  '<text x="560" y="97" fill="currentColor">[Downward-facing camera]</text></svg>';
 
 var STORY_SVG='<svg viewBox="0 0 800 560" role="img" aria-label="Diagram: the aircraft looks down, recognises landmarks, and steers to its destination" data-stage="1">'+
-  '<path d="M20 470 L120 452 L190 468 L270 438 L350 460 L430 432 L520 456 L610 430 L700 452 L780 436" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="1.4"/>'+
-  '<path d="M20 500 L130 486 L210 502 L300 474 L380 496 L470 470 L560 492 L650 468 L740 488 L780 480" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1"/>'+
+  '<path d="M20 470 L120 452 L190 468 L270 438 L350 460 L430 432 L520 456 L610 430 L700 452 L780 436" fill="none" stroke="currentColor" stroke-opacity=".45" stroke-width="1.4"/>'+
+  '<path d="M20 500 L130 486 L210 502 L300 474 L380 496 L470 470 L560 492 L650 468 L740 488 L780 480" fill="none" stroke="currentColor" stroke-opacity=".2" stroke-width="1"/>'+
   '<g class="sg sg1">'+
-    '<path d="M180 180 L260 205 L180 230 L196 205 Z" fill="rgba(255,255,255,.1)" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/>'+
-    '<path d="M196 205 L120 452 M196 205 L300 440" class="dash" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1"/>'+
-    '<path d="M120 452 L300 440" fill="none" stroke="#fff" stroke-width="1.6"/>'+
-    '<circle cx="196" cy="216" r="7" fill="none" stroke="#fff" stroke-width="1.4"/>'+
-    '<text x="24" y="150">[Step 01 · Camera looks down]</text>'+
+    '<path d="M180 180 L260 205 L180 230 L196 205 Z" fill="currentColor" fill-opacity=".1" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>'+
+    '<path d="M196 205 L120 452 M196 205 L300 440" class="dash" fill="none" stroke="currentColor" stroke-opacity=".55" stroke-width="1"/>'+
+    '<path d="M120 452 L300 440" fill="none" stroke="currentColor" stroke-width="1.6"/>'+
+    '<circle cx="196" cy="216" r="7" fill="none" stroke="currentColor" stroke-width="1.4"/>'+
+    '<text x="24" y="150" fill="currentColor">[Step 01 \u00B7 Camera looks down]</text>'+
   '</g>'+
   '<g class="sg sg2">'+
-    '<rect x="146" y="432" width="18" height="18" fill="none" stroke="#fff" stroke-width="1.4"/>'+
-    '<rect x="214" y="446" width="18" height="18" fill="none" stroke="#fff" stroke-width="1.4"/>'+
-    '<rect x="272" y="424" width="18" height="18" fill="none" stroke="#fff" stroke-width="1.4"/>'+
-    '<text x="150" y="410">[3 matched]</text>'+
-    '<path d="M155 432 L196 216 M223 446 L196 216 M281 424 L196 216" fill="none" stroke="rgba(255,255,255,.28)" stroke-width="1"/>'+
+    '<rect x="146" y="432" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4"/>'+
+    '<rect x="214" y="446" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4"/>'+
+    '<rect x="272" y="424" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4"/>'+
+    '<text x="150" y="410" fill="currentColor">[3 matched]</text>'+
+    '<path d="M155 432 L196 216 M223 446 L196 216 M281 424 L196 216" fill="none" stroke="currentColor" stroke-opacity=".28" stroke-width="1"/>'+
   '</g>'+
   '<g class="sg sg3">'+
-    '<path d="M196 205 C 340 150, 520 250, 690 180" class="dash" fill="none" stroke="#fff" stroke-width="1.6"/>'+
-    '<circle cx="690" cy="180" r="12" fill="none" stroke="#fff" stroke-width="1.5"/>'+
-    '<circle cx="690" cy="180" r="3.5" fill="#fff"/>'+
-    '<path d="M690 192 L690 430" class="dash" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="1"/>'+
-    '<text x="620" y="150">[Destination]</text>'+
+    '<path d="M196 205 C 340 150, 520 250, 690 180" class="dash" fill="none" stroke="currentColor" stroke-width="1.6"/>'+
+    '<circle cx="690" cy="180" r="12" fill="none" stroke="currentColor" stroke-width="1.5"/>'+
+    '<circle cx="690" cy="180" r="3.5" fill="currentColor"/>'+
+    '<path d="M690 192 L690 430" class="dash" fill="none" stroke="currentColor" stroke-opacity=".4" stroke-width="1"/>'+
+    '<text x="620" y="150" fill="currentColor">[Destination]</text>'+
   '</g>'+
 '</svg>';
 
-/* ---------------- Project view ---------------- */
+/* ---------------- Project page ---------------- */
+function statusTrack(p){
+  var i=STAGE_ORDER.indexOf(p.stage);
+  return '<ol class="track" aria-label="Program status">'+STAGE_ORDER.map(function(s,n){
+    var cls=n<i?'done':(n===i?'now':'');
+    return '<li class="'+cls+'"><span class="dot" aria-hidden="true"></span><span class="tag">[0'+(n+1)+']</span>'+
+      '<b>'+STAGES[s]+'</b>'+(n===i?'<span class="sr"> (current stage)</span>':'')+'</li>';
+  }).join('')+'</ol>';
+}
 function projectView(p){
   var dn=p.domain==='air'?'Air':'Space',idx=projects.indexOf(p),more=[],k;
   for(k=1;k<=3;k++)more.push(projects[(idx+k)%projects.length]);
   var first=p.id==='air-01';
   var visual=first?'<div class="panel">'+AIRCRAFT+'</div>':'<div class="art big"><span class="tag">['+p.label+']</span>'+artFor(p,true)+'</div>';
   var facts=p.facts.map(function(f){return '<div><dt>'+esc(f[0])+'</dt><dd'+(f[1]===TBC?' class="tbc"':'')+'>'+esc(f[1])+'</dd></div>'}).join('');
-  var extra='';
-  if(p.id==='space-01'){
-    extra+='<section class="pad" style="padding-top:0"><div class="wrap">'+
-      '<span class="tag gap">[APERTURE-02]</span><h2 style="margin-bottom:1.2rem">Aim it yourself.</h2>'+
-      '<p class="lede" style="margin-bottom:2rem">Drag anywhere over the Earth to move the aperture, and switch between wide, narrow and spot. Slant range and ground spot are worked out from a 550&nbsp;km orbit.</p>'+
-      satBlock('satProj','Orbital aperture — aim it')+
-      '<p class="fineprint">[Illustration only — orbit, sensor and spacecraft to be confirmed]</p></div></section>';
-  }
+  var specs=p.specs.map(function(f){return '<div><dt>'+esc(f[0])+'</dt><dd'+(f[1]===TBC?' class="tbc"':'')+'>'+esc(f[1])+'</dd></div>'}).join('');
+  var rel=NEWS.filter(function(n){return n.tag===p.label||n.tag===p.domain.toUpperCase()});
+
+  /* how it works: scroll story for AIR-01, step cards elsewhere */
+  var howSec;
   if(first){
-    extra+='<section class="pad" style="padding-top:0"><div class="wrap">'+
-      '<span class="tag gap">[FEED-02]</span><h2 style="margin-bottom:1.2rem">What the aircraft sees.</h2>'+
+    howSec='<section class="story"><div class="wrap"><span class="tag gap">[SEQUENCE-03]</span>'+
+      '<h2 style="margin-bottom:clamp(2rem,4vw,3.5rem)">How it finds its way.</h2>'+
+      '<div class="inner"><div class="sticky"><div class="story-panel">'+STORY_SVG+'</div></div><div>'+
+      p.how.map(function(h,i){
+        return '<div class="sstep" data-step="'+(i+1)+'"><span class="tag">[STEP-0'+(i+1)+']</span><h3>'+esc(h[0])+'</h3><p>'+esc(h[1])+'</p></div>';
+      }).join('')+'</div></div></div></section>';
+  }else{
+    howSec='<section class="steps-sec"><div class="wrap"><span class="tag gap">[SEQUENCE-03]</span>'+
+      '<h2>How it is meant to work.</h2><ol class="steps">'+
+      p.how.map(function(h,i){
+        return '<li><span class="tag">[STEP-0'+(i+1)+']</span><h3>'+esc(h[0])+'</h3><p>'+esc(h[1])+'</p></li>';
+      }).join('')+'</ol></div></section>';
+  }
+
+  /* interactive blocks */
+  var demo='';
+  if(first){
+    demo+='<section class="pad"><div class="wrap">'+
+      '<span class="tag gap">[FEED-04]</span><h2 style="margin-bottom:1.2rem">What the aircraft sees.</h2>'+
       '<p class="lede" style="margin-bottom:2rem">Drag the divider. On the left is the raw camera frame. On the right is the same frame once the landmarks in it have been recognised.</p>'+
       '<div class="compare reveal">'+
         '<canvas class="raw" aria-hidden="true"></canvas><canvas class="top" aria-hidden="true"></canvas>'+
         '<span class="handle" aria-hidden="true"></span>'+
         '<input class="knob" type="range" min="0" max="100" value="52" aria-label="Reveal the recognised landmarks">'+
         '<span class="lbl l">[Raw frame]</span><span class="lbl r">[Recognised]</span>'+
-      '</div><p class="fineprint">[Illustration only — not flight data]</p></div></section>'+
-
-      '<section class="story"><div class="wrap"><span class="tag gap">[SEQUENCE-03]</span>'+
-      '<h2 style="margin-bottom:clamp(2rem,4vw,3.5rem)">How it finds its way.</h2>'+
-      '<div class="inner"><div class="sticky"><div class="story-panel">'+STORY_SVG+'</div></div><div>'+
-      '<div class="sstep" data-step="1"><span class="tag">[STEP-01]</span><h3>It looks down.</h3><p>A camera pointed at the ground streams the terrain below the aircraft.</p></div>'+
-      '<div class="sstep" data-step="2"><span class="tag">[STEP-02]</span><h3>It recognises where it is.</h3><p>Software compares that view with the surrounding landscape to work out the aircraft\'s position.</p></div>'+
-      '<div class="sstep" data-step="3"><span class="tag">[STEP-03]</span><h3>It steers to its destination.</h3><p>The aircraft corrects course as it flies and heads for the location it was given.</p></div>'+
-      '</div></div></div></section>'+
-
-      '<section class="pad"><div class="wrap"><span class="tag gap">[AIRFRAME-04]</span>'+
+      '</div><p class="fineprint">[Illustration only \u2014 not flight data]</p></div></section>'+
+      '<section class="pad" style="padding-top:0"><div class="wrap"><span class="tag gap">[AIRFRAME-05]</span>'+
       '<h2 style="margin-bottom:1.2rem">Look around the aircraft.</h2>'+
       '<p class="lede" style="margin-bottom:2rem">Drag to rotate. Tap a marker for detail. The geometry here is a placeholder until the flight article is released.</p>'+
       '<div class="viewer" role="application" aria-label="Rotatable 3D view of the aircraft. Arrow keys also rotate it.">'+
@@ -1302,16 +1611,49 @@ function projectView(p){
         HOTS.map(function(h,i){return '<button class="hot" type="button" aria-pressed="false" aria-label="'+esc(h.t)+'">'+(i+1)+'</button>'}).join('')+
         '<div class="vtools"><button class="tb" type="button" data-reset>Reset</button></div>'+
         '<div class="hot-card" hidden></div>'+
-      '</div><p class="fineprint">[Placeholder geometry — not the flight article]</p></div></section>';
+      '</div><p class="fineprint">[Placeholder geometry \u2014 not the flight article]</p></div></section>';
   }
+  if(p.id==='space-01'){
+    demo+='<section class="pad"><div class="wrap">'+
+      '<span class="tag gap">[APERTURE-04]</span><h2 style="margin-bottom:1.2rem">Aim it yourself.</h2>'+
+      '<p class="lede" style="margin-bottom:2rem">Drag anywhere over the Earth to move the aperture, and switch between wide, narrow and spot. Slant range and ground spot come from the geometry of a 550&nbsp;km orbit.</p>'+
+      satBlock('satProj','Orbital aperture \u2014 aim it')+
+      '<p class="fineprint">[Illustration only \u2014 orbit, sensor and spacecraft to be confirmed]</p></div></section>';
+  }
+
+  var gallery='<section class="pad" style="padding-top:0"><div class="wrap">'+
+    '<div class="row-head"><h3>Gallery</h3><span class="tag">[Imagery to come]</span></div>'+
+    '<div class="grid c3">'+p.gallery.map(function(g,i){
+      return '<figure class="shot"><div class="art"><span class="tag">[IMG-0'+(i+1)+']</span>'+contourSVG(p.seed+i*3,400,300,9)+
+        '<span class="shot-note">Photo to come</span></div><figcaption>'+esc(g)+'</figcaption></figure>';
+    }).join('')+'</div></div></section>';
+
+  var updates=rel.length?'<section class="pad" style="padding-top:0"><div class="wrap">'+
+    '<div class="row-head"><h3>Program updates</h3><a href="#/news">All updates</a></div>'+
+    '<div class="grid c3">'+rel.map(function(n){return newsItem(n)}).join('')+'</div></div></section>':'';
+
   return '<div class="page-head"><div class="wrap">'+
     '<p class="crumbs"><a href="#/">Home</a><span>/</span><a href="#/'+p.domain+'">'+dn+'</a><span>/</span>'+p.label+'</p>'+
-    '<span class="tag gap">['+p.label+']</span>'+
-    '<h1 tabindex="-1">'+esc(p.name)+'</h1><p class="lede">'+esc(p.lede)+'</p></div></div>'+
+    '<span class="tag gap">['+p.label+' \u00B7 '+dn.toUpperCase()+']</span>'+
+    '<h1 tabindex="-1">'+esc(p.name)+'</h1><p class="lede">'+esc(p.lede)+'</p>'+
+    statusTrack(p)+'</div></div>'+
     '<div class="visual"><div class="wrap">'+visual+'</div></div>'+
-    '<section class="pad overview"><div class="wrap"><div class="split"><div><span class="tag gap">[OVERVIEW-01]</span><h2>Overview</h2>'+
-    p.overview.map(function(t){return '<p class="lede">'+esc(t)+'</p>'}).join('')+
-    '</div><dl class="facts">'+facts+'</dl></div></div></section>'+extra+
+
+    '<section class="pad overview"><div class="wrap"><div class="split"><div>'+
+      '<span class="tag gap">[PROBLEM-01]</span><h2>The problem</h2><p class="lede">'+esc(p.problem)+'</p>'+
+      '<span class="tag gap" style="margin-top:2.6rem">[OVERVIEW-02]</span><h2>Overview</h2>'+
+      p.overview.map(function(t){return '<p class="lede" style="margin-top:.9rem">'+esc(t)+'</p>'}).join('')+
+    '</div><dl class="facts">'+facts+'</dl></div></div></section>'+
+
+    howSec+demo+
+
+    '<section class="pad"><div class="wrap"><span class="tag gap">[SPECIFICATION-06]</span>'+
+    '<h2 style="margin-bottom:1.6rem">Specification</h2>'+
+    '<dl class="facts cols">'+specs+'</dl>'+
+    '<p class="fineprint">[Figures marked to be confirmed are not yet settled]</p></div></section>'+
+
+    gallery+updates+
+
     '<section class="pad" style="padding-top:0"><div class="wrap"><div class="row-head"><h3>More projects</h3><a href="#/'+p.domain+'">All '+dn.toLowerCase()+' projects</a></div><div class="grid c3">'+more.map(card).join('')+'</div></div></section>';
 }
 
@@ -1325,12 +1667,14 @@ var PAL=(function(){
     {k:'Page',n:'Leadership',d:'The team',h:'#/leadership'},
     {k:'Page',n:'Careers',d:'Open roles',h:'#/careers'},
     {k:'Page',n:'Investors',d:'The company and the raise',h:'#/investors'},
-    {k:'Demo',n:'Aim the orbital aperture',d:'Interactive satellite',h:'#/project/space-01'},
+    {k:'Page',n:'Updates',d:'Company news',h:'#/news'},
     {k:'Demo',n:'Move the camera',d:'Interactive position fix',h:'#/?try'},
-    {k:'Contact',n:'Email Kourashi Systems',d:'contact@kourashisystems.com.au',h:'mailto:contact@kourashisystems.com.au'},
-    {k:'Contact',n:'Email investor relations',d:'investors@kourashisystems.com.au',h:'mailto:investors@kourashisystems.com.au'}
+    {k:'Demo',n:'Aim the orbital aperture',d:'Interactive satellite',h:'#/project/space-01'},
+    {k:'Section',n:'Roadmap',d:'Every program by year',h:'#/?roadmap'},
+    {k:'Section',n:'Contact form',d:'Send us a message',h:'#/?contact'}
   ].concat(projects.map(function(p){return{k:p.label,n:p.name,d:p.short,h:'#/project/'+p.id}}))
-   .concat(roles.map(function(r){return{k:'Role',n:r.title,d:r.team,h:'#/careers'}}));
+   .concat(roles.map(function(r){return{k:'Role',n:r.title,d:r.team,h:'#/careers'}}))
+   .concat(NEWS.map(function(n){return{k:'Update',n:n.title,d:fmtDate(n.date),h:'#/news'}}));
   function render(q){
     var s=q.trim().toLowerCase();
     items=index.filter(function(it){return !s||(it.n+' '+it.d+' '+it.k).toLowerCase().indexOf(s)>-1});
@@ -1353,7 +1697,12 @@ var PAL=(function(){
   function go(i){
     var it=items[i];if(!it)return;close();
     if(it.h.indexOf('mailto:')===0){location.href=it.h;return}
-    if(it.h==='#/?try'){if(location.hash!=='#/'){location.hash='#/'}setTimeout(function(){var e=$('try');if(e)e.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'})},80);return}
+    if(it.h.indexOf('#/?')===0){
+      var target='#'+it.h.slice(3);
+      if(location.hash!=='#/'&&location.hash!=='')location.hash='#/';
+      setTimeout(function(){var e=document.querySelector(target);if(e)e.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'})},120);
+      return;
+    }
     location.hash=it.h;
   }
   input.addEventListener('input',function(){render(input.value)});
@@ -1370,7 +1719,7 @@ var PAL=(function(){
   });
   document.addEventListener('keydown',function(e){
     if((e.metaKey||e.ctrlKey)&&(e.key==='k'||e.key==='K')){e.preventDefault();pal.classList.contains('open')?close():open()}
-    else if(e.key==='/'&&!/^(INPUT|TEXTAREA)$/.test((document.activeElement||{}).tagName||'')&&!pal.classList.contains('open')){e.preventDefault();open()}
+    else if(e.key==='/'&&!/^(INPUT|TEXTAREA|SELECT)$/.test((document.activeElement||{}).tagName||'')&&!pal.classList.contains('open')){e.preventDefault();open()}
   });
   $('palBtn').addEventListener('click',open);
   if(!/Mac|iPhone|iPad/.test(navigator.platform||''))$('kbdHint').textContent='Ctrl K';
@@ -1401,6 +1750,15 @@ function initSat(root){
   var box=el.closest('.demo'),cv=el.querySelector('canvas'),ctx=cv.getContext&&cv.getContext('2d');if(!ctx)return;
   var W=0,H=0,dpr=1,spin=0,mode=0,aimLat=6,aimLon=0,vis=true,raf=0,stars=[],hintOff=false;
   var RE=6371,ALT=550,SATLAT=24,TILT=-14*Math.PI/180,HV=0.30;
+  var INK=[255,255,255],BG=[15,15,15],dark=true;
+  function readTheme(){
+    function rgb(str){var m=/(\d+)[,\s]+(\d+)[,\s]+(\d+)/.exec(str||'');return m?[+m[1],+m[2],+m[3]]:null}
+    INK=rgb(getComputedStyle(el).color)||INK;
+    BG=rgb(getComputedStyle(box).backgroundColor)||BG;
+    dark=(INK[0]+INK[1]+INK[2])/3>128;
+  }
+  function ink(a){return 'rgba('+INK[0]+','+INK[1]+','+INK[2]+','+a+')'}
+  function bg(a){return 'rgba('+BG[0]+','+BG[1]+','+BG[2]+','+a+')'}
   var out={slew:box.querySelector('[data-slew]'),range:box.querySelector('[data-range]'),spot:box.querySelector('[data-spot]'),bar:box.querySelector('[data-bar]'),status:box.querySelector('[data-status]')};
   function d2r(d){return d*Math.PI/180}
   function dir(lat,lon){var a=d2r(lat),b=d2r(lon);return[Math.cos(a)*Math.sin(b),Math.sin(a),Math.cos(a)*Math.cos(b)]}
@@ -1421,7 +1779,7 @@ function initSat(root){
     var p=[n[0],n[1]-0.34,n[2]];
     return (n[0]*(0-p[0])+n[1]*(0-p[1])+n[2]*(ez-p[2]))>0.06;
   }
-  function size(){W=el.clientWidth;H=el.clientHeight;if(!W||!H)return false;
+  function size(){W=el.clientWidth;H=el.clientHeight;if(!W||!H)return false;readTheme();
     dpr=Math.min(window.devicePixelRatio||1,2);cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);
     stars=[];for(var i=0;i<90;i++)stars.push([Math.random(),Math.random(),Math.random()*.5+.2]);
     return true;}
@@ -1438,19 +1796,21 @@ function initSat(root){
     if(!W)return;
     var i,j,q,pts;
     ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
-    /* stars */
-    ctx.fillStyle='#fff';
-    stars.forEach(function(s){ctx.globalAlpha=s[2]*.55;ctx.fillRect(s[0]*W,s[1]*H*.8,1.4,1.4)});
-    ctx.globalAlpha=1;
+    /* stars (dark theme only) */
+    if(dark){
+      ctx.fillStyle=ink(1);
+      stars.forEach(function(s){ctx.globalAlpha=s[2]*.55;ctx.fillRect(s[0]*W,s[1]*H*.8,1.4,1.4)});
+      ctx.globalAlpha=1;
+    }
     /* globe body */
     var cw=world([0,0,0],false),cq=proj(cw),edge=proj(world([1,0,0],false));
     var rad=Math.abs(edge[0]-cq[0]);
     ctx.beginPath();ctx.arc(cq[0],cq[1],rad,0,6.283);
-    ctx.fillStyle='rgba(255,255,255,.05)';ctx.fill();
-    ctx.strokeStyle='rgba(255,255,255,.75)';ctx.lineWidth=1.5;ctx.stroke();
+    ctx.fillStyle=ink(.05);ctx.fill();
+    ctx.strokeStyle=ink(.75);ctx.lineWidth=1.5;ctx.stroke();
     /* graticule (clipped to the globe) */
     ctx.save();ctx.beginPath();ctx.arc(cq[0],cq[1],rad,0,6.283);ctx.clip();
-    ctx.lineWidth=1;ctx.strokeStyle='rgba(255,255,255,.26)';
+    ctx.lineWidth=1;ctx.strokeStyle=ink(.26);
     for(j=-60;j<=60;j+=15){
       pts=[];for(i=0;i<=72;i++)pts.push(rotY(dir(j,i*5),Math.cos(spin),Math.sin(spin)));
       arcPath(pts,false);ctx.stroke();
@@ -1475,33 +1835,33 @@ function initSat(root){
                  P[2]*cr+(e1[2]*Math.cos(a)+e2[2]*Math.sin(a))*sr]);
     }
     arcPath(ring,true);
-    ctx.fillStyle='rgba(255,255,255,.14)';ctx.fill();
-    ctx.strokeStyle='#fff';ctx.lineWidth=1.6;ctx.stroke();
+    ctx.fillStyle=ink(.14);ctx.fill();
+    ctx.strokeStyle=ink(1);ctx.lineWidth=1.6;ctx.stroke();
     /* cone */
-    ctx.strokeStyle='rgba(255,255,255,.4)';ctx.lineWidth=1;
+    ctx.strokeStyle=ink(.4);ctx.lineWidth=1;
     for(i=0;i<48;i+=12){
       if(!visible(ring[i]))continue;
       q=proj(world(ring[i],false));
       ctx.beginPath();ctx.moveTo(Sq[0],Sq[1]);ctx.lineTo(q[0],q[1]);ctx.stroke();
     }
     var Pq=proj(world(P,false));
-    ctx.setLineDash([5,5]);ctx.strokeStyle='rgba(255,255,255,.8)';
+    ctx.setLineDash([5,5]);ctx.strokeStyle=ink(.85);
     ctx.beginPath();ctx.moveTo(Sq[0],Sq[1]);ctx.lineTo(Pq[0],Pq[1]);ctx.stroke();ctx.setLineDash([]);
     /* crosshair on the aim point */
-    ctx.strokeStyle='#fff';ctx.lineWidth=1.3;
+    ctx.strokeStyle=ink(1);ctx.lineWidth=1.3;
     ctx.beginPath();ctx.moveTo(Pq[0]-11,Pq[1]);ctx.lineTo(Pq[0]+11,Pq[1]);ctx.moveTo(Pq[0],Pq[1]-11);ctx.lineTo(Pq[0],Pq[1]+11);ctx.stroke();
     /* satellite glyph, pointing at the aim */
     var ang=Math.atan2(Pq[1]-Sq[1],Pq[0]-Sq[0]);
     ctx.save();ctx.translate(Sq[0],Sq[1]);ctx.rotate(ang);
-    ctx.fillStyle='rgba(15,15,15,.9)';ctx.strokeStyle='#fff';ctx.lineWidth=1.5;
+    ctx.fillStyle=bg(.92);ctx.strokeStyle=ink(1);ctx.lineWidth=1.5;
     ctx.beginPath();ctx.rect(-11,-9,22,18);ctx.fill();ctx.stroke();
     ctx.beginPath();ctx.moveTo(9,0);ctx.lineTo(19,0);ctx.stroke();
     ctx.beginPath();ctx.rect(-6,-30,12,20);ctx.stroke();
     ctx.beginPath();ctx.rect(-6,10,12,20);ctx.stroke();
     ctx.beginPath();ctx.moveTo(-6,-20);ctx.lineTo(6,-20);ctx.moveTo(-6,20);ctx.lineTo(6,20);ctx.stroke();
     ctx.restore();
-    ctx.font='500 10px "JetBrains Mono", ui-monospace, Menlo, monospace';ctx.fillStyle='#fff';
-    ctx.save();ctx.shadowColor='rgba(15,15,15,.95)';ctx.shadowBlur=5;
+    ctx.font='500 10px "JetBrains Mono", ui-monospace, Menlo, monospace';ctx.fillStyle=ink(1);
+    ctx.save();ctx.shadowColor=bg(.95);ctx.shadowBlur=5;
     ctx.fillText('[SPACE-01]',Sq[0]+26,Sq[1]-14);
     ctx.fillText('[GROUND SPOT]',Pq[0]+16,Pq[1]+4);
     ctx.restore();
@@ -1707,6 +2067,7 @@ function fillOnce(key,fn){if(!filled[key]){filled[key]=1;fn()}}
 function ensure(name){
   if(name==='home')fillOnce('home',function(){
     Board($('homeBoard'));DragDemo.init();initStats();initMap();initAudience();
+    initRoadmap($('roadmap'));initNewsHome($('newsHome'));initForm();
   });
   if(name==='air')fillOnce('air',function(){Board($('airBoard'),'air')});
   if(name==='space')fillOnce('space',function(){
@@ -1715,6 +2076,13 @@ function ensure(name){
     Board($('spaceBoard'),'space');
   });
   if(name==='careers')fillOnce('careers',initCareers);
+  if(name==='news')fillOnce('news',function(){initNewsPage($('newsList'))});
+  if(name==='investors')fillOnce('inv',function(){
+    $('invCards').innerHTML=[byId['air-01'],byId['space-01']].map(card).join('')+
+      '<a class="card" href="#/careers"><div class="art"><span class="tag">[TEAM]</span>'+contourSVG(5,400,300,9)+
+      '</div><div class="meta"><div class="name">Who we are hiring</div><p class="desc">Where the first money goes.</p></div></a>';
+    initRoadmap($('invRoadmap'));
+  });
   if(name==='investors')fillOnce('inv',function(){
     $('invCards').innerHTML=[byId['air-01'],byId['space-01']].map(card).join('')+
       '<a class="card" href="#/careers"><div class="art"><span class="tag">[TEAM]</span>'+contourSVG(5,400,300,9)+
@@ -1730,10 +2098,10 @@ function parse(){
   var h=location.hash;if(h.indexOf('#/')!==0)return{name:'home'};
   var p=h.slice(2).split('/');
   if(p[0]==='project'&&p[1])return{name:'project',id:p[1]};
-  if(['air','space','leadership','careers','investors'].indexOf(p[0])>-1)return{name:p[0]};
+  if(['air','space','leadership','careers','investors','news'].indexOf(p[0])>-1)return{name:p[0]};
   return{name:'home'};
 }
-var titles={home:'Kourashi Systems',air:'Air',space:'Space',leadership:'Leadership',careers:'Careers',investors:'Investors'};
+var titles={home:'Kourashi Systems',air:'Air',space:'Space',leadership:'Leadership',careers:'Careers',investors:'Investors',news:'Updates'};
 function render(){
   var r=parse(),view,title,navKey=r.name;
   Array.prototype.forEach.call(document.querySelectorAll('.view'),function(v){v.hidden=true});
@@ -1742,6 +2110,10 @@ function render(){
     view=$('v-project');view.innerHTML=projectView(p);title=p.label;navKey=p.domain;
   }else{ensure(r.name);view=$('v-'+r.name);title=titles[r.name]}
   view.hidden=false;
+  var isSpace=(r.name==='space')||(r.name==='project'&&byId[r.id]&&byId[r.id].domain==='space');
+  view.classList.toggle('space',!!isSpace);
+  nav.classList.toggle('light',!!isSpace);
+  document.documentElement.style.setProperty('--page-bg',isSpace?'#FFFFFF':'');
   if(!reduce){view.style.animation='none';void view.offsetWidth;view.style.animation=''}
   if(r.name==='project'){initCompare(view);initStory(view);initViewer(view);initSat(view)}
   reveal(view);
@@ -1767,7 +2139,7 @@ document.addEventListener('click',function(e){
   var a=e.target.closest('[data-scroll]');if(!a)return;
   e.preventDefault();closeMenu();
   var sel=a.getAttribute('data-scroll');
-  if(sel!=='#contact'&&sel!=='#main'&&parse().name!=='home'){pending=sel;location.hash='#/';return}
+  if(sel!=='#main'&&parse().name!=='home'){pending=sel;location.hash='#/';return}
   scrollToSel(sel);
 });
 window.addEventListener('hashchange',render);
