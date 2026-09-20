@@ -182,7 +182,7 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border:0;border-radiu
 .fineprint{font-family:var(--mono);font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:var(--mute);margin-top:1rem}
 
 /* Compare slider */
-.compare{position:relative;aspect-ratio:16/9;min-height:280px;overflow:hidden;background:var(--panel-deep);touch-action:none}
+.compare{position:relative;aspect-ratio:16/9;min-height:280px;overflow:hidden;background:#0F0F0F;touch-action:none}
 .compare canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 .compare .top{clip-path:inset(0 calc(100% - var(--x,50%)) 0 0)}
 .compare .handle{position:absolute;top:0;bottom:0;left:var(--x,50%);width:2px;background:#fff;transform:translateX(-1px);pointer-events:none}
@@ -343,17 +343,15 @@ footer .base a:hover{opacity:1;text-decoration:underline;text-underline-offset:3
 /* ================= v3: domain themes, detail pages, roadmap, news, form ================= */
 :root{--scrim:rgba(15,15,15,.6)}
 
-/* Space = white primary. Fixed values so the theme holds in dark mode too. */
-.space,.card.space{
-  --bg:#FFFFFF;--fg:#191919;--paper:#F1F1F0;--rule:#D9D9D9;--mute:#575757;
-  --panel:#FFFFFF;--panel-deep:#F1F1F0;--on-panel:#191919;--mute-panel:#575757;--rule-panel:#D9D9D9;
-  --scrim:rgba(255,255,255,.72);
+/* Air = lightish stealth grey, F-35-style. Dark text, light scrim for contrast. */
+.air,.card.air{
+  --panel:#9CA3A6;--panel-deep:#7E8588;--on-panel:#14171A;--mute-panel:#41474A;--rule-panel:#B7BCBE;
+  --scrim:rgba(244,245,245,.8);
 }
-.space{background:var(--bg);color:var(--fg)}
-.card.space{--panel:#F1F1F0;--panel-deep:#F1F1F0;--scrim:rgba(241,241,240,.82)}
-.card.space .art{border:1px solid var(--rule)}
-.space .page-head{border-bottom:1px solid var(--rule)}
-.space .demo,.space .viewer,.space .map-wrap,.space .panel,.space .story-panel,.space .art{border:1px solid var(--rule)}
+.card.air{--panel:#A7AEB0;--panel-deep:#A7AEB0}
+.card.air .art{border:1px solid var(--rule)}
+.air .page-head{border-bottom:1px solid var(--rule-panel)}
+.air .demo,.air .viewer,.air .map-wrap,.air .panel,.air .story-panel,.air .art{border:1px solid var(--rule-panel)}
 .art,.panel,.map-wrap,.story-panel{color:var(--on-panel)}
 .art .tag{color:var(--on-panel);text-shadow:0 0 8px var(--panel)}
 .art .stage{color:var(--on-panel);border-color:currentColor;background:var(--scrim)}
@@ -362,19 +360,6 @@ footer .base a:hover{opacity:1;text-decoration:underline;text-underline-offset:3
 .hot:hover,.hot[aria-pressed="true"]{background:var(--on-panel);color:var(--panel)}
 .hot-card{background:var(--scrim);color:var(--on-panel);border-color:var(--rule-panel)}
 .hot-card p{color:var(--mute-panel)}
-
-/* Nav over the white space pages */
-.nav.light{color:#191919}
-.nav.light.solid,.nav.light.open{background:rgba(255,255,255,.96)}
-.nav.light .brand img{filter:invert(1)}
-.nav.light .kbtn{border-color:#D9D9D9;color:#575757}
-.nav.light .kbtn:hover{color:#191919;border-color:#191919}
-.nav.light .btn-line{color:#191919}
-.nav.light .btn-line:hover{background:#191919;color:#fff}
-@media (max-width:1100px){
-  .nav.light .links{background:#F1F1F0}
-  .nav.light .links a:not(.btn){border-bottom-color:#D9D9D9}
-}
 
 /* Status tracker */
 .track{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin-top:clamp(2rem,4vw,3rem);max-width:760px}
@@ -435,6 +420,7 @@ footer .base a:hover{opacity:1;text-decoration:underline;text-underline-offset:3
 .form-actions{display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;grid-column:1/-1}
 .form-note{font-family:var(--mono);font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:var(--mute)}
 @media (max-width:700px){.form{grid-template-columns:1fr}}
+
 
 
 /* ================= v4: 4 domains, neon accent, cut-corner cards, nav dropdown, sound, socials, motion ================= */
@@ -515,16 +501,6 @@ footer .base a:hover{opacity:1;text-decoration:underline;text-underline-offset:3
   .navdrop-menu a{padding:.7rem 0;border-bottom:1px solid var(--rule-panel)}
 }
 
-/* Sound toggle */
-.sndbtn{display:flex;align-items:center;justify-content:center;width:38px;height:38px;background:none;border:1px solid var(--rule-panel);
-  border-radius:2px;color:var(--mute-panel);cursor:pointer;flex:0 0 auto}
-.sndbtn:hover{color:var(--on-panel);border-color:var(--on-panel)}
-.sndbtn svg{width:17px;height:17px}
-.sndbtn .off{display:none}
-.sndbtn[aria-pressed="false"] .on{display:none}
-.sndbtn[aria-pressed="false"] .off{display:block}
-@media (max-width:1100px){.sndbtn{display:none}}
-
 /* Socials */
 .socials{display:flex;flex-wrap:wrap;gap:.6rem}
 .social{display:inline-flex;align-items:center;gap:.4rem;border:1px solid var(--rule-panel);border-radius:2px;
@@ -539,6 +515,83 @@ footer .base a:hover{opacity:1;text-decoration:underline;text-underline-offset:3
 @media (max-width:820px){.mission-pillars{grid-template-columns:1fr}}
 .mission-pillars li{list-style:none;border-top:2px solid var(--fg);padding-top:1rem}
 .mission-pillars p{color:var(--mute);margin-top:.6rem;font-size:.98rem;line-height:1.5}
+
+/* ================= v5: redacted programs, schematic callouts, careers, big map ================= */
+.card.redacted{--panel:#F1F1F0;--panel-deep:#F1F1F0;--on-panel:#141414;--rule-panel:#191919;--mute-panel:#575757}
+.card.redacted .art{background:var(--panel)}
+.card.redacted .name{font-family:var(--mono);letter-spacing:.04em}
+.rfacts{margin-top:.9rem}
+.rfacts div{display:flex;flex-direction:column;gap:.35rem;padding:.55rem 0;border-top:1px solid var(--rule)}
+.rfacts dt{font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+.rbar{display:block;height:9px;background:#141414;border-radius:1px}
+.redacted-head{background:#F1F1F0;color:#141414}
+.redacted-head .tag{color:#575757}
+.redacted-panel{position:relative;background:#F1F1F0}
+.redacted-panel svg{filter:grayscale(1)}
+.redacted-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(20,20,20,.28)}
+.redacted-overlay .tag{color:#fff;background:rgba(20,20,20,.7);padding:.5rem 1rem;border:1px solid rgba(255,255,255,.4)}
+.rm-row.redacted .rm-bar{background:repeating-linear-gradient(135deg,#141414,#141414 6px,#2b2b2b 6px,#2b2b2b 12px);color:#fff;border-color:#141414}
+.rm-row.redacted b{font-family:var(--mono);letter-spacing:.04em}
+
+/* Schematic callouts (per-project feature diagram) */
+.schem{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(1.5rem,4vw,3rem);align-items:center}
+@media (max-width:820px){.schem{grid-template-columns:1fr}}
+.schem-art{position:relative}
+.schem-art svg{width:100%;height:auto;display:block}
+.schem-dot{fill:var(--panel);stroke:currentColor;stroke-width:2;cursor:pointer;transition:fill .15s}
+.schem-dot.active{fill:var(--accent);stroke:var(--accent)}
+.schem-num{font-family:var(--mono);font-size:11px;fill:currentColor;pointer-events:none;text-anchor:middle;dominant-baseline:central}
+.schem-dot.active+.schem-num{fill:var(--accent-ink)}
+.feat-list{list-style:none;display:flex;flex-direction:column;gap:0}
+.feat-list li{border-top:1px solid var(--rule-panel);padding:1rem 0;cursor:pointer;display:flex;gap:1rem;align-items:baseline}
+.feat-list li:last-child{border-bottom:1px solid var(--rule-panel)}
+.feat-list .num{font-family:var(--mono);font-size:.85rem;color:var(--mute-panel);flex:0 0 1.6rem}
+.feat-list .body b{display:block;font-size:1.02rem}
+.feat-list .body p{color:var(--mute-panel);font-size:.92rem;margin-top:.2rem;max-width:44ch}
+.feat-list li.active .num{color:var(--accent)}
+.feat-list li:hover{background:rgba(255,255,255,.03)}
+
+/* Careers */
+.job{border-top:2px solid var(--fg);padding:1.4rem 0}
+.job-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;align-items:baseline;cursor:pointer}
+.job-head h3{font-size:1.25rem}
+.job-meta{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem}
+.job-meta span{font-family:var(--mono);font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;color:var(--mute);border:1px solid var(--rule);border-radius:2px;padding:.25rem .55rem}
+.job-body{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.job.open .job-body{max-height:900px}
+.job-body-in{padding-top:1.2rem}
+.job-body p{color:var(--mute);max-width:70ch;line-height:1.6;margin-bottom:.9rem}
+.job-body ul{margin:0 0 .9rem 1.2rem;color:var(--mute)}
+.job-body li{margin-bottom:.4rem}
+.job-actions{display:flex;gap:.8rem;margin-top:1rem}
+.job-toggle{background:none;border:0;font:inherit;color:inherit;display:flex;align-items:center;gap:.6rem}
+.job-toggle svg{width:14px;height:14px;transition:transform .2s;flex:0 0 auto}
+.job.open .job-toggle svg{transform:rotate(180deg)}
+
+/* Application modal */
+.modal-wrap{position:fixed;inset:0;z-index:95;display:none;padding:clamp(1rem,6vh,4rem) var(--pad);background:rgba(15,15,15,.62);backdrop-filter:blur(3px);overflow:auto}
+.modal-wrap.open{display:block}
+.modal{max-width:640px;margin:0 auto;background:var(--bg);border:1px solid var(--rule);position:relative;
+  clip-path:polygon(0 0,calc(100% - 26px) 0,100% 26px,100% 100%,0 100%)}
+.modal-head{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;padding:1.4rem 1.6rem;border-bottom:1px solid var(--rule)}
+.modal-head h3{font-size:1.4rem}
+.modal-close{background:none;border:0;font-size:1.4rem;line-height:1;cursor:pointer;color:var(--mute)}
+.modal-body{padding:1.4rem 1.6rem 1.8rem}
+
+/* Region map */
+.rmap-wrap{position:relative;background:#0F0F0F;border-radius:2px;padding:0;overflow:hidden}
+.rmap-wrap svg{width:100%;height:auto;display:block}
+.rmap-legend{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.1rem}
+.rmap-chip{display:flex;align-items:center;gap:.5rem;border:1.5px solid var(--rule);border-radius:2px;padding:.4rem .75rem;
+  background:none;font-size:.85rem;font-weight:500;cursor:pointer;color:var(--fg)}
+.rmap-chip[aria-pressed="false"]{opacity:.4}
+.rmap-chip i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.rmap-info{position:absolute;left:1rem;bottom:1rem;max-width:min(320px,66%);background:rgba(15,15,15,.9);border:1px solid rgba(255,255,255,.18);
+  padding:.9rem 1rem;color:#fff;display:none}
+.rmap-info.show{display:block}
+.rmap-info .t{font-weight:600}
+.rmap-info p{color:#A6A6A6;font-size:.9rem;margin-top:.3rem;line-height:1.4}
+.rmap-info .cat{font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:#E8FF3D}
 
 </style>
 </head>
@@ -570,10 +623,6 @@ footer .base a:hover{opacity:1;text-decoration:underline;text-underline-offset:3
       <a href="#/careers" data-route="careers">Careers</a>
       <a href="#/investors" data-route="investors">Investor Relations</a>
       <a href="#/news" data-route="news">Newsroom</a>
-      <button class="sndbtn" id="sndBtn" type="button" aria-pressed="true" aria-label="Toggle sound effects">
-        <svg class="on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 5V4L8 9H4z" fill="currentColor"/><path d="M16.5 8.5a5 5 0 010 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M19 6a9 9 0 010 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-        <svg class="off" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 5V4L8 9H4z" fill="currentColor"/><path d="M16 9l5 6M21 9l-5 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-      </button>
       <button class="kbtn" id="palBtn" aria-label="Search (Control or Command + K)"><span>Search</span><kbd id="kbdHint">⌘K</kbd></button>
       <a class="btn btn-line" href="#/" data-scroll="#contact">Contact</a>
     </nav>
@@ -646,14 +695,10 @@ footer .base a:hover{opacity:1;text-decoration:underline;text-underline-offset:3
         </div>
         <div class="stats" id="stats"></div>
         <div style="margin-top:clamp(3rem,6vw,5rem)">
-          <div class="split" style="align-items:start">
-            <div>
-              <span class="tag gap">[FOOTPRINT-01]</span>
-              <h3 style="font-size:clamp(1.6rem,2.6vw,2.4rem);max-width:16ch">Where we build, test and fly.</h3>
-              <p style="color:var(--mute-panel);margin-top:1rem;max-width:44ch">We're headquartered in Melbourne. Further sites will appear on this map as they're confirmed.</p>
-            </div>
-            <div class="map-wrap" id="mapWrap"></div>
-          </div>
+          <span class="tag gap">[FOOTPRINT-01]</span>
+          <h3 style="font-size:clamp(1.6rem,2.6vw,2.4rem);max-width:20ch;margin-bottom:1rem">Offices, manufacturing, test ranges and radar sites across Australia.</h3>
+          <p style="color:var(--mute-panel);max-width:60ch;margin-bottom:2rem">We're headquartered in Melbourne. Click a marker for what's there, or use the filters to narrow the map down. Positions are approximate.</p>
+          <div class="map-wrap" id="mapWrap"></div>
         </div>
       </div>
     </section>
@@ -787,7 +832,7 @@ footer .base a:hover{opacity:1;text-decoration:underline;text-underline-offset:3
     </div></div>
     <section class="pad"><div class="wrap">
       <div class="chips" id="roleFilter" role="group" aria-label="Filter roles by team" style="margin-bottom:1.6rem"></div>
-      <ul class="roles" id="roleList"></ul>
+      <div id="roleList"></div>
       <p class="count-line" id="roleCount"></p>
       <p class="note">Some roles may require Australian citizenship and the ability to obtain a security clearance.</p>
     </div></section>
@@ -977,6 +1022,50 @@ footer .base a:hover{opacity:1;text-decoration:underline;text-underline-offset:3
   </div>
 </footer>
 
+<div class="modal-wrap" id="applyModal" role="dialog" aria-modal="true" aria-label="Job application">
+  <div class="modal">
+    <div class="modal-head">
+      <div><span class="tag gap">[APPLICATION]</span><h3>Apply \u2014 <span id="applyRole">Role</span></h3></div>
+      <button class="modal-close" type="button" aria-label="Close">&times;</button>
+    </div>
+    <div class="modal-body">
+      <form id="applyForm" novalidate>
+        <input type="hidden" name="role" value="">
+        <div class="form">
+          <label><span class="lab">[Name]</span><input name="name" type="text" autocomplete="name" required></label>
+          <label><span class="lab">[Email]</span><input name="email" type="email" autocomplete="email" required></label>
+          <label><span class="lab">[Phone]</span><input name="phone" type="tel" autocomplete="tel"></label>
+          <label><span class="lab">[LinkedIn / portfolio]</span><input name="link" type="text" placeholder="https://"></label>
+          <label><span class="lab">[Right to work]</span>
+            <select name="rtw">
+              <option>Australian citizen</option>
+              <option>Australian permanent resident</option>
+              <option>Visa holder</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <label><span class="lab">[Clearance held]</span>
+            <select name="clr">
+              <option>None</option>
+              <option>Baseline</option>
+              <option>NV1</option>
+              <option>NV2</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <label class="full"><span class="lab">[Cover note]</span><textarea name="cover" placeholder="Why this role, and what you'd bring to it"></textarea></label>
+          <div class="form-actions">
+            <button class="btn btn-dark" type="submit">Send application</button>
+            <button class="btn" type="button" data-copy>Copy instead</button>
+            <span class="form-note" id="applyNote"></span>
+          </div>
+        </div>
+      </form>
+      <p class="fineprint" style="margin-top:1.2rem">[This opens a message in your own email app \u2014 attach your resume there before sending. No file leaves your device through this form.]</p>
+    </div>
+  </div>
+</div>
+
 <div class="pal" id="pal" role="dialog" aria-modal="true" aria-label="Search Kourashi Systems">
   <div class="box">
     <input id="palInput" type="text" placeholder="Search projects, pages and roles…" autocomplete="off" spellcheck="false" aria-label="Search" aria-controls="palList">
@@ -1004,7 +1093,7 @@ var DOMAINS={
 var DOMAIN_ORDER=['air','sea','ground','space'];
 
 var projects=[
-  {id:'air-01',domain:'air',label:'AIR-01',name:'Visual-navigation aircraft',seed:1,stage:'built',span:[2026,2027],
+  {id:'air-01',domain:'air',label:'AIR-01',name:'Pegasus',seed:1,stage:'built',span:[2026,2027],
    short:'Navigates by the landscape beneath it.',
    lede:'A small uncrewed aircraft with a camera aimed straight down. It uses that camera, and the landscape around it, to navigate to a target location on its own.',
    problem:'Most uncrewed aircraft navigate by satellite. Satellite navigation can be jammed, spoofed or simply unavailable, and when it goes, the aircraft is lost. An aircraft that can work out where it is from the ground below it does not have that single point of failure.',
@@ -1013,37 +1102,49 @@ var projects=[
    how:[['It looks down.','A camera pointed at the ground streams the terrain below the aircraft.'],
         ['It recognises where it is.','Software compares that view with the surrounding landscape to work out the aircraft\u2019s position.'],
         ['It steers to its destination.','The aircraft corrects course as it flies and heads for the location it was given.']],
+   features:[['Downward camera','Aimed straight at the ground for continuous terrain matching.'],
+             ['Nose bay','Forward equipment bay, contents to be confirmed.'],
+             ['Wing','Span, airfoil and control surfaces to be confirmed.'],
+             ['Payload bay','Payload and capacity to be confirmed.']],
    facts:[['Type','Uncrewed aircraft'],['Status','Built'],['Navigation','Visual, downward-facing camera'],['Endurance',TBC],['Payload',TBC]],
    specs:[['Wingspan',TBC],['Take-off weight',TBC],['Cruise speed',TBC],['Endurance',TBC],['Range',TBC],['Launch',TBC],['Recovery',TBC],['Payload capacity',TBC],['Navigation sensor','Downward-facing camera'],['Onboard compute',TBC],['Link','Not required in flight'],['Operating altitude',TBC]],
    gallery:['Aircraft on the bench','Camera bay','Ground testing']},
 
-  {id:'air-02',domain:'air',label:'AIR-02',name:'Long-endurance surveillance aircraft',seed:2,stage:'dev',span:[2027,2029],
+  {id:'air-02',domain:'air',label:'AIR-02',name:'Griffon',seed:2,stage:'dev',span:[2027,2029],
    short:'Stays up longer, watches a wider area.',
-   lede:'A larger uncrewed aircraft built around the same navigation approach, intended to hold a wide area under watch for far longer than AIR-01 can.',
+   lede:'A larger uncrewed aircraft built around the same navigation approach, intended to hold a wide area under watch for far longer than Pegasus can.',
    problem:'Wide-area surveillance across Australian distances means hours in the air, often well beyond radio range and over country with no infrastructure. That rules out anything that needs a constant link home.',
-   overview:['An air program in development. It carries the AIR-01 navigation stack into a larger airframe with more fuel, more payload and a longer time on station.',
+   overview:['An air program in development. It carries the Pegasus navigation stack into a larger airframe with more fuel, more payload and a longer time on station.',
              'Airframe, propulsion and endurance targets are still being set.'],
    how:[['It launches without infrastructure.','Intended to operate from unprepared sites rather than runways.'],
-        ['It navigates the same way.','The same downward-facing camera approach proven on AIR-01.'],
+        ['It navigates the same way.','The same downward-facing camera approach proven on Pegasus.'],
         ['It holds a pattern.','Designed to stay over an assigned area and keep sending back what it sees.']],
+   features:[['Sensor turret','Wide-area camera and infrared sensor, gimbal-mounted.'],
+             ['Long-range tank','Extended fuel capacity for time on station.'],
+             ['Ground link antenna','Backup link for when the aircraft is in range.'],
+             ['Undercarriage','Configuration for unprepared-site operation.']],
    facts:[['Type','Uncrewed aircraft'],['Status','In development'],['Role','Wide-area surveillance'],['Endurance',TBC],['Payload',TBC]],
    specs:[['Wingspan',TBC],['Take-off weight',TBC],['Cruise speed',TBC],['Endurance',TBC],['Range',TBC],['Launch',TBC],['Recovery',TBC],['Payload capacity',TBC],['Navigation sensor','Downward-facing camera'],['Onboard compute',TBC],['Link',TBC],['Operating altitude',TBC]],
    gallery:['Concept airframe','Payload bay','Ground station']},
 
-  {id:'air-03',domain:'air',label:'AIR-03',name:'Navigation retrofit kit',seed:3,stage:'concept',span:[2028,2030],
+  {id:'air-03',domain:'air',label:'AIR-03',name:'Chimera',seed:3,stage:'concept',span:[2028,2030],
    short:'Puts our navigation into aircraft that already fly.',
-   lede:'A self-contained kit — camera, compute and software — that gives an existing uncrewed aircraft the ability to navigate visually, without redesigning the airframe.',
+   lede:'A self-contained kit \u2014 camera, compute and software \u2014 that gives an existing uncrewed aircraft the ability to navigate visually, without redesigning the airframe.',
    problem:'Operators already own fleets of aircraft that stop working properly the moment satellite navigation is denied. Replacing those fleets is slow and expensive. Upgrading them is not.',
    overview:['An early-stage program. The kit is intended to bolt into an existing aircraft and feed position to its autopilot in the format it already expects.',
              'Interfaces, form factor and supported aircraft are to be confirmed.'],
    how:[['It mounts to the airframe.','A camera and compute module sized to fit existing payload bays.'],
         ['It speaks the autopilot\u2019s language.','Position is handed to the aircraft in the format its flight controller already uses.'],
         ['It takes over when the fix drops.','Intended to keep the aircraft navigating when satellite navigation is unavailable.']],
+   features:[['Camera module','Downward-facing, sized for existing payload bays.'],
+             ['Compute module','Runs the terrain-matching software independently of the host aircraft.'],
+             ['Interface harness','Speaks to the host autopilot in its native format.'],
+             ['Mounting frame','Adaptable bracket for different bay sizes.']],
    facts:[['Type','Retrofit payload'],['Status','Concept'],['Role','Navigation in GPS-denied conditions'],['Host aircraft',TBC],['Interface',TBC]],
    specs:[['Mass',TBC],['Power draw',TBC],['Dimensions',TBC],['Camera',TBC],['Compute',TBC],['Interface',TBC],['Supported aircraft',TBC],['Environmental rating',TBC]],
    gallery:['Kit layout','Mounting','Integration testing']},
 
-  {id:'air-04',domain:'air',label:'AIR-04',name:'Multi-aircraft coordination',seed:4,stage:'concept',span:[2029,2031],
+  {id:'air-04',domain:'air',label:'AIR-04',name:'Hydra',seed:4,stage:'concept',span:[2029,2031],
    short:'Several aircraft, one shared picture.',
    lede:'Software that lets a group of aircraft share what each of them can see, so the group covers an area together rather than flying the same route four times.',
    problem:'One aircraft sees one patch of ground. Covering a real search area usually means flying the same aircraft over it again and again, or flying several that do not know about each other.',
@@ -1052,63 +1153,49 @@ var projects=[
    how:[['Each aircraft reports what it sees.','Recognised ground features, not raw video.'],
         ['The group builds one picture.','Contributions are merged into a shared view of the area.'],
         ['The area is divided up.','Coverage is split so aircraft are not repeating each other\u2019s work.']],
+   features:[['Mesh link','Aircraft-to-aircraft data sharing, link type to be confirmed.'],
+             ['Shared map layer','A merged picture built from every aircraft\u2019s contributions.'],
+             ['Coverage planner','Splits the search area between aircraft automatically.'],
+             ['Operator console','Where a human sees the group\u2019s combined picture.']],
    facts:[['Type','Software'],['Status','Concept'],['Role','Coordinated coverage'],['Aircraft per group',TBC],['Link',TBC]],
    specs:[['Aircraft per group',TBC],['Link type',TBC],['Bandwidth',TBC],['Autonomy level',TBC],['Operator load',TBC],['Host platforms',TBC]],
    gallery:['Coverage pattern','Operator view','Field trial']},
 
-  {id:'space-01',domain:'space',label:'SPACE-01',name:'Orbital aperture satellite',seed:1,stage:'concept',span:[2028,2031],
-   short:'Points a sensor at any patch of ground below it.',
-   lede:'A satellite that carries a steerable aperture. Ground controllers give it a point on the surface, and it holds that point while it passes overhead.',
-   problem:'A satellite in a fixed attitude sweeps a strip and moves on. If the thing you care about is one place, most of that pass is wasted.',
-   overview:['An early-stage space program. The satellite keeps a sensor locked on a chosen patch of ground as the spacecraft moves, so a single pass can watch one place rather than a strip.',
-             'Orbit, sensor and spacecraft bus are all to be confirmed.'],
-   how:[['It is given a point.','Controllers task the satellite with a location on the surface.'],
-        ['It holds the point.','The aperture slews as the spacecraft moves so the ground spot stays where it was put.'],
-        ['It hands the data down.','What it collected comes down on the next available downlink.']],
-   facts:[['Type','Satellite'],['Status','Concept'],['Role','Steerable Earth sensing'],['Orbit',TBC],['Payload',TBC],['Aperture',TBC]],
-   specs:[['Orbit',TBC],['Altitude',TBC],['Mass',TBC],['Aperture',TBC],['Ground spot',TBC],['Slew rate',TBC],['Revisit',TBC],['Downlink',TBC],['Bus',TBC],['Design life',TBC]],
-   gallery:['Spacecraft concept','Aperture assembly','Ground segment']},
-
-  {id:'space-02',domain:'space',label:'SPACE-02',name:'Terrain reference payload',seed:2,stage:'concept',span:[2029,2031],
-   short:'Builds the maps our aircraft navigate against.',
-   lede:'A satellite payload that images terrain specifically to produce the reference landscape our aircraft match themselves against, and keeps it current as the ground changes.',
-   problem:'Visual navigation is only as good as the reference it is matching to. Terrain changes — fires, floods, construction, seasons — and a stale reference is a lost aircraft.',
-   overview:['A space program at concept stage, and the piece that ties the company together: it feeds the air programs rather than standing alone.',
-             'Sensor, coverage and refresh rate are to be confirmed.'],
-   how:[['It images the ground.','Coverage is chosen for the areas our aircraft operate over.'],
-        ['It turns imagery into reference.','Processing produces the landscape description the aircraft compare against.'],
-        ['It keeps it current.','Areas are re-imaged so the reference does not go stale.']],
-   facts:[['Type','Satellite payload'],['Status','Concept'],['Role','Reference mapping for visual navigation'],['Orbit',TBC],['Sensor',TBC]],
-   specs:[['Orbit',TBC],['Sensor',TBC],['Ground resolution',TBC],['Swath',TBC],['Coverage',TBC],['Refresh rate',TBC],['Processing',TBC],['Host bus',TBC]],
-   gallery:['Reference tile','Processing chain','Coverage map']},
-
-  {id:'ground-01',domain:'ground',label:'GROUND-01',name:'Autonomous logistics rover',seed:1,stage:'dev',span:[2027,2029],
+  {id:'ground-01',domain:'ground',label:'GROUND-01',name:'Minotaur',seed:1,stage:'dev',span:[2027,2029],
    short:'Moves supplies across ground a driver would not risk crossing.',
    lede:'An uncrewed ground vehicle that carries supplies between points without a driver in the seat, using the same visual-navigation approach as our aircraft.',
    problem:'Resupply routes are often the most dangerous part of an operation, and the ones most affected when satellite navigation is denied. A vehicle that can navigate the route itself removes a driver from that exposure.',
-   overview:['A ground program in development. It reuses the terrain-matching navigation approach from AIR-01, adapted for a vehicle that has to deal with roads, obstacles and other traffic rather than open air.',
+   overview:['A ground program in development. It reuses the terrain-matching navigation approach from Pegasus, adapted for a vehicle that has to deal with roads, obstacles and other traffic rather than open air.',
              'Payload capacity, range and the vehicle platform itself are still being set.'],
    how:[['It is given a route.','A start point, an end point and the ground in between.'],
         ['It watches the ground ahead.','Cameras cover the terrain and obstacles in its path, the same principle as the aircraft looking down.'],
         ['It adapts as it goes.','The vehicle re-plans around anything the route did not account for.']],
+   features:[['Sensor mast','Forward and downward-facing cameras for route recognition.'],
+             ['Cargo bed','Configurable load area, capacity to be confirmed.'],
+             ['Drive unit','Powertrain and terrain rating to be confirmed.'],
+             ['Recovery point','Standard attachment for towing or extraction.']],
    facts:[['Type','Uncrewed ground vehicle'],['Status','In development'],['Role','Autonomous resupply'],['Payload',TBC],['Range',TBC]],
    specs:[['Payload capacity',TBC],['Range',TBC],['Top speed',TBC],['Ground clearance',TBC],['Navigation sensor','Visual, forward and downward-facing'],['Onboard compute',TBC],['Terrain rating',TBC],['Recovery',TBC]],
    gallery:['Chassis testing','Sensor mast','Route trial']},
 
-  {id:'ground-02',domain:'ground',label:'GROUND-02',name:'Perimeter sentry vehicle',seed:2,stage:'concept',span:[2029,2031],
+  {id:'ground-02',domain:'ground',label:'GROUND-02',name:'Cerberus',seed:2,stage:'concept',span:[2029,2031],
    short:'Watches a fixed perimeter without a person in it.',
    lede:'A small ground vehicle intended to patrol a fixed perimeter on a repeating pattern, watching for anything that should not be there and reporting it back.',
-   problem:'Standing watch over a fenceline or a site boundary is a long, low-value use of a person’s time. It is also one of the easiest jobs to hand to a vehicle that does not get tired or distracted.',
+   problem:'Standing watch over a fenceline or a site boundary is a long, low-value use of a person\u2019s time. It is also one of the easiest jobs to hand to a vehicle that does not get tired or distracted.',
    overview:['An early-stage ground program, intended to complement fixed cameras with something that can physically move to investigate.',
              'Sensor package, endurance and the site types it is meant for are all to be confirmed.'],
    how:[['It holds a pattern.','A repeating patrol route around the perimeter it has been assigned.'],
         ['It notices what has changed.','Anything new or out of place against what it saw last time is flagged.'],
         ['It reports back.','An operator is alerted rather than the vehicle acting on its own.']],
+   features:[['Sensor pod','Day and night cameras covering the patrol line.'],
+             ['Drive base','Low-profile chassis, terrain rating to be confirmed.'],
+             ['Charging dock','Return-to-charge point along the patrol route.'],
+             ['Alert link','Reports anomalies to an operator console.']],
    facts:[['Type','Uncrewed ground vehicle'],['Status','Concept'],['Role','Perimeter patrol'],['Endurance',TBC],['Sensor',TBC]],
    specs:[['Endurance',TBC],['Top speed',TBC],['Sensor package',TBC],['Weather rating',TBC],['Charging',TBC],['Link',TBC],['Coverage area',TBC]],
    gallery:['Patrol vehicle','Sensor head','Site trial']},
 
-  {id:'sea-01',domain:'sea',label:'SEA-01',name:'Autonomous surface vessel',seed:1,stage:'concept',span:[2028,2031],
+  {id:'sea-01',domain:'sea',label:'SEA-01',name:'Kraken',seed:1,stage:'concept',span:[2028,2031],
    short:'Patrols a stretch of water for days without a crew.',
    lede:'An uncrewed surface vessel intended to hold station or patrol a stretch of coastline for far longer than a crewed boat could reasonably stay out.',
    problem:'Coastal surveillance across Australian distances means long, uneventful hours on the water. Crewed vessels are expensive to keep out that long, and the job does not need a crew for most of it.',
@@ -1117,11 +1204,15 @@ var projects=[
    how:[['It holds station or patrols.','A fixed point to watch, or a repeating stretch of water to cover.'],
         ['It watches the surface and the air above it.','Sensors cover the water around the vessel and the sky above it.'],
         ['It comes back on its own.','Return to port or a rendezvous point without a crew aboard.']],
+   features:[['Sensor mast','Surface and air-search sensors, type to be confirmed.'],
+             ['Hull','Form and displacement to be confirmed.'],
+             ['Power and propulsion','Endurance-optimised, configuration to be confirmed.'],
+             ['Recovery cradle','Standard interface for launch and recovery from a mother vessel.']],
    facts:[['Type','Uncrewed surface vessel'],['Status','Concept'],['Role','Coastal surveillance'],['Endurance',TBC],['Sensor',TBC]],
    specs:[['Length',TBC],['Displacement',TBC],['Endurance',TBC],['Top speed',TBC],['Sea state rating',TBC],['Sensor package',TBC],['Link',TBC],['Launch and recovery',TBC]],
    gallery:['Hull concept','Sensor mast','Sea trial']},
 
-  {id:'sea-02',domain:'sea',label:'SEA-02',name:'Seabed mapping vehicle',seed:2,stage:'concept',span:[2029,2031],
+  {id:'sea-02',domain:'sea',label:'SEA-02',name:'Leviathan',seed:2,stage:'concept',span:[2029,2031],
    short:'Maps the seafloor ahead of everything else.',
    lede:'An uncrewed underwater vehicle that surveys the seafloor, building the maps that everything else in the water depends on having first.',
    problem:'You cannot navigate, moor or operate safely in water that has not been properly charted, and re-surveying by crewed vessel is slow and expensive to repeat often.',
@@ -1130,9 +1221,33 @@ var projects=[
    how:[['It surveys a stretch of seafloor.','Sonar or an equivalent sensor builds a picture of what is down there.'],
         ['It turns that into a map.','Raw survey data is processed into something usable by other vessels and vehicles.'],
         ['It keeps the map current.','Areas are re-surveyed as conditions change.']],
+   features:[['Sonar array','Builds the seafloor picture, type to be confirmed.'],
+             ['Pressure hull','Depth rating to be confirmed.'],
+             ['Buoyancy unit','Trim and ballast, configuration to be confirmed.'],
+             ['Data pod','Recoverable module carrying survey data ashore.']],
    facts:[['Type','Uncrewed underwater vehicle'],['Status','Concept'],['Role','Seafloor survey'],['Depth rating',TBC],['Sensor',TBC]],
    specs:[['Depth rating',TBC],['Endurance',TBC],['Sensor',TBC],['Survey resolution',TBC],['Data link',TBC],['Launch and recovery',TBC],['Hull material',TBC]],
-   gallery:['Vehicle concept','Sonar array','Survey output']}
+   gallery:['Vehicle concept','Sonar array','Survey output']},
+
+  {id:'space-01',domain:'space',label:'SPACE-01',name:'Argus',seed:1,stage:'concept',span:[2028,2031],
+   short:'Points a sensor at any patch of ground below it.',
+   lede:'A satellite that carries a steerable aperture. Ground controllers give it a point on the surface, and it holds that point while it passes overhead.',
+   problem:'A satellite in a fixed attitude sweeps a strip and moves on. If the thing you care about is one place, most of that pass is wasted.',
+   overview:['An early-stage space program. The satellite keeps a sensor locked on a chosen patch of ground as the spacecraft moves, so a single pass can watch one place rather than a strip.',
+             'Orbit, sensor and spacecraft bus are all to be confirmed.'],
+   how:[['It is given a point.','Controllers task the satellite with a location on the surface.'],
+        ['It holds the point.','The aperture slews as the spacecraft moves so the ground spot stays where it was put.'],
+        ['It hands the data down.','What it collected comes down on the next available downlink.']],
+   features:[['Steerable aperture','Slews to hold a ground point as the spacecraft moves.'],
+             ['Solar array','Power generation, configuration to be confirmed.'],
+             ['Bus','Spacecraft body and attitude control, to be confirmed.'],
+             ['Downlink antenna','Sends collected data to the ground segment.']],
+   facts:[['Type','Satellite'],['Status','Concept'],['Role','Steerable Earth sensing'],['Orbit',TBC],['Payload',TBC],['Aperture',TBC]],
+   specs:[['Orbit',TBC],['Altitude',TBC],['Mass',TBC],['Aperture',TBC],['Ground spot',TBC],['Slew rate',TBC],['Revisit',TBC],['Downlink',TBC],['Bus',TBC],['Design life',TBC]],
+   gallery:['Spacecraft concept','Aperture assembly','Ground segment']},
+
+  {id:'space-02',domain:'space',label:'SPACE-02',seed:5,stage:'concept',span:[2029,2031],redacted:true},
+  {id:'space-03',domain:'space',label:'SPACE-03',seed:9,stage:'concept',span:[2030,2031],redacted:true}
 ];
 
 var people=[
@@ -1142,11 +1257,40 @@ var people=[
   {name:'Name to come',role:'Head of Space Programs'}
 ];
 var roles=[
-  {label:'ROLE-01',title:'Computer vision engineer',team:'Autonomy'},
-  {label:'ROLE-02',title:'Flight software engineer',team:'Software'},
-  {label:'ROLE-03',title:'Airframe and structures engineer',team:'Hardware'},
-  {label:'ROLE-04',title:'Flight test lead',team:'Operations'},
-  {label:'ROLE-05',title:"Don't see your role?",team:'General',sub:'Send us a general application'}
+  {label:'ROLE-01',title:'Computer vision engineer',team:'Autonomy',location:'Melbourne, VIC',type:'Full-time',clearance:'Baseline',
+   summary:'Build the terrain-recognition software that lets our vehicles work out where they are without a satellite fix.',
+   responsibilities:['Develop and test the visual terrain-matching pipeline used across our air, sea and ground programs','Improve recognition performance in poor light, weather and degraded imagery','Work closely with flight test to diagnose real-world navigation failures','Bring research-grade computer vision techniques into production code that flies']},
+  {label:'ROLE-02',title:'Flight software engineer',team:'Software',location:'Melbourne, VIC',type:'Full-time',clearance:'Baseline',
+   summary:'Write the software that flies the aircraft: flight control, navigation integration and safety systems.',
+   responsibilities:['Develop flight control and navigation software for uncrewed aircraft','Integrate the visual-navigation stack with flight controllers','Build simulation and hardware-in-the-loop test environments','Support flight test with rapid debugging and fixes']},
+  {label:'ROLE-03',title:'Airframe and structures engineer',team:'Hardware',location:'Melbourne, VIC',type:'Full-time',clearance:'None required',
+   summary:'Design and refine the physical airframes our aircraft programs are built around.',
+   responsibilities:['Design airframe structures for manufacturability and flight loads','Run structural analysis and coordinate physical testing','Work with manufacturing partners on tooling and production','Support the transition from concept airframes to flight articles']},
+  {label:'ROLE-04',title:'Flight test lead',team:'Operations',location:'Regional Victoria',type:'Full-time',clearance:'NV1',
+   summary:'Plan and run flight test campaigns for our aircraft programs, from first flight through to operational testing.',
+   responsibilities:['Plan and execute flight test campaigns against defined test objectives','Own airworthiness and safety-of-flight sign-off for test aircraft','Coordinate range bookings, safety cases and regulatory approvals','Report results back into the engineering team for the next iteration']},
+  {label:'ROLE-05',title:'Guidance and controls engineer',team:'Autonomy',location:'Melbourne, VIC',type:'Full-time',clearance:'Baseline',
+   summary:'Design the control loops and guidance logic that keep our vehicles on their intended path.',
+   responsibilities:['Design guidance, navigation and control algorithms across air, sea and ground platforms','Tune controllers against simulation and real flight or vehicle data','Work with the vision team to fuse terrain-matching output into the control loop','Validate control performance across a range of operating conditions']},
+  {label:'ROLE-06',title:'Maritime systems engineer',team:'Sea',location:'Melbourne, VIC',type:'Full-time',clearance:'Baseline',
+   summary:'Lead systems engineering for our uncrewed surface and underwater vehicle programs.',
+   responsibilities:['Define system architecture for uncrewed surface and underwater vehicles','Coordinate hull, power, sensor and communications subsystems','Plan and support sea trials','Work with the autonomy team on marine-specific navigation and control']},
+  {label:'ROLE-07',title:'Ground robotics engineer',team:'Ground',location:'Melbourne, VIC',type:'Full-time',clearance:'Baseline',
+   summary:'Build the uncrewed ground vehicles behind our logistics and perimeter programs.',
+   responsibilities:['Design and integrate ground vehicle platforms from chassis to sensors','Adapt the visual-navigation stack to road and off-road environments','Run field trials across a range of terrain types','Work with manufacturing partners on vehicle production']},
+  {label:'ROLE-08',title:'Spacecraft systems engineer',team:'Space',location:'Melbourne, VIC',type:'Full-time',clearance:'NV1',
+   summary:'Work across our satellite programs, from concept through to spacecraft bus and payload integration.',
+   responsibilities:['Define spacecraft bus and payload architecture for early-stage space programs','Coordinate with launch and ground segment providers','Support mission design, orbit selection and payload trade studies','Work with the ground segment team on tasking and downlink operations']},
+  {label:'ROLE-09',title:'Systems security engineer',team:'Software',location:'Melbourne, VIC',type:'Full-time',clearance:'NV1',
+   summary:'Own the security posture of software running on platforms operating in contested environments.',
+   responsibilities:['Assess and harden onboard and ground software against a range of threats','Lead secure-by-design practices across engineering teams','Run security testing against flight and ground software','Work with Defence stakeholders on accreditation requirements']},
+  {label:'ROLE-10',title:'Business development manager',team:'Business',location:'Melbourne, VIC',type:'Full-time',clearance:'None required',
+   summary:'Build relationships with Defence and industry stakeholders across our air, sea, ground and space programs.',
+   responsibilities:['Develop and manage relationships with Defence and industry partners','Support capture of new program opportunities across all four domains','Coordinate proposal development with the engineering team','Represent Kourashi Systems at industry events and briefings']},
+  {label:'ROLE-11',title:"Don't see your role?",team:'General',location:'Melbourne, VIC',type:'Varies',clearance:TBC,
+   sub:'Send us a general application',
+   summary:'We are growing quickly across four domains. If your background fits the company but not a specific listing, we would still like to hear from you.',
+   responsibilities:['Tell us what you do and where you think you would fit','We will route your application to the closest matching team']}
 ];
 /* Updates — newest first. Replace these with real entries. */
 var NEWS=[
@@ -1165,7 +1309,27 @@ var STATS=[
   {label:'Test flights',value:null}
 ];
 /* Sites: add {name, kind, lon, lat} once locations are confirmed. */
-var SITES=[{name:'Melbourne',kind:'Headquarters',lon:144.9631,lat:-37.8136}];
+var SITE_CATS={
+  office:{label:'Offices',color:'#F1F1F0'},
+  manufacturing:{label:'Manufacturing',color:'#E8A33D'},
+  testrange:{label:'Test ranges',color:'#4FB6C9'},
+  radar:{label:'Radar and surveillance',color:'#E8FF3D'},
+  naval:{label:'Naval facilities',color:'#5B7FD6'}
+};
+var SITES=[
+  {name:'Melbourne',kind:'Headquarters',cat:'office',lon:144.9631,lat:-37.8136,note:'Company headquarters and primary engineering site.'},
+  {name:'Sydney',kind:'Engineering office',cat:'office',lon:151.2093,lat:-33.8688,note:'Software and systems engineering office.'},
+  {name:'Cairns',kind:'Northern operations base',cat:'office',lon:145.7781,lat:-16.9186,note:'Forward operations base for northern test and trial work.'},
+  {name:'Adelaide',kind:'Manufacturing hub',cat:'manufacturing',lon:138.6007,lat:-34.9285,note:'Airframe and vehicle manufacturing.'},
+  {name:'Brisbane',kind:'Manufacturing hub',cat:'manufacturing',lon:153.0251,lat:-27.4698,note:'Payload and sensor assembly.'},
+  {name:'Woomera',kind:'Flight test range',cat:'testrange',lon:136.8272,lat:-31.1999,note:'Primary flight test range for air programs.'},
+  {name:'Port Augusta',kind:'Ground vehicle test range',cat:'testrange',lon:137.7645,lat:-32.4927,note:'Off-road and endurance testing for ground programs.'},
+  {name:'Darwin',kind:'Northern radar site',cat:'radar',lon:130.8456,lat:-12.4634,note:'Northern approach radar and surveillance trial site.'},
+  {name:'Exmouth',kind:'Anti-drone radar site',cat:'radar',lon:114.1281,lat:-21.9341,note:'Counter-drone radar and detection trial site.'},
+  {name:'Alice Springs',kind:'Satellite ground segment',cat:'radar',lon:133.8807,lat:-23.6980,note:'Ground station for tasking and downlink of space programs.'},
+  {name:'Nowra',kind:'Naval test facility',cat:'naval',lon:150.6019,lat:-34.8797,note:'Sea trial support for surface vessel programs.'},
+  {name:'Rockingham',kind:'Naval facility',cat:'naval',lon:115.7290,lat:-32.2767,note:'Fleet base support for uncrewed underwater vehicle trials.'}
+];
 var ROADMAP=[2026,2031];
 var EMAILS={general:'contact@kourashisystems.com.au',careers:'careers@kourashisystems.com.au',investors:'investors@kourashisystems.com.au'};
 var SOCIALS=[['LinkedIn','#'],['X','#'],['YouTube','#']];
@@ -1269,7 +1433,20 @@ function waveSVG(s){
   o+='<circle cx="'+cx+'" cy="'+cy+'" r="3" fill="currentColor"/>';
   return '<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">'+o+'</svg>';
 }
+function glitchSVG(seed){
+  var rnd=(function(s){return function(){s=(s*9301+49297)%233280;return s/233280}})(seed*97+13);
+  var W=400,H=300,cx=W*0.42+rnd()*60,cy=H*0.42+rnd()*40,o='',n,i,x,y,w,h,shade;
+  for(i=0;i<11;i++){
+    n=rnd();
+    w=34+rnd()*70;h=34+rnd()*70;
+    x=cx+(rnd()-.5)*220-w/2;y=cy+(rnd()-.5)*170-h/2;
+    shade=n<.15?'#141414':(n<.4?'#3a3a3a':(n<.7?'#8a8a8a':'#c9c9c9'));
+    o+='<rect x="'+x.toFixed(0)+'" y="'+y.toFixed(0)+'" width="'+w.toFixed(0)+'" height="'+h.toFixed(0)+'" fill="'+shade+'" fill-opacity="0.88"/>';
+  }
+  return '<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">'+o+'</svg>';
+}
 function artFor(p,big){
+  if(p.redacted)return glitchSVG(p.seed);
   if(p.domain==='air'||p.domain==='ground')return big?contourSVG(p.seed,900,420,10):contourSVG(p.seed,400,300,9);
   if(p.domain==='sea')return waveSVG(p.seed);
   return spaceSVG(p.seed);
@@ -1370,7 +1547,6 @@ var DragDemo=(function(){
       }
     });
     var conf=Math.min(1,n/4);
-    if(n>lastN&&typeof Sound!=='undefined')Sound.match();
     lastN=n;
     if(elM)elM.textContent=n;
     if(elS)elS.textContent=n===0?'No fix':(n<2?'Coarse':(n<4?'Fix held':'Fix held (tight)'));
@@ -1409,6 +1585,67 @@ var DragDemo=(function(){
   }
   return{init:init};
 })();
+
+/* ---------------- Generic feature schematic (silhouette + numbered callouts) ---------------- */
+function schemShape(p){
+  if(p.domain==='ground')return '<rect x="220" y="150" width="280" height="110" rx="6" fill="currentColor" fill-opacity=".08" stroke="currentColor" stroke-width="1.5"/>'+
+    '<rect x="250" y="120" width="60" height="34" fill="currentColor" fill-opacity=".12" stroke="currentColor" stroke-width="1.3"/>'+
+    '<circle cx="270" cy="266" r="20" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="450" cy="266" r="20" fill="none" stroke="currentColor" stroke-width="1.4"/>'+
+    '<line x1="220" y1="150" x2="500" y2="150" stroke="currentColor" stroke-opacity=".3"/>';
+  if(p.domain==='sea'&&p.id==='sea-02')return '<path d="M120 200 C160 172,540 172,600 196 C630 200,630 204,600 208 C540 232,160 232,120 204 Z" fill="currentColor" fill-opacity=".08" stroke="currentColor" stroke-width="1.5"/>'+
+    '<ellipse cx="150" cy="200" rx="18" ry="14" fill="currentColor" fill-opacity=".18" stroke="currentColor" stroke-width="1.2"/>'+
+    '<line x1="580" y1="199" x2="640" y2="199" stroke="currentColor" stroke-width="1.3"/>';
+  if(p.domain==='sea')return '<path d="M160 230 C160 190,540 190,560 230 L520 260 L200 260 Z" fill="currentColor" fill-opacity=".08" stroke="currentColor" stroke-width="1.5"/>'+
+    '<line x1="400" y1="230" x2="400" y2="110" stroke="currentColor" stroke-width="1.6"/>'+
+    '<rect x="380" y="100" width="40" height="16" fill="currentColor" fill-opacity=".15" stroke="currentColor" stroke-width="1.2"/>'+
+    '<line x1="160" y1="230" x2="560" y2="230" stroke="currentColor" stroke-opacity=".3"/>';
+  if(p.domain==='space')return '<rect x="300" y="150" width="100" height="100" fill="currentColor" fill-opacity=".1" stroke="currentColor" stroke-width="1.5"/>'+
+    '<rect x="120" y="175" width="150" height="50" fill="currentColor" fill-opacity=".12" stroke="currentColor" stroke-width="1.2"/>'+
+    '<rect x="430" y="175" width="150" height="50" fill="currentColor" fill-opacity=".12" stroke="currentColor" stroke-width="1.2"/>'+
+    '<circle cx="350" cy="200" r="26" fill="none" stroke="currentColor" stroke-width="1.4"/>'+
+    '<line x1="350" y1="150" x2="350" y2="90" stroke="currentColor" stroke-width="1.3"/>';
+  /* air (default) */
+  return '<path d="M350 70 L400 150 L610 260 L616 280 L470 272 L392 262 L372 300 L328 300 L308 262 L230 272 L84 280 L90 260 L300 150 Z" '+
+    'fill="currentColor" fill-opacity=".07" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>'+
+    '<ellipse cx="350" cy="185" rx="22" ry="60" fill="currentColor" fill-opacity=".1" stroke="currentColor" stroke-width="1.2"/>';
+}
+function schemDots(p){
+  if(p.domain==='ground')return [[350,137,'1'],[420,205,'2'],[350,266,'3'],[470,266,'4']];
+  if(p.domain==='sea'&&p.id==='sea-02')return [[150,200,'1'],[330,200,'2'],[470,200,'3'],[600,199,'4']];
+  if(p.domain==='sea')return [[400,100,'1'],[350,225,'2'],[520,235,'3'],[220,250,'4']];
+  if(p.domain==='space')return [[350,200,'1'],[195,200,'2'],[505,200,'3'],[350,95,'4']];
+  return [[350,90,'1'],[350,190,'2'],[145,165,'3'],[350,290,'4']];
+}
+function schemSVG(p){
+  var shape=schemShape(p),dots=schemDots(p),d='';
+  dots.forEach(function(pt,i){
+    d+='<g class="schem-hit" data-i="'+i+'" tabindex="0" role="button" aria-label="Feature '+(i+1)+'">'+
+      '<circle class="schem-dot" data-i="'+i+'" cx="'+pt[0]+'" cy="'+pt[1]+'" r="15"/>'+
+      '<text class="schem-num" x="'+pt[0]+'" y="'+pt[1]+'">'+pt[2]+'</text></g>';
+  });
+  return '<svg viewBox="0 0 700 400" role="img" aria-label="Labelled diagram">'+shape+d+'</svg>';
+}
+function schemBlock(p){
+  if(!p.features)return '';
+  return '<div class="schem"><div class="schem-art panel">'+schemSVG(p)+'</div>'+
+    '<ol class="feat-list">'+p.features.map(function(f,i){
+      return '<li data-i="'+i+'"><span class="num">0'+(i+1)+'</span><span class="body"><b>'+esc(f[0])+'</b><p>'+esc(f[1])+'</p></span></li>';
+    }).join('')+'</ol></div>';
+}
+function initSchem(root){
+  var wrap=root.querySelector('.schem');if(!wrap||wrap.dataset.on)return;wrap.dataset.on='1';
+  var dots=wrap.querySelectorAll('.schem-hit'),items=wrap.querySelectorAll('.feat-list li');
+  function set(i){
+    dots.forEach(function(d){d.querySelector('.schem-dot').classList.toggle('active',d.getAttribute('data-i')===String(i))});
+    items.forEach(function(li){li.classList.toggle('active',li.getAttribute('data-i')===String(i))});
+  }
+  dots.forEach(function(d){
+    d.addEventListener('click',function(){set(d.getAttribute('data-i'))});
+    d.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();set(d.getAttribute('data-i'))}});
+  });
+  items.forEach(function(li){li.addEventListener('click',function(){set(li.getAttribute('data-i'))})});
+  set('0');
+}
 
 /* ---------------- Camera-feed compare slider ---------------- */
 function initCompare(root){
@@ -1481,7 +1718,7 @@ function Board(el,fixedDomain){
   var grid=el.querySelector('[data-grid]'),count=el.querySelector('[data-count]');
   if(fixedDomain){
     var dg=el.querySelector('[data-f="domain"]');if(dg)dg.closest('.fgroup').remove();
-    grid.className='grid '+(fixedDomain==='space'?'c2':'c4');
+    grid.className='grid '+((fixedDomain==='space'||fixedDomain==='sea'||fixedDomain==='ground')?'c2':'c4');
   }
   function apply(){
     var list=projects.filter(function(p){
@@ -1514,11 +1751,11 @@ function initRoadmap(el){
     '<div class="rm-years">'+years+'</div>'+
     projects.map(function(p){
       var a=(p.span[0]-y0),b=(p.span[1]-y0+1);
-      return '<a class="rm-row '+p.domain+'" href="#/project/'+p.id+'">'+
-        '<span class="rm-lbl"><span class="tag">['+p.label+']</span><b>'+esc(p.name)+'</b></span>'+
+      return '<a class="rm-row '+p.domain+(p.redacted?' redacted':'')+'" href="#/project/'+p.id+'">'+
+        '<span class="rm-lbl"><span class="tag">['+p.label+']</span><b>'+(p.redacted?'[REDACTED]':esc(p.name))+'</b></span>'+
         '<span class="rm-track">'+
           '<span class="rm-bar reveal'+(p.stage==='built'?' solid':'')+'" style="grid-column:'+(a+1)+' / '+(b+1)+'">'+
-            '<i>'+esc(STAGES[p.stage])+'</i></span>'+
+            '<i>'+(p.redacted?'[REDACTED]':esc(STAGES[p.stage]))+'</i></span>'+
         '</span></a>';
     }).join('')+'</div>'+
     '<p class="fineprint">[Dates are indicative and will move as programs are confirmed]</p>';
@@ -1571,18 +1808,31 @@ function initForm(){
   });
 }
 
-/* ---------------- Careers filter ---------------- */
+/* ---------------- Careers: full listings + application modal ---------------- */
+function roleCard(r,i){
+  var badges=[r.location,r.type,(r.clearance&&r.clearance!==TBC?r.clearance+' clearance':null)].filter(Boolean);
+  return '<div class="job" id="job-'+i+'"><div class="job-head" data-toggle="'+i+'">'+
+    '<div><span class="tag">['+r.label+']</span><h3>'+esc(r.title)+'</h3>'+
+      '<div class="job-meta">'+badges.map(function(b){return '<span>'+esc(b)+'</span>'}).join('')+'</div></div>'+
+    '<button class="job-toggle" type="button" aria-expanded="false" aria-controls="job-body-'+i+'">Details'+
+      '<svg viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>'+
+    '</div>'+
+    '<div class="job-body" id="job-body-'+i+'"><div class="job-body-in">'+
+      '<p>'+esc(r.summary)+'</p>'+
+      (r.responsibilities?'<ul>'+r.responsibilities.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul>':'')+
+      '<div class="job-actions">'+
+        '<button class="btn btn-dark" type="button" data-apply="'+esc(r.title)+'">'+(r.sub?'Send application':'Apply for this role')+'</button>'+
+        '<a class="btn" href="mailto:'+EMAILS.careers+'?subject='+encodeURIComponent(r.title)+'">Email instead</a>'+
+      '</div>'+
+    '</div></div></div>';
+}
 function initCareers(){
   var wrap=$('roleFilter'),list=$('roleList'),count=$('roleCount'),cur='All';
   var teams=['All'].concat(roles.map(function(r){return r.team}).filter(function(v,i,a){return a.indexOf(v)===i}));
   wrap.innerHTML=teams.map(function(t,i){return '<button class="chip" type="button" data-v="'+esc(t)+'" aria-pressed="'+(i===0)+'">'+esc(t)+'</button>'}).join('');
   function apply(){
     var l=roles.filter(function(r){return cur==='All'||r.team===cur});
-    list.innerHTML=l.map(function(r){
-      return '<li><a href="mailto:'+EMAILS.careers+'?subject='+encodeURIComponent(r.title)+'">'+
-        '<span class="tag">['+r.label+']</span><span class="t">'+esc(r.title)+'</span>'+
-        '<span class="m">'+esc(r.sub||r.team)+'</span><span class="a">Apply</span></a></li>';
-    }).join('');
+    list.innerHTML=l.map(roleCard).join('');
     count.textContent='['+l.length+' of '+roles.length+' roles shown]';
   }
   wrap.addEventListener('click',function(e){
@@ -1590,7 +1840,59 @@ function initCareers(){
     Array.prototype.forEach.call(wrap.querySelectorAll('.chip'),function(c){c.setAttribute('aria-pressed',String(c===b))});
     cur=b.getAttribute('data-v');apply();
   });
+  list.addEventListener('click',function(e){
+    var ap=e.target.closest('[data-apply]');
+    if(ap){openApply(ap.getAttribute('data-apply'));return}
+    var h=e.target.closest('.job-head');if(!h)return;
+    var job=h.closest('.job'),open=job.classList.toggle('open');
+    h.querySelector('.job-toggle').setAttribute('aria-expanded',String(open));
+  });
   apply();
+}
+
+/* ---------------- Application modal ---------------- */
+function openApply(role){
+  var m=$('applyModal');if(!m)return;
+  $('applyRole').textContent=role;
+  m.querySelector('[name=role]').value=role;
+  m.classList.add('open');
+  document.body.style.overflow='hidden';
+  var f=m.querySelector('#applyForm');if(f)f.reset();
+  m.querySelector('[name=role]').value=role;
+  setTimeout(function(){var n=m.querySelector('[name=name]');if(n)n.focus()},20);
+}
+function closeApply(){
+  var m=$('applyModal');if(!m)return;
+  m.classList.remove('open');document.body.style.overflow='';
+}
+function initApplyModal(){
+  var m=$('applyModal');if(!m||m.dataset.on)return;m.dataset.on='1';
+  m.addEventListener('click',function(e){if(e.target===m)closeApply()});
+  m.querySelector('.modal-close').addEventListener('click',closeApply);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&m.classList.contains('open'))closeApply()});
+  var f=m.querySelector('#applyForm'),note=$('applyNote');
+  function compose(){
+    var d=new FormData(f);
+    var body='Applying for: '+(d.get('role')||'')+'\n\nName: '+(d.get('name')||'')+'\nEmail: '+(d.get('email')||'')+
+      '\nPhone: '+(d.get('phone')||'')+'\nLinkedIn / portfolio: '+(d.get('link')||'')+
+      '\nRight to work: '+(d.get('rtw')||'')+'\nClearance held: '+(d.get('clr')||'')+
+      '\n\nCover note:\n'+(d.get('cover')||'')+
+      '\n\n[Attach your resume to this email before sending]';
+    return{subject:'Application — '+(d.get('role')||'General'),body:body};
+  }
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var msg=compose();
+    location.href='mailto:'+EMAILS.careers+'?subject='+encodeURIComponent(msg.subject)+'&body='+encodeURIComponent(msg.body);
+    note.textContent='[Opening your email app — attach your resume before sending. If nothing happens, use copy instead]';
+  });
+  m.querySelector('[data-copy]').addEventListener('click',function(){
+    var msg=compose(),text=EMAILS.careers+'\n'+msg.subject+'\n\n'+msg.body;
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){note.textContent='[Copied — paste it into an email to '+EMAILS.careers+' with your resume attached]'},
+        function(){note.textContent='[Copy failed — email '+EMAILS.careers+' directly]'});
+    }else note.textContent='[Email '+EMAILS.careers+' directly]';
+  });
 }
 
 /* ---------------- Counters ---------------- */
@@ -1625,27 +1927,78 @@ var AUS=[[142.5,-10.7],[145.5,-15],[146.3,-19],[149,-21],[150.6,-22.5],[153.2,-2
 var TAS=[[145,-40.7],[148,-40.8],[148.3,-43],[146.9,-43.6],[145.2,-42.5]];
 function initMap(){
   var el=$('mapWrap');if(!el||el.dataset.on)return;el.dataset.on='1';
-  var VW=1000,VH=820,lon0=112,lon1=155,lat0=-9,lat1=-44.5;
+  var VW=1000,VH=880,lon0=108,lon1=158,lat0=-6,lat1=-45.5;
   function px(p){return[(p[0]-lon0)/(lon1-lon0)*VW,(p[1]-lat0)/(lat1-lat0)*VH]}
   function path(pts){return pts.map(function(p,i){var q=px(p);return (i?'L':'M')+q[0].toFixed(1)+' '+q[1].toFixed(1)}).join('')+'Z'}
-  var pins=SITES.map(function(s){
-    var q=px([s.lon,s.lat]);
-    return '<g class="site"><circle cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="7" fill="none" stroke="currentColor" stroke-width="1.4"/>'+
-      '<circle cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="2.5" fill="currentColor"/>'+
-      '<text x="'+(q[0]+14).toFixed(1)+'" y="'+(q[1]+4).toFixed(1)+'" fill="currentColor" font-family="JetBrains Mono, ui-monospace, monospace" font-size="15" letter-spacing="1">['+esc((s.name||'').toUpperCase())+' \u00B7 '+esc((s.kind||'').toUpperCase())+']</text></g>';
+
+  var pins=SITES.map(function(s,i){
+    var q=px([s.lon,s.lat]),c=SITE_CATS[s.cat].color;
+    return '<g class="site" data-i="'+i+'" data-cat="'+s.cat+'" tabindex="0" role="button" aria-label="'+esc(s.name)+'">'+
+      '<circle cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="10" fill="'+c+'" fill-opacity=".16" stroke="'+c+'" stroke-width="1.2"/>'+
+      '<circle cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="3.2" fill="'+c+'"/>'+
+    '</g>';
   }).join('');
-  el.innerHTML='<svg viewBox="0 0 '+VW+' '+VH+'" role="img" aria-label="Map of Australia showing Kourashi Systems sites">'+
-    '<path d="'+path(AUS)+'" fill="currentColor" fill-opacity=".05" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>'+
-    '<path d="'+path(TAS)+'" fill="currentColor" fill-opacity=".05" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>'+
-    pins+'</svg>'+
-    (SITES.length?'':'<p class="empty"><span class="tag">[Sites to be confirmed]</span></p>');
+
+  /* orbiting satellites: a few dots tracing faint elliptical tracks */
+  var orbits=[
+    {rx:560,ry:130,cx:500,cy:250,dur:'22s',r0:3.4},
+    {rx:470,ry:340,cx:490,cy:440,dur:'31s',r0:3},
+    {rx:610,ry:230,cx:480,cy:520,dur:'26s',r0:2.6}
+  ],orbitSVG='';
+  orbits.forEach(function(o,i){
+    var id='orbit'+i,d='M '+(o.cx-o.rx)+' '+o.cy+' A '+o.rx+' '+o.ry+' 0 1 1 '+(o.cx+o.rx)+' '+o.cy+' A '+o.rx+' '+o.ry+' 0 1 1 '+(o.cx-o.rx)+' '+o.cy;
+    orbitSVG+='<path id="'+id+'" d="'+d+'" fill="none" stroke="#E8FF3D" stroke-opacity=".14" stroke-width="1"/>';
+    orbitSVG+='<circle r="'+o.r0+'" fill="#E8FF3D">'+
+      (reduce?'':'<animateMotion dur="'+o.dur+'" repeatCount="indefinite" rotate="auto"><mpath href="#'+id+'"/></animateMotion>')+
+      '</circle>';
+  });
+
+  el.innerHTML='<div class="rmap-wrap"><svg viewBox="0 0 '+VW+' '+VH+'" role="img" aria-label="Interactive map of Kourashi Systems sites across Australia, with orbiting satellite tracks">'+
+    '<rect x="0" y="0" width="'+VW+'" height="'+VH+'" fill="#0F0F0F"/>'+
+    orbitSVG+
+    '<path d="'+path(AUS)+'" fill="#F1F1F0" fill-opacity=".06" stroke="#F1F1F0" stroke-opacity=".5" stroke-width="1.6" stroke-linejoin="round"/>'+
+    '<path d="'+path(TAS)+'" fill="#F1F1F0" fill-opacity=".06" stroke="#F1F1F0" stroke-opacity=".5" stroke-width="1.6" stroke-linejoin="round"/>'+
+    pins+
+  '</svg>'+
+  '<div class="rmap-info" id="rmapInfo"></div>'+
+  '</div>'+
+  '<div class="rmap-legend" id="rmapLegend"></div>';
+
+  var legend=$('rmapLegend'),info=$('rmapInfo'),active={};
+  Object.keys(SITE_CATS).forEach(function(k){active[k]=true});
+  legend.innerHTML=Object.keys(SITE_CATS).map(function(k){
+    return '<button class="rmap-chip" type="button" data-cat="'+k+'" aria-pressed="true"><i style="background:'+SITE_CATS[k].color+'"></i>'+esc(SITE_CATS[k].label)+'</button>';
+  }).join('');
+  function applyFilter(){
+    Array.prototype.forEach.call(el.querySelectorAll('.site'),function(g){
+      g.style.display=active[g.getAttribute('data-cat')]?'':'none';
+    });
+  }
+  legend.addEventListener('click',function(e){
+    var b=e.target.closest('.rmap-chip');if(!b)return;
+    var k=b.getAttribute('data-cat');active[k]=!active[k];
+    b.setAttribute('aria-pressed',String(active[k]));applyFilter();
+  });
+  function show(i){
+    var s=SITES[i];if(!s)return;
+    info.innerHTML='<span class="cat">['+esc(SITE_CATS[s.cat].label)+']</span><div class="t">'+esc(s.name)+' \u00B7 '+esc(s.kind)+'</div><p>'+esc(s.note)+'</p>';
+    info.classList.add('show');
+  }
+  el.addEventListener('click',function(e){
+    var g=e.target.closest('.site');if(!g)return;
+    show(+g.getAttribute('data-i'));
+  });
+  el.addEventListener('keydown',function(e){
+    var g=e.target.closest('.site');if(!g||(e.key!=='Enter'&&e.key!==' '))return;
+    e.preventDefault();show(+g.getAttribute('data-i'));
+  });
 }
 
 /* ---------------- Audience selector ---------------- */
 var AUDIENCES=[
   {k:'defence',t:'Defence customer',s:'Capability and programs',
    lines:'Start with our air programs and the aircraft we have built. For capability discussions, write to us directly and we will come back with the right people.',
-   links:[['Air programs','#/air'],['Visual-navigation aircraft','#/project/air-01'],['Contact us','#/?contact']]},
+   links:[['Air programs','#/air'],['Pegasus','#/project/air-01'],['Contact us','#/?contact']]},
   {k:'partner',t:'Industry partner',s:'Supply and collaboration',
    lines:'We work with Australian suppliers and research partners across air and space. Tell us what you build and where you think it fits.',
    links:[['All programs','#/'],['Space programs','#/space'],['Contact us','#/?contact']]},
@@ -1679,52 +2032,6 @@ function initAudience(){
   try{var saved=localStorage.getItem('ks-aud');if(saved)show(saved,false)}catch(e){}
 }
 
-/* ---------------- Sound ---------------- */
-var Sound=(function(){
-  var ctx=null,master=null,enabled=true;
-  try{enabled=localStorage.getItem('ks-sound')!=='off'}catch(e){}
-  function ensure(){
-    if(ctx)return ctx;
-    var AC=window.AudioContext||window.webkitAudioContext;if(!AC)return null;
-    ctx=new AC();master=ctx.createGain();master.gain.value=.16;master.connect(ctx.destination);
-    return ctx;
-  }
-  function tone(freq,dur,type,gainMul,glideTo){
-    if(!enabled)return;
-    var c=ensure();if(!c)return;
-    if(c.state==='suspended')c.resume();
-    var t0=c.currentTime,osc=c.createOscillator(),g=c.createGain();
-    osc.type=type||'sine';osc.frequency.setValueAtTime(freq,t0);
-    if(glideTo)osc.frequency.exponentialRampToValueAtTime(glideTo,t0+dur);
-    g.gain.setValueAtTime(0,t0);g.gain.linearRampToValueAtTime((gainMul||1),t0+.006);
-    g.gain.exponentialRampToValueAtTime(.0001,t0+dur);
-    osc.connect(g);g.connect(master);osc.start(t0);osc.stop(t0+dur+.02);
-  }
-  return{
-    click:function(){tone(720,.05,'square',.5)},
-    toggle:function(){tone(520,.06,'square',.5,760)},
-    confirm:function(){tone(500,.09,'sine',.6,900)},
-    match:function(){tone(880,.07,'sine',.5,1180)},
-    open:function(){tone(600,.05,'triangle',.5,340)},
-    setEnabled:function(v){enabled=v;try{localStorage.setItem('ks-sound',v?'on':'off')}catch(e){}},
-    isEnabled:function(){return enabled}
-  };
-})();
-function initSound(){
-  var btn=$('sndBtn');if(!btn)return;
-  btn.setAttribute('aria-pressed',String(Sound.isEnabled()));
-  btn.addEventListener('click',function(){
-    var v=!Sound.isEnabled();Sound.setEnabled(v);btn.setAttribute('aria-pressed',String(v));
-    if(v)Sound.confirm();
-  });
-  document.addEventListener('click',function(e){
-    if(e.target.closest('.sndbtn'))return;
-    var t=e.target.closest('.btn,.chip,.tb,.kbtn,.card,.aud button,.hot,.navdrop-menu a,.roles a');
-    if(t)Sound.click();
-  },true);
-}
-
-/* ---------------- Footer socials ---------------- */
 function initSocials(){
   var el=$('footerSocials');if(!el)return;
   el.innerHTML=SOCIALS.map(function(s){
@@ -1915,8 +2222,28 @@ function statusTrack(p){
   }).join('')+'</ol>';
 }
 function projectView(p){
-  var dn=DOMAINS[p.domain].label,idx=projects.indexOf(p),more=[],k;
-  for(k=1;k<=3;k++)more.push(projects[(idx+k)%projects.length]);
+  if(p.redacted){
+    var pool2=projects.filter(function(x){return !x.redacted&&x.domain===p.domain});
+    var more2=pool2.length?pool2.slice(0,3):projects.filter(function(x){return !x.redacted}).slice(0,3);
+    return '<div class="page-head redacted-head"><div class="wrap">'+
+      '<p class="crumbs"><a href="#/">Home</a><span>/</span><a href="#/'+p.domain+'">'+DOMAINS[p.domain].label+'</a><span>/</span>[REDACTED]</p>'+
+      '<span class="tag gap">['+p.label+' \u00B7 CLASSIFIED]</span>'+
+      '<h1 tabindex="-1">[REDACTED]</h1>'+
+      '<p class="lede">This program has not been disclosed. Details are withheld pending public release.</p></div></div>'+
+      '<section class="pad"><div class="wrap"><div class="panel redacted-panel">'+artFor(p,true)+
+        '<div class="redacted-overlay"><span class="tag">[ACCESS RESTRICTED]</span></div></div>'+
+      '<dl class="facts" style="margin-top:2rem">'+
+        '<div><dt>Missions</dt><dd>'+redactBar(46)+'</dd></div>'+
+        '<div><dt>Use cases</dt><dd>'+redactBar(58)+'</dd></div>'+
+        '<div><dt>Weight</dt><dd>'+redactBar(20)+'</dd></div>'+
+        '<div><dt>Dimensions</dt><dd>'+redactBar(38)+'</dd></div>'+
+      '</dl>'+
+      '<p class="fineprint" style="margin-top:1.5rem">[Speak to Investor Relations or Defence customer channels for access to classified program briefings]</p>'+
+      '</div></section>'+
+      '<section class="pad" style="padding-top:0"><div class="wrap"><div class="row-head"><h3>Other '+DOMAINS[p.domain].label.toLowerCase()+' programs</h3><a href="#/'+p.domain+'">All '+DOMAINS[p.domain].label.toLowerCase()+' programs</a></div><div class="grid c3">'+more2.map(card).join('')+'</div></div></section>';
+  }
+  var dn=DOMAINS[p.domain].label,idx=projects.indexOf(p),more=[],k,pool=projects.filter(function(x){return !x.redacted});
+  for(k=1;k<=3;k++)more.push(pool[(pool.indexOf(p)+k)%pool.length]);
   var first=p.id==='air-01';
   var visual=first?'<div class="panel">'+AIRCRAFT+'</div>':'<div class="art big"><span class="tag">['+p.label+']</span>'+artFor(p,true)+'</div>';
   var facts=p.facts.map(function(f){return '<div><dt>'+esc(f[0])+'</dt><dd'+(f[1]===TBC?' class="tbc"':'')+'>'+esc(f[1])+'</dd></div>'}).join('');
@@ -1968,6 +2295,13 @@ function projectView(p){
       '<p class="lede" style="margin-bottom:2rem">Drag anywhere over the Earth to move the aperture, and switch between wide, narrow and spot. Slant range and ground spot come from the geometry of a 550&nbsp;km orbit.</p>'+
       satBlock('satProj','Orbital aperture \u2014 aim it')+
       '<p class="fineprint">[Illustration only \u2014 orbit, sensor and spacecraft to be confirmed]</p></div></section>';
+  }
+  if(!first&&p.features){
+    demo+='<section class="pad"><div class="wrap">'+
+      '<span class="tag gap">[LAYOUT-04]</span><h2 style="margin-bottom:1.2rem">What is on it.</h2>'+
+      '<p class="lede" style="margin-bottom:2rem">Click a marker, or a line below, for what it does. Layout shown is illustrative until the design is finalised.</p>'+
+      schemBlock(p)+
+      '<p class="fineprint">[Illustrative layout \u2014 not the final design]</p></div></section>';
   }
 
   var gallery='<section class="pad" style="padding-top:0"><div class="wrap">'+
@@ -2026,7 +2360,7 @@ var PAL=(function(){
     {k:'Demo',n:'Aim the orbital aperture',d:'Interactive satellite',h:'#/project/space-01'},
     {k:'Section',n:'Roadmap',d:'Every program by year',h:'#/?roadmap'},
     {k:'Section',n:'Contact form',d:'Send us a message',h:'#/?contact'}
-  ].concat(projects.map(function(p){return{k:p.label,n:p.name,d:p.short,h:'#/project/'+p.id}}))
+  ].concat(projects.filter(function(p){return !p.redacted}).map(function(p){return{k:p.label,n:p.name,d:p.short,h:'#/project/'+p.id}}))
    .concat(roles.map(function(r){return{k:'Role',n:r.title,d:r.team,h:'#/careers'}}))
    .concat(NEWS.map(function(n){return{k:'Update',n:n.title,d:fmtDate(n.date),h:'#/news'}}));
   function render(q){
@@ -2045,7 +2379,6 @@ var PAL=(function(){
   }
   function open(){
     lastFocus=document.activeElement;pal.classList.add('open');input.value='';render('');
-    if(typeof Sound!=='undefined')Sound.open();
     setTimeout(function(){input.focus()},20);
   }
   function close(){pal.classList.remove('open');if(lastFocus&&lastFocus.focus)lastFocus.focus()}
@@ -2273,7 +2606,7 @@ var Hero=(function(){
   if(!ctx)return{start:function(){},stop:function(){}};
   var W=0,H=0,dpr=1,active=false,visible=true,raf=0,t0=performance.now(),lastCount=-1;
   var NX=52,NY=40,AX=7.2,DEPTH=17,EX=0,EY=-2.05,EZ=1.28,PITCH=0.30,CP=Math.cos(PITCH),SP=Math.sin(PITCH),FOC=600;
-  var AY=3.5,ALT=1.15,HW=1.25,HD=0.95,ACC='#E8FF3D';
+  var ACC='#E8FF3D';
   function readAccent(){
     var v=getComputedStyle(document.documentElement).getPropertyValue('--accent');
     if(v&&v.trim())ACC=v.trim();
@@ -2282,41 +2615,70 @@ var Hero=(function(){
     var h=hex.replace('#','');if(h.length===3)h=h.split('').map(function(c){return c+c}).join('');
     var n=parseInt(h,16);return 'rgba('+((n>>16)&255)+','+((n>>8)&255)+','+(n&255)+','+a+')';
   }
-  function drawGlyph(cx,cy,s,ang,alpha,color){
+  /* two silhouettes, blended: a top-down view (seen from an angled bird's-eye) morphing into a
+     foreshortened, wings-wide view (seen head-on as it rushes past the camera) */
+  var TOPDOWN=[[1.3,0],[-0.6,-0.9],[-0.15,-0.18],[-0.85,-0.08],[-0.85,0.08],[-0.15,0.18],[-0.6,0.9]];
+  var FRONTON=[[1.3,0],[-0.5,-1.4],[-0.1,-0.3],[-0.3,-0.15],[-0.3,0.15],[-0.1,0.3],[-0.5,1.4]];
+  function drawGlyph(cx,cy,s,ang,alpha,color,blend){
+    blend=blend||0;
     ctx.save();ctx.globalAlpha=alpha;ctx.translate(cx,cy);ctx.rotate(ang);
-    ctx.fillStyle=color;ctx.strokeStyle=color;ctx.lineWidth=Math.max(1,s*0.03);
-    ctx.beginPath();
-    ctx.moveTo(s*1.3,0);ctx.lineTo(-s*0.6,-s*0.9);ctx.lineTo(-s*0.15,-s*0.18);
-    ctx.lineTo(-s*0.85,-s*0.08);ctx.lineTo(-s*0.85,s*0.08);ctx.lineTo(-s*0.15,s*0.18);
-    ctx.lineTo(-s*0.6,s*0.9);ctx.closePath();ctx.fill();
-    ctx.restore();
+    ctx.fillStyle=color;ctx.beginPath();
+    for(var i=0;i<TOPDOWN.length;i++){
+      var px_=(TOPDOWN[i][0]+(FRONTON[i][0]-TOPDOWN[i][0])*blend)*s;
+      var py_=(TOPDOWN[i][1]+(FRONTON[i][1]-TOPDOWN[i][1])*blend)*s;
+      if(i===0)ctx.moveTo(px_,py_);else ctx.lineTo(px_,py_);
+    }
+    ctx.closePath();ctx.fill();ctx.restore();
   }
-  /* flyby: an aircraft rushing from the horizon toward the viewer, on a loop */
-  function flyby(t){
-    var period=6.4,phase=(t%period)/period,ease=phase*phase*phase;
+  /* an irregular, weaving lateral path rather than a straight run \u2014 evasive, not a straight line */
+  function swerveX(phase){
+    return 0.8*Math.sin(phase*8.2+0.6)+0.32*Math.sin(phase*19.5+2.1)+0.16*Math.sin(phase*31+0.3);
+  }
+  var FLY_PERIOD=6.6;
+  function flybyState(t){
+    var phase=(t%FLY_PERIOD)/FLY_PERIOD,ease=phase*phase*phase;
     var farY=DEPTH*0.92,nearY=EY-1.0,y=farY+(nearY-farY)*ease;
-    var x=0.6*Math.sin(t*0.15+1.4),z=ALT*0.7;
+    var x=swerveX(phase),z=0.85;
     var dz=z-EZ,dy=y-EY,f=dy*CP-dz*SP;
-    if(f<=0.04)return;
+    if(f<=0.04)return null;
     var k=FOC/f,sx=W/2+(x-EX)*k,sy=H*0.54-(dy*SP+dz*CP)*k;
     var size=Math.min(Math.max(10,k*0.11),Math.max(W,H)*1.15);
     var fadeIn=Math.min(1,phase/0.05),fadeOut=Math.min(1,Math.max(0,(f-0.04)/0.55));
-    var alpha=Math.min(fadeIn,fadeOut);if(alpha<=0.015)return;
-    /* speed trail */
+    var alpha=Math.min(fadeIn,fadeOut);if(alpha<=0.015)return null;
+    var blend=Math.max(0,Math.min(1,(phase-0.15)/0.65));blend=blend*blend*(3-2*blend);
+    var eps=0.004,dx=swerveX(Math.min(1,phase+eps))-swerveX(Math.max(0,phase-eps));
+    var ang=Math.PI/2-dx*1.3;
+    return{phase:phase,x:x,y:y,z:z,sx:sx,sy:sy,size:size,alpha:alpha,blend:blend,ang:ang};
+  }
+  function flybyDraw(st,t){
+    if(!st)return;
+    var scroll=t*0.95,gz=hz(st.x,st.y+scroll),gp=proj(st.x,st.y,gz+0.01),dp=proj(st.x,st.y,st.z);
+    if(gp&&dp){
+      ctx.save();ctx.globalAlpha=st.alpha*0.55;ctx.setLineDash([3,5]);ctx.strokeStyle=hexA(ACC,1);ctx.lineWidth=1;
+      ctx.beginPath();ctx.moveTo(dp[0],dp[1]);ctx.lineTo(gp[0],gp[1]);ctx.stroke();ctx.setLineDash([]);ctx.restore();
+      var pulse=(t*1.15)%1,ringMax=st.size*2.6,i2;
+      for(i2=0;i2<2;i2++){
+        var ph2=(pulse+i2*0.5)%1,rad=ph2*ringMax,a2=(1-ph2)*st.alpha*0.55;
+        if(a2<=0.01)continue;
+        ctx.save();ctx.globalAlpha=a2;ctx.strokeStyle=hexA(ACC,1);ctx.lineWidth=1.4;
+        ctx.beginPath();ctx.ellipse(gp[0],gp[1],rad,rad*0.4,0,0,6.283);ctx.stroke();ctx.restore();
+      }
+    }
     var trail=4,i;
     for(i=trail;i>=1;i--){
-      var ph2=Math.max(0,phase-i*0.014),ea2=ph2*ph2*ph2,y2=farY+(nearY-farY)*ea2;
-      var x2=0.6*Math.sin((t-i*0.09)*0.15+1.4),dz2=z-EZ,dy2=y2-EY,f2=dy2*CP-dz2*SP;
+      var ph2b=Math.max(0,st.phase-i*0.013),ea2=ph2b*ph2b*ph2b,y2=DEPTH*0.92+(EY-1.0-DEPTH*0.92)*ea2;
+      var x2=swerveX(ph2b),dz2=st.z-EZ,dy2=y2-EY,f2=dy2*CP-dz2*SP;
       if(f2<=0.04)continue;
       var k2=FOC/f2,sx2=W/2+(x2-EX)*k2,sy2=H*0.54-(dy2*SP+dz2*CP)*k2;
       var s2=Math.min(Math.max(10,k2*0.11),Math.max(W,H)*1.15);
-      drawGlyph(sx2,sy2,s2,Math.PI/2,alpha*(1-i/trail)*0.35,hexA(ACC,1));
+      var bl2=Math.max(0,Math.min(1,(ph2b-0.15)/0.65));bl2=bl2*bl2*(3-2*bl2);
+      drawGlyph(sx2,sy2,s2,st.ang,st.alpha*(1-i/trail)*0.35,hexA(ACC,1),bl2);
     }
-    drawGlyph(sx,sy,size,Math.PI/2,alpha,ACC);
+    drawGlyph(st.sx,st.sy,st.size,st.ang,st.alpha,ACC,st.blend);
   }
   var names=['Ridgeline','Creek bend','Dam wall','Track junction','Homestead','Salt pan','Fence line','Quarry','Water tank','Rock outcrop'];
   var lms=names.map(function(n,i){return{n:'['+n.toUpperCase()+']',x:(((i*2.7)%5.4)-2.7)+(i%3-1)*0.5,b:(i*1.63)%DEPTH}});
-  var xs=[],ys=[],zs=[],px=[],py=[],ins=[];
+  var xs=[],ys=[],zs=[],px=[],py=[];
   function hz(x,y){
     var nx=x*0.42,ny=y*0.34;
     return 0.34*Math.sin(nx*1.7+0.6*Math.sin(ny*1.3))+0.24*Math.sin(ny*2.1-nx*0.8+1.2)
@@ -2341,18 +2703,18 @@ var Hero=(function(){
   }
   function wrapY(v){var m=(v+1.1)%(DEPTH+1.1);if(m<0)m+=DEPTH+1.1;return m-1.1}
   function draw(now){
-    var t=(now-t0)/1000,scroll=t*0.95,acx=1.9*Math.sin(t*0.26),i,j,k,q;
+    var t=(now-t0)/1000,scroll=t*0.95,i,j,k,q;
+    var fly=flybyState(t);
     ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
     /* project the grid */
     for(j=0;j<=NY;j++){
-      zs[j]=zs[j]||[];px[j]=px[j]||[];py[j]=py[j]||[];ins[j]=ins[j]||[];
+      zs[j]=zs[j]||[];px[j]=px[j]||[];py[j]=py[j]||[];
       var y=ys[j];
       for(i=0;i<=NX;i++){
         var x=xs[i],z=hz(x,y+scroll);
         zs[j][i]=z;
         q=proj(x,y,z);
         px[j][i]=q?q[0]:NaN;py[j][i]=q?q[1]:NaN;
-        ins[j][i]=(Math.abs(x-acx)<HW&&Math.abs(y-AY)<HD)?1:0;
       }
     }
     /* rows */
@@ -2362,15 +2724,7 @@ var Hero=(function(){
       ctx.lineWidth=1;ctx.strokeStyle='rgba(255,255,255,'+a.toFixed(3)+')';
       ctx.beginPath();var run=false;
       for(i=0;i<=NX;i++){
-        if(isNaN(px[j][i])||(ins[j][i]&&i<NX&&ins[j][i+1])){run=false;continue}
-        if(!run){ctx.moveTo(px[j][i],py[j][i]);run=true}else ctx.lineTo(px[j][i],py[j][i]);
-      }
-      ctx.stroke();
-      /* bright segments inside the footprint */
-      ctx.lineWidth=1.5;ctx.strokeStyle='rgba(255,255,255,.92)';
-      ctx.beginPath();run=false;
-      for(i=0;i<=NX;i++){
-        if(isNaN(px[j][i])||!ins[j][i]){run=false;continue}
+        if(isNaN(px[j][i])){run=false;continue}
         if(!run){ctx.moveTo(px[j][i],py[j][i]);run=true}else ctx.lineTo(px[j][i],py[j][i]);
       }
       ctx.stroke();
@@ -2389,45 +2743,26 @@ var Hero=(function(){
         ctx.stroke();
       }
     }
-    /* footprint outline on the ground */
-    var corners=[[acx-HW,AY-HD],[acx+HW,AY-HD],[acx+HW,AY+HD],[acx-HW,AY+HD]],cp=[],ok=true;
-    corners.forEach(function(c){var p=proj(c[0],c[1],hz(c[0],c[1]+scroll)+0.005);if(!p)ok=false;cp.push(p)});
-    if(ok){
-      ctx.beginPath();cp.forEach(function(p,n){n?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1])});ctx.closePath();
-      ctx.fillStyle='rgba(255,255,255,.07)';ctx.fill();
-      ctx.strokeStyle='#fff';ctx.lineWidth=1.6;ctx.stroke();
-    }
-    /* aircraft + sensor cone */
-    var ap=proj(acx,AY,ALT),ap2=proj(acx+0.02,AY+0.4,ALT);
-    if(ap&&ok){
-      ctx.strokeStyle='rgba(255,255,255,.4)';ctx.setLineDash([4,4]);ctx.lineWidth=1;
-      cp.forEach(function(p){ctx.beginPath();ctx.moveTo(ap[0],ap[1]);ctx.lineTo(p[0],p[1]);ctx.stroke()});
-      ctx.setLineDash([]);
-      var s=Math.max(9,FOC/ap[2]*0.16),ang=Math.atan2((ap2?ap2[1]:ap[1])-ap[1],(ap2?ap2[0]:ap[0])-ap[0])+Math.PI;
-      ctx.save();ctx.translate(ap[0],ap[1]);ctx.rotate(ang);
-      ctx.fillStyle='#fff';ctx.strokeStyle='#fff';ctx.lineWidth=1.4;
-      ctx.beginPath();ctx.moveTo(s*1.3,0);ctx.lineTo(-s*0.7,-s*0.95);ctx.lineTo(-s*0.25,0);ctx.lineTo(-s*0.7,s*0.95);ctx.closePath();ctx.fill();
-      ctx.restore();
-    }
-    /* landmarks */
+    /* landmarks: lit up when the flyby drone's ground track passes near them */
     var count=0;
     ctx.font='500 10px "JetBrains Mono", ui-monospace, Menlo, monospace';
     lms.forEach(function(m){
       var ly=wrapY(m.b-scroll),lz=hz(m.x,ly+scroll),p=proj(m.x,ly,lz+0.02);
       if(!p)return;
-      var inside=Math.abs(m.x-acx)<HW&&Math.abs(ly-AY)<HD,sz=Math.max(3,FOC/p[2]*0.05);
+      var inside=fly&&Math.abs(m.x-fly.x)<1.1&&Math.abs(ly-fly.y)<1.0,sz=Math.max(3,FOC/p[2]*0.05);
       if(inside){
         count++;
-        ctx.strokeStyle='#fff';ctx.lineWidth=1.3;ctx.strokeRect(p[0]-sz,p[1]-sz,sz*2,sz*2);
-        ctx.save();ctx.shadowColor='rgba(15,15,15,.95)';ctx.shadowBlur=5;ctx.fillStyle='#fff';
+        ctx.strokeStyle=ACC;ctx.lineWidth=1.3;ctx.strokeRect(p[0]-sz,p[1]-sz,sz*2,sz*2);
+        ctx.save();ctx.shadowColor='rgba(15,15,15,.95)';ctx.shadowBlur=5;ctx.fillStyle=ACC;
         ctx.fillText(m.n,p[0]+sz+6,p[1]+4);ctx.restore();
       }else{
         ctx.strokeStyle='rgba(255,255,255,.32)';ctx.lineWidth=1;
         ctx.strokeRect(p[0]-sz*.55,p[1]-sz*.55,sz*1.1,sz*1.1);
       }
     });
-    if(count!==lastCount&&readout){readout.textContent=count;lastCount=count}
-    flyby(t);
+    if(fly&&count>lastCount&&readout){readout.textContent=count;lastCount=count}
+    if(fly&&count===0&&lastCount>0&&fly.alpha<0.05){lastCount=-1}
+    flybyDraw(fly,t);
   }
   function loop(now){if(!active){raf=0;return}if(visible)draw(now);raf=requestAnimationFrame(loop)}
   function start(){
@@ -2510,7 +2845,7 @@ function render(){
   ['air','sea','ground','space'].forEach(function(d){view.classList.toggle(d,themeDomain===d)});
   nav.classList.toggle('light',themeDomain==='space');
   if(!reduce){view.style.animation='none';void view.offsetWidth;view.style.animation=''}
-  if(r.name==='project'){initCompare(view);initStory(view);initViewer(view);initSat(view)}
+  if(r.name==='project'){initCompare(view);initStory(view);initViewer(view);initSat(view);initSchem(view)}
   reveal(view);
   if(r.name==='home')Hero.start();else Hero.stop();
   Array.prototype.forEach.call(document.querySelectorAll('.links a[data-route]'),function(a){
@@ -2554,8 +2889,8 @@ window.addEventListener('hashchange',render);
   dd.querySelectorAll('a').forEach(function(a){a.addEventListener('click',close)});
 })();
 
-initSound();
 initSocials();
+initApplyModal();
 render();
 })();
 
