@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Kourashi Systems</title>
-<meta name="description" content="Kourashi Systems develops aircraft and space systems. Based in Australia.">
+<meta name="description" content="Kourashi Systems develops aircraft, vessels, vehicles and space systems. Based in Australia.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -318,7 +318,7 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border:0;border-radiu
 
 /* Footer */
 footer{background:var(--panel-deep);color:var(--on-panel);padding-block:clamp(3.5rem,7vw,6rem) 2rem}
-footer .top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2.5rem;padding-bottom:3.5rem;border-bottom:1px solid var(--rule-panel)}
+footer .top{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:2.5rem;padding-bottom:3.5rem;border-bottom:1px solid var(--rule-panel)}
 @media (max-width:760px){footer .top{grid-template-columns:1fr}}
 footer h3{font-size:2.2rem;max-width:12ch;line-height:1.02}
 footer h4{font-family:var(--mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;font-weight:500;color:var(--mute-panel);margin-bottom:.9rem}
@@ -326,6 +326,8 @@ footer li{list-style:none;margin-bottom:.4rem}
 footer li a:hover{text-decoration:underline;text-underline-offset:4px}
 footer .flogo{height:46px;width:auto;display:block;margin-bottom:1.6rem}
 footer .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding-top:1.5rem;font-size:.9rem;color:var(--mute-panel)}
+footer .base a{opacity:.85}
+footer .base a:hover{opacity:1;text-decoration:underline;text-underline-offset:3px}
 
 /* Page transitions */
 .view{animation:vin .45s cubic-bezier(.2,.7,.3,1) both}
@@ -434,6 +436,110 @@ footer .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;
 .form-note{font-family:var(--mono);font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:var(--mute)}
 @media (max-width:700px){.form{grid-template-columns:1fr}}
 
+
+/* ================= v4: 4 domains, neon accent, cut-corner cards, nav dropdown, sound, socials, motion ================= */
+:root{--accent:#E8FF3D;--accent-ink:#141A00}
+
+/* Ground = dark military green. Sea = dark navy. Both stay dark-panel/light-text like Air. */
+.ground{--panel:#20281D;--panel-deep:#171D14;--on-panel:#F1F3EC;--mute-panel:#9BA68F;--rule-panel:#39432F}
+.sea{--panel:#151E30;--panel-deep:#0D1421;--on-panel:#EDF1F7;--mute-panel:#8FA0BC;--rule-panel:#28374F}
+
+/* Cut-corner panels — shared visual signature across dark UI surfaces */
+.art,.panel,.viewer,.demo,.story-panel,.compare,.map-wrap{
+  clip-path:polygon(0 0,calc(100% - 26px) 0,100% 26px,100% 100%,0 100%);
+  position:relative;
+}
+.art::after,.panel::after,.viewer::after,.demo::after,.story-panel::after,.compare::after,.map-wrap::after{
+  content:"";position:absolute;top:0;right:0;width:37px;height:37px;pointer-events:none;
+  background:linear-gradient(135deg,transparent 49.2%,var(--rule-panel) 49.2%,var(--rule-panel) 50.8%,transparent 50.8%);
+}
+.art .stage{top:auto;bottom:.85rem;right:.95rem}
+
+/* Neon accent — used sparingly as the signature highlight */
+:focus-visible{outline-color:var(--accent)}
+.links a[aria-current="page"]{text-decoration-color:var(--accent)}
+.card:hover .name{text-decoration-color:var(--accent)}
+.chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.tb[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.track li.now{color:var(--accent)}
+.track li.now .dot{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 25%,transparent)}
+.stats b:not(.tbc){color:var(--accent)}
+.readout b{color:var(--accent)}
+#dMatched,#dStatus{color:var(--accent)}
+.pal li[aria-selected="true"] a{background:color-mix(in srgb,var(--accent) 14%,var(--paper))}
+.btn-solid{position:relative}
+.hero .btn-solid{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.hero .btn-solid:hover{background:transparent;color:var(--accent)}
+.card.air .stage,.rm-row.air .rm-bar.solid{box-shadow:inset 0 0 0 1.5px var(--accent)}
+
+/* Button / interactive press */
+.btn,.chip,.tb,.kbtn,.card,.aud button,.hot{transition:transform .12s ease,background .15s,color .15s,border-color .15s}
+.btn:active,.chip:active,.tb:active,.kbtn:active,.aud button:active,.hot:active{transform:scale(.96)}
+.card:active{transform:scale(.985)}
+
+/* Staggered card entrance */
+.grid>.reveal{transition-delay:0ms}
+.grid>.reveal:nth-child(1){transition-delay:0ms}
+.grid>.reveal:nth-child(2){transition-delay:60ms}
+.grid>.reveal:nth-child(3){transition-delay:120ms}
+.grid>.reveal:nth-child(4){transition-delay:180ms}
+.grid>.reveal:nth-child(5){transition-delay:240ms}
+.grid>.reveal:nth-child(6){transition-delay:300ms}
+.grid>.reveal:nth-child(n+7){transition-delay:340ms}
+.track li.reveal:nth-child(1){transition-delay:0ms}
+.track li.reveal:nth-child(2){transition-delay:70ms}
+.track li.reveal:nth-child(3){transition-delay:140ms}
+.track li.reveal:nth-child(4){transition-delay:210ms}
+
+/* Roadmap bar grow-in */
+.rm-bar.reveal{transform:scaleX(0);transform-origin:left;opacity:0;transition:transform .5s cubic-bezier(.2,.7,.3,1),opacity .3s}
+.rm-bar.reveal.in{transform:scaleX(1);opacity:1}
+@media (prefers-reduced-motion:reduce){.rm-bar.reveal{transform:none;opacity:1}}
+
+/* Nav dropdown */
+.navdrop{position:relative}
+.navdrop>button{display:flex;align-items:center;gap:.35rem;background:none;border:0;color:inherit;cursor:pointer;font:inherit;opacity:.8;padding:0}
+.navdrop>button:hover,.navdrop[data-open="true"]>button{opacity:1}
+.navdrop svg{width:11px;height:11px;transition:transform .18s}
+.navdrop[data-open="true"] svg{transform:rotate(180deg)}
+.navdrop-menu{position:absolute;top:calc(100% + .9rem);left:50%;transform:translateX(-50%);min-width:200px;
+  background:var(--panel-deep);border:1px solid var(--rule-panel);border-radius:2px;padding:.4rem;display:none;z-index:5}
+.navdrop[data-open="true"] .navdrop-menu{display:block}
+.navdrop-menu a{display:flex;justify-content:space-between;gap:.6rem;padding:.6rem .7rem;border-radius:2px;opacity:1}
+.navdrop-menu a:hover{background:rgba(255,255,255,.06)}
+.navdrop-menu .d{color:var(--mute-panel);font-size:.82rem}
+@media (max-width:1100px){
+  .navdrop>button{width:100%;justify-content:space-between;padding:.9rem 0;border-bottom:1px solid var(--rule-panel);opacity:1}
+  .navdrop-menu{position:static;transform:none;display:block;border:0;background:none;padding:0 0 0 .9rem;min-width:0}
+  .navdrop[data-open="true"] .navdrop-menu,.navdrop:not([data-open="true"]) .navdrop-menu{display:block}
+  .navdrop-menu a{padding:.7rem 0;border-bottom:1px solid var(--rule-panel)}
+}
+
+/* Sound toggle */
+.sndbtn{display:flex;align-items:center;justify-content:center;width:38px;height:38px;background:none;border:1px solid var(--rule-panel);
+  border-radius:2px;color:var(--mute-panel);cursor:pointer;flex:0 0 auto}
+.sndbtn:hover{color:var(--on-panel);border-color:var(--on-panel)}
+.sndbtn svg{width:17px;height:17px}
+.sndbtn .off{display:none}
+.sndbtn[aria-pressed="false"] .on{display:none}
+.sndbtn[aria-pressed="false"] .off{display:block}
+@media (max-width:1100px){.sndbtn{display:none}}
+
+/* Socials */
+.socials{display:flex;flex-wrap:wrap;gap:.6rem}
+.social{display:inline-flex;align-items:center;gap:.4rem;border:1px solid var(--rule-panel);border-radius:2px;
+  padding:.5rem .8rem;font-family:var(--mono);font-size:.78rem;letter-spacing:.05em;text-transform:uppercase;color:var(--mute-panel)}
+.social .soon{color:var(--mute-panel);opacity:.7;font-size:.7rem;text-transform:none;letter-spacing:0}
+
+/* Mission / legal pages */
+.legal p{color:var(--mute);max-width:70ch;margin-bottom:1.1rem;line-height:1.65}
+.legal h2{font-size:1.5rem;margin:2.4rem 0 .8rem;letter-spacing:-.02em}
+.legal h2:first-of-type{margin-top:0}
+.mission-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:1.75rem;margin-top:clamp(2.5rem,5vw,4rem)}
+@media (max-width:820px){.mission-pillars{grid-template-columns:1fr}}
+.mission-pillars li{list-style:none;border-top:2px solid var(--fg);padding-top:1rem}
+.mission-pillars p{color:var(--mute);margin-top:.6rem;font-size:.98rem;line-height:1.5}
+
 </style>
 </head>
 <body>
@@ -448,12 +554,26 @@ footer .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;
       <svg viewBox="0 0 26 26" aria-hidden="true"><path d="M3 8h20M3 13h20M3 18h20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
     </button>
     <nav class="links" id="links" aria-label="Main">
-      <a href="#/air" data-route="air">Air</a>
-      <a href="#/space" data-route="space">Space</a>
+      <div class="navdrop" id="progDrop" data-open="false">
+        <button type="button" aria-haspopup="true" aria-expanded="false">Programs
+          <svg viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="navdrop-menu" role="menu">
+          <a href="#/air" data-route="air" role="menuitem">Air<span class="d">Aircraft</span></a>
+          <a href="#/sea" data-route="sea" role="menuitem">Sea<span class="d">Vessels</span></a>
+          <a href="#/ground" data-route="ground" role="menuitem">Ground<span class="d">Vehicles</span></a>
+          <a href="#/space" data-route="space" role="menuitem">Space<span class="d">Satellites</span></a>
+        </div>
+      </div>
+      <a href="#/mission" data-route="mission">Our Mission</a>
       <a href="#/leadership" data-route="leadership">Leadership</a>
       <a href="#/careers" data-route="careers">Careers</a>
-      <a href="#/investors" data-route="investors">Investors</a>
-      <a href="#/news" data-route="news">Updates</a>
+      <a href="#/investors" data-route="investors">Investor Relations</a>
+      <a href="#/news" data-route="news">Newsroom</a>
+      <button class="sndbtn" id="sndBtn" type="button" aria-pressed="true" aria-label="Toggle sound effects">
+        <svg class="on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 5V4L8 9H4z" fill="currentColor"/><path d="M16.5 8.5a5 5 0 010 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M19 6a9 9 0 010 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <svg class="off" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 5V4L8 9H4z" fill="currentColor"/><path d="M16 9l5 6M21 9l-5 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
       <button class="kbtn" id="palBtn" aria-label="Search (Control or Command + K)"><span>Search</span><kbd id="kbdHint">⌘K</kbd></button>
       <a class="btn btn-line" href="#/" data-scroll="#contact">Contact</a>
     </nav>
@@ -469,7 +589,7 @@ footer .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;
       <div class="wrap">
         <span class="tag gap">[KOURASHI-00]</span>
         <h1>Aerospace and defence from Australia.</h1>
-        <p class="lede">Kourashi Systems develops aircraft and space systems. Our first aircraft finds its way by the landscape beneath it.</p>
+        <p class="lede">Kourashi Systems develops aircraft, vessels, vehicles and space systems across air, sea, ground and space. Our first aircraft finds its way by the landscape beneath it.</p>
         <div class="cta">
           <a class="btn btn-solid" href="#/" data-scroll="#try">Try the demo</a>
           <a class="btn btn-line" href="#/" data-scroll="#projects">Explore projects</a>
@@ -520,7 +640,7 @@ footer .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;
         <div class="split">
           <h2>We are building an Australian aerospace and defence company.</h2>
           <div class="side">
-            <p>Our first aircraft is built. More air and space programs are in development, led by the team behind them.</p>
+            <p>Our first aircraft is built. More programs across air, sea, ground and space are in development, led by the team behind them.</p>
             <a class="btn btn-solid" href="#/leadership">Meet the leadership</a>
           </div>
         </div>
@@ -530,7 +650,7 @@ footer .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;
             <div>
               <span class="tag gap">[FOOTPRINT-01]</span>
               <h3 style="font-size:clamp(1.6rem,2.6vw,2.4rem);max-width:16ch">Where we build, test and fly.</h3>
-              <p style="color:var(--mute-panel);margin-top:1rem;max-width:44ch">Sites are being confirmed. They will appear on this map as each one is locked in.</p>
+              <p style="color:var(--mute-panel);margin-top:1rem;max-width:44ch">We're headquartered in Melbourne. Further sites will appear on this map as they're confirmed.</p>
             </div>
             <div class="map-wrap" id="mapWrap"></div>
           </div>
@@ -595,7 +715,7 @@ footer .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;
 
     <div class="band">
       <div class="wrap">
-        <div><span class="tag" style="margin-bottom:.6rem">[CAREERS-08]</span><h3>We are hiring.</h3><p class="d">Engineering and flight operations roles across our air and space programs.</p></div>
+        <div><span class="tag" style="margin-bottom:.6rem">[CAREERS-08]</span><h3>We are hiring.</h3><p class="d">Engineering and operations roles across our air, sea, ground and space programs.</p></div>
         <a class="btn btn-dark" href="#/careers">View careers</a>
       </div>
     </div>
@@ -609,6 +729,26 @@ footer .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;
       <p class="lede">Aircraft and autonomy programs from Kourashi Systems.</p>
     </div></div>
     <section class="pad"><div class="wrap"><div id="airBoard"></div></div></section>
+  </div>
+
+  <!-- SEA -->
+  <div class="view" id="v-sea" hidden>
+    <div class="page-head"><div class="wrap">
+      <p class="crumbs"><a href="#/">Home</a><span>/</span>Sea</p>
+      <h1 tabindex="-1">Sea</h1>
+      <p class="lede">Surface and subsurface vessel programs from Kourashi Systems.</p>
+    </div></div>
+    <section class="pad"><div class="wrap"><div id="seaBoard"></div></div></section>
+  </div>
+
+  <!-- GROUND -->
+  <div class="view" id="v-ground" hidden>
+    <div class="page-head"><div class="wrap">
+      <p class="crumbs"><a href="#/">Home</a><span>/</span>Ground</p>
+      <h1 tabindex="-1">Ground</h1>
+      <p class="lede">Ground vehicle programs from Kourashi Systems.</p>
+    </div></div>
+    <section class="pad"><div class="wrap"><div id="groundBoard"></div></div></section>
   </div>
 
   <!-- SPACE -->
@@ -643,7 +783,7 @@ footer .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;
     <div class="page-head"><div class="wrap">
       <p class="crumbs"><a href="#/">Home</a><span>/</span>Careers</p>
       <h1 tabindex="-1">Careers</h1>
-      <p class="lede">We are hiring engineers and operators to work across our air and space programs.</p>
+      <p class="lede">We are hiring engineers and operators to work across our air, sea, ground and space programs.</p>
     </div></div>
     <section class="pad"><div class="wrap">
       <div class="chips" id="roleFilter" role="group" aria-label="Filter roles by team" style="margin-bottom:1.6rem"></div>
@@ -656,19 +796,86 @@ footer .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;
   <!-- NEWS -->
   <div class="view" id="v-news" hidden>
     <div class="page-head"><div class="wrap">
-      <p class="crumbs"><a href="#/">Home</a><span>/</span>Updates</p>
-      <h1 tabindex="-1">Updates</h1>
+      <p class="crumbs"><a href="#/">Home</a><span>/</span>Newsroom</p>
+      <h1 tabindex="-1">Newsroom</h1>
       <p class="lede">What has changed at Kourashi Systems, newest first.</p>
     </div></div>
     <section class="pad"><div class="wrap"><div class="news-list" id="newsList"></div></div></section>
   </div>
 
+  <!-- MISSION -->
+  <div class="view" id="v-mission" hidden>
+    <div class="page-head"><div class="wrap">
+      <p class="crumbs"><a href="#/">Home</a><span>/</span>Our Mission</p>
+      <h1 tabindex="-1">Our Mission</h1>
+      <p class="lede">To build aircraft, vessels, vehicles and satellites that keep working when the systems around them do not.</p>
+    </div></div>
+    <section class="pad"><div class="wrap">
+      <div class="split">
+        <div>
+          <span class="tag gap">[MISSION-01]</span>
+          <h2 style="margin-bottom:1.2rem">Capability that does not depend on someone else's infrastructure.</h2>
+          <p class="lede">Modern navigation, communication and positioning all lean on infrastructure that can be jammed, spoofed, or simply switched off. We build systems across air, sea, ground and space that are designed from the outset to keep working when that infrastructure is denied.</p>
+        </div>
+        <div>
+          <p class="lede">That starts with an aircraft that finds its way by the landscape beneath it rather than a satellite signal. The same principle — sense the world directly, decide locally, keep moving — carries into every program that follows it.</p>
+        </div>
+      </div>
+      <ul class="mission-pillars">
+        <li><span class="tag">[01]</span><h3>Built in Australia.</h3><p>Sovereign capability, designed and built by an Australian team for Australian conditions.</p></li>
+        <li><span class="tag">[02]</span><h3>Independent by design.</h3><p>Every program is built to keep operating when the systems around it are degraded or unavailable.</p></li>
+        <li><span class="tag">[03]</span><h3>One approach, four domains.</h3><p>Air, sea, ground and space programs share the same navigation and sensing foundation.</p></li>
+      </ul>
+      <p class="fineprint" style="margin-top:2.5rem">[This page is an early statement of intent and will be expanded as the company grows]</p>
+    </div></section>
+  </div>
+
+  <!-- PRIVACY -->
+  <div class="view" id="v-privacy" hidden>
+    <div class="page-head"><div class="wrap">
+      <p class="crumbs"><a href="#/">Home</a><span>/</span>Privacy Policy</p>
+      <h1 tabindex="-1">Privacy Policy</h1>
+      <p class="lede">How Kourashi Systems handles information collected through this website.</p>
+    </div></div>
+    <section class="pad"><div class="wrap legal">
+      <h2>What we collect</h2>
+      <p>When you use the contact form on this site, we collect what you choose to give us: your name, organisation, email address, the enquiry type you select, and any message you write. Submitting the form opens a message in your own email application; nothing is transmitted to a server we control until you choose to send that email.</p>
+      <h2>How we use it</h2>
+      <p>Information you send us is used to respond to your enquiry and, where relevant, to keep records of our communications with you. We do not sell or share your information with third parties for their own marketing purposes.</p>
+      <h2>Cookies and local storage</h2>
+      <p>This site uses your browser's local storage to remember small preferences, such as whether sound effects are enabled and which audience option you last selected. This information stays on your device and is not sent to us.</p>
+      <h2>Contact</h2>
+      <p>Questions about this policy can be sent to <a href="mailto:contact@kourashisystems.com.au" style="text-decoration:underline;text-underline-offset:4px">contact@kourashisystems.com.au</a>.</p>
+      <p class="fineprint">[This is placeholder text and has not been reviewed by a lawyer. It should not be relied on until it has been.]</p>
+    </div></section>
+  </div>
+
+  <!-- TERMS -->
+  <div class="view" id="v-terms" hidden>
+    <div class="page-head"><div class="wrap">
+      <p class="crumbs"><a href="#/">Home</a><span>/</span>Terms of Service</p>
+      <h1 tabindex="-1">Terms of Service</h1>
+      <p class="lede">The terms that apply to using this website.</p>
+    </div></div>
+    <section class="pad"><div class="wrap legal">
+      <h2>Using this site</h2>
+      <p>This website describes Kourashi Systems and its programs. Content on programs marked as concept or in development is indicative and subject to change without notice. Figures marked "to be confirmed" are not yet settled and should not be relied upon.</p>
+      <h2>No offer</h2>
+      <p>Nothing on this site, including the Investor Relations page, constitutes an offer or solicitation to buy or sell securities, or a recommendation of any kind. Nothing here is legal, financial or technical advice.</p>
+      <h2>Intellectual property</h2>
+      <p>The content, design and branding of this site belong to Kourashi Systems unless otherwise stated. It may not be reproduced without permission.</p>
+      <h2>Changes</h2>
+      <p>These terms may be updated from time to time. Continued use of the site after a change constitutes acceptance of the updated terms.</p>
+      <p class="fineprint">[This is placeholder text and has not been reviewed by a lawyer. It should not be relied on until it has been.]</p>
+    </div></section>
+  </div>
+
   <!-- INVESTORS -->
   <div class="view" id="v-investors" hidden>
     <div class="page-head"><div class="wrap">
-      <p class="crumbs"><a href="#/">Home</a><span>/</span>Investors</p>
-      <h1 tabindex="-1">Investors</h1>
-      <p class="lede">We are building an Australian aerospace and defence company, starting with an aircraft that navigates without help from outside.</p>
+      <p class="crumbs"><a href="#/">Home</a><span>/</span>Investor Relations</p>
+      <h1 tabindex="-1">Investor Relations</h1>
+      <p class="lede">We are building an Australian aerospace and defence company across air, sea, ground and space, starting with an aircraft that navigates without help from outside.</p>
     </div></div>
 
     <section class="pad"><div class="wrap"><div class="split">
@@ -676,7 +883,7 @@ footer .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;
         <span class="tag gap">[THESIS-01]</span>
         <h2 style="margin-bottom:1.4rem">Why this, and why here.</h2>
         <p class="lede">Australia is funding sovereign defence capability, and much of it has to be built locally. The gap we are going after is aircraft that keep working when satellite navigation does not.</p>
-        <p class="lede" style="margin-top:1.1rem">Our first aircraft navigates by the landscape beneath it: a camera pointed at the ground, and software that matches what it sees against the surrounding terrain. The same approach carries into the air and space programs behind it.</p>
+        <p class="lede" style="margin-top:1.1rem">Our first aircraft navigates by the landscape beneath it: a camera pointed at the ground, and software that matches what it sees against the surrounding terrain. The same approach carries into the sea, ground and space programs behind it.</p>
       </div>
       <dl class="facts">
         <div><dt>Stage</dt><dd class="tbc">To be confirmed</dd></div>
@@ -693,7 +900,7 @@ footer .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;
       <h2>Where the company is today.</h2>
       <ol class="steps">
         <li><span class="tag">[NOW-01]</span><h3>One aircraft built.</h3><p>AIR-01 exists. Its navigation approach is the thing the rest of the company is built around.</p></li>
-        <li><span class="tag">[NOW-02]</span><h3>Five programs behind it.</h3><p>Three further air programs and two space programs, including a satellite with a steerable aperture. Scope and dates are being set.</p></li>
+        <li><span class="tag">[NOW-02]</span><h3>Nine programs behind it.</h3><p>Further programs across air, sea, ground and space, including a satellite with a steerable aperture. Scope and dates are being set.</p></li>
         <li><span class="tag">[NOW-03]</span><h3>Team forming.</h3><p>We are hiring across autonomy, software, hardware and flight operations. Leadership is being announced.</p></li>
       </ol>
     </div></section>
@@ -745,17 +952,27 @@ footer .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;
         <h4>[Explore]</h4>
         <ul>
           <li><a href="#/air">Air</a></li>
+          <li><a href="#/sea">Sea</a></li>
+          <li><a href="#/ground">Ground</a></li>
           <li><a href="#/space">Space</a></li>
+          <li><a href="#/mission">Our Mission</a></li>
           <li><a href="#/leadership">Leadership</a></li>
           <li><a href="#/careers">Careers</a></li>
-          <li><a href="#/investors">Investors</a></li>
-          <li><a href="#/news">Updates</a></li>
+          <li><a href="#/investors">Investor Relations</a></li>
+          <li><a href="#/news">Newsroom</a></li>
         </ul>
+      </div>
+      <div>
+        <h4>[Follow]</h4>
+        <div class="socials" id="footerSocials"></div>
       </div>
     </div>
     <div class="base">
       <span>&copy; 2026 Kourashi Systems. Australia.</span>
-      <span>Privacy</span>
+      <span style="display:flex;gap:1.2rem">
+        <a href="#/privacy">Privacy Policy</a>
+        <a href="#/terms">Terms of Service</a>
+      </span>
     </div>
   </div>
 </footer>
@@ -778,6 +995,13 @@ var TBC='To be confirmed';
 /* ================= CONTENT — edit here ================= */
 var STAGES={concept:'Concept',dev:'In development',testing:'In testing',built:'Built'};
 var STAGE_ORDER=['concept','dev','testing','built'];
+var DOMAINS={
+  air:{label:'Air',tagline:'Aircraft and autonomy programs.'},
+  sea:{label:'Sea',tagline:'Surface and subsurface vessels.'},
+  ground:{label:'Ground',tagline:'Ground vehicles and logistics.'},
+  space:{label:'Space',tagline:'Space programs.'}
+};
+var DOMAIN_ORDER=['air','sea','ground','space'];
 
 var projects=[
   {id:'air-01',domain:'air',label:'AIR-01',name:'Visual-navigation aircraft',seed:1,stage:'built',span:[2026,2027],
@@ -856,7 +1080,59 @@ var projects=[
         ['It keeps it current.','Areas are re-imaged so the reference does not go stale.']],
    facts:[['Type','Satellite payload'],['Status','Concept'],['Role','Reference mapping for visual navigation'],['Orbit',TBC],['Sensor',TBC]],
    specs:[['Orbit',TBC],['Sensor',TBC],['Ground resolution',TBC],['Swath',TBC],['Coverage',TBC],['Refresh rate',TBC],['Processing',TBC],['Host bus',TBC]],
-   gallery:['Reference tile','Processing chain','Coverage map']}
+   gallery:['Reference tile','Processing chain','Coverage map']},
+
+  {id:'ground-01',domain:'ground',label:'GROUND-01',name:'Autonomous logistics rover',seed:1,stage:'dev',span:[2027,2029],
+   short:'Moves supplies across ground a driver would not risk crossing.',
+   lede:'An uncrewed ground vehicle that carries supplies between points without a driver in the seat, using the same visual-navigation approach as our aircraft.',
+   problem:'Resupply routes are often the most dangerous part of an operation, and the ones most affected when satellite navigation is denied. A vehicle that can navigate the route itself removes a driver from that exposure.',
+   overview:['A ground program in development. It reuses the terrain-matching navigation approach from AIR-01, adapted for a vehicle that has to deal with roads, obstacles and other traffic rather than open air.',
+             'Payload capacity, range and the vehicle platform itself are still being set.'],
+   how:[['It is given a route.','A start point, an end point and the ground in between.'],
+        ['It watches the ground ahead.','Cameras cover the terrain and obstacles in its path, the same principle as the aircraft looking down.'],
+        ['It adapts as it goes.','The vehicle re-plans around anything the route did not account for.']],
+   facts:[['Type','Uncrewed ground vehicle'],['Status','In development'],['Role','Autonomous resupply'],['Payload',TBC],['Range',TBC]],
+   specs:[['Payload capacity',TBC],['Range',TBC],['Top speed',TBC],['Ground clearance',TBC],['Navigation sensor','Visual, forward and downward-facing'],['Onboard compute',TBC],['Terrain rating',TBC],['Recovery',TBC]],
+   gallery:['Chassis testing','Sensor mast','Route trial']},
+
+  {id:'ground-02',domain:'ground',label:'GROUND-02',name:'Perimeter sentry vehicle',seed:2,stage:'concept',span:[2029,2031],
+   short:'Watches a fixed perimeter without a person in it.',
+   lede:'A small ground vehicle intended to patrol a fixed perimeter on a repeating pattern, watching for anything that should not be there and reporting it back.',
+   problem:'Standing watch over a fenceline or a site boundary is a long, low-value use of a person’s time. It is also one of the easiest jobs to hand to a vehicle that does not get tired or distracted.',
+   overview:['An early-stage ground program, intended to complement fixed cameras with something that can physically move to investigate.',
+             'Sensor package, endurance and the site types it is meant for are all to be confirmed.'],
+   how:[['It holds a pattern.','A repeating patrol route around the perimeter it has been assigned.'],
+        ['It notices what has changed.','Anything new or out of place against what it saw last time is flagged.'],
+        ['It reports back.','An operator is alerted rather than the vehicle acting on its own.']],
+   facts:[['Type','Uncrewed ground vehicle'],['Status','Concept'],['Role','Perimeter patrol'],['Endurance',TBC],['Sensor',TBC]],
+   specs:[['Endurance',TBC],['Top speed',TBC],['Sensor package',TBC],['Weather rating',TBC],['Charging',TBC],['Link',TBC],['Coverage area',TBC]],
+   gallery:['Patrol vehicle','Sensor head','Site trial']},
+
+  {id:'sea-01',domain:'sea',label:'SEA-01',name:'Autonomous surface vessel',seed:1,stage:'concept',span:[2028,2031],
+   short:'Patrols a stretch of water for days without a crew.',
+   lede:'An uncrewed surface vessel intended to hold station or patrol a stretch of coastline for far longer than a crewed boat could reasonably stay out.',
+   problem:'Coastal surveillance across Australian distances means long, uneventful hours on the water. Crewed vessels are expensive to keep out that long, and the job does not need a crew for most of it.',
+   overview:['An early-stage sea program. The vessel is intended to hold a patrol pattern or a fixed station and report back on what it observes.',
+             'Hull form, endurance and sensor fit are still being decided.'],
+   how:[['It holds station or patrols.','A fixed point to watch, or a repeating stretch of water to cover.'],
+        ['It watches the surface and the air above it.','Sensors cover the water around the vessel and the sky above it.'],
+        ['It comes back on its own.','Return to port or a rendezvous point without a crew aboard.']],
+   facts:[['Type','Uncrewed surface vessel'],['Status','Concept'],['Role','Coastal surveillance'],['Endurance',TBC],['Sensor',TBC]],
+   specs:[['Length',TBC],['Displacement',TBC],['Endurance',TBC],['Top speed',TBC],['Sea state rating',TBC],['Sensor package',TBC],['Link',TBC],['Launch and recovery',TBC]],
+   gallery:['Hull concept','Sensor mast','Sea trial']},
+
+  {id:'sea-02',domain:'sea',label:'SEA-02',name:'Seabed mapping vehicle',seed:2,stage:'concept',span:[2029,2031],
+   short:'Maps the seafloor ahead of everything else.',
+   lede:'An uncrewed underwater vehicle that surveys the seafloor, building the maps that everything else in the water depends on having first.',
+   problem:'You cannot navigate, moor or operate safely in water that has not been properly charted, and re-surveying by crewed vessel is slow and expensive to repeat often.',
+   overview:['A concept-stage sea program, and the underwater counterpart to the terrain-mapping work being done for aircraft: it builds a reference rather than acting on one.',
+             'Depth rating, sensor and endurance are all to be confirmed.'],
+   how:[['It surveys a stretch of seafloor.','Sonar or an equivalent sensor builds a picture of what is down there.'],
+        ['It turns that into a map.','Raw survey data is processed into something usable by other vessels and vehicles.'],
+        ['It keeps the map current.','Areas are re-surveyed as conditions change.']],
+   facts:[['Type','Uncrewed underwater vehicle'],['Status','Concept'],['Role','Seafloor survey'],['Depth rating',TBC],['Sensor',TBC]],
+   specs:[['Depth rating',TBC],['Endurance',TBC],['Sensor',TBC],['Survey resolution',TBC],['Data link',TBC],['Launch and recovery',TBC],['Hull material',TBC]],
+   gallery:['Vehicle concept','Sonar array','Survey output']}
 ];
 
 var people=[
@@ -874,22 +1150,25 @@ var roles=[
 ];
 /* Updates — newest first. Replace these with real entries. */
 var NEWS=[
+  {date:'2026-09-18',tag:'GROUND',title:'Ground programs opened',body:'Two ground programs have been opened: an autonomous logistics rover and a perimeter sentry vehicle, both built on the same navigation approach as the aircraft.'},
   {date:'2026-09-12',tag:'AIR-01',title:'First aircraft complete',body:'The AIR-01 airframe is built and in ground testing. The navigation software is running on the aircraft rather than on a bench.'},
   {date:'2026-08-20',tag:'SPACE',title:'Space programs opened',body:'Two space programs have been opened: a satellite with a steerable aperture, and a payload that builds the reference terrain our aircraft navigate against.'},
+  {date:'2026-08-05',tag:'SEA',title:'Sea programs opened',body:'Two sea programs have been opened: an autonomous surface vessel and a seabed mapping vehicle, extending the company beyond air and land.'},
   {date:'2026-07-02',tag:'COMPANY',title:'Hiring across four teams',body:'Roles are open in autonomy, software, hardware and flight operations. Some will require Australian citizenship and a security clearance.'},
   {date:'2026-06-10',tag:'COMPANY',title:'Kourashi Systems formed',body:'The company was formed in Australia to build aircraft and space systems that keep working when satellite navigation does not.'}
 ];
 /* Numbers: set value to a number once confirmed. null renders as TBC. */
 var STATS=[
   {label:'Aircraft built',value:1},
-  {label:'Programs running',value:6},
-  {label:'Test flights',value:null},
-  {label:'Flight hours',value:null}
+  {label:'Programs running',value:10},
+  {label:'Domains active',value:4},
+  {label:'Test flights',value:null}
 ];
 /* Sites: add {name, kind, lon, lat} once locations are confirmed. */
-var SITES=[];
+var SITES=[{name:'Melbourne',kind:'Headquarters',lon:144.9631,lat:-37.8136}];
 var ROADMAP=[2026,2031];
 var EMAILS={general:'contact@kourashisystems.com.au',careers:'careers@kourashisystems.com.au',investors:'investors@kourashisystems.com.au'};
+var SOCIALS=[['LinkedIn','#'],['X','#'],['YouTube','#']];
 
 var byId={};projects.forEach(function(p){byId[p.id]=p});
 function pad2(n){return n<10?'0'+n:''+n}
@@ -978,8 +1257,21 @@ function spaceSVG(s){
   o+='<circle cx="'+X.toFixed(1)+'" cy="'+Y.toFixed(1)+'" r="9" fill="none" stroke="currentColor" stroke-opacity=".5" vector-effect="non-scaling-stroke"/><circle cx="'+X.toFixed(1)+'" cy="'+Y.toFixed(1)+'" r="3.5" fill="currentColor"/>';
   return '<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">'+o+'</svg>';
 }
+function waveSVG(s){
+  var cx=90+s*40,cy=170,o='',k,r;
+  o+='<path d="M0 240 L400 240 L400 300 L0 300 Z" fill="currentColor" fill-opacity=".05"/>';
+  o+='<path d="M0 240 C 90 220, 170 258, 260 236 S 360 214, 400 236" fill="none" stroke="currentColor" stroke-opacity=".55" stroke-width="1.4" vector-effect="non-scaling-stroke"/>';
+  for(k=0;k<4;k++){
+    r=34+k*30;
+    o+='<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="none" stroke="currentColor" stroke-opacity="'+(k===1?.6:.22)+'" stroke-width="1" vector-effect="non-scaling-stroke"/>';
+  }
+  o+='<path d="M'+(cx-42)+' '+cy+' L'+(cx-14)+' '+(cy-16)+' L'+(cx+34)+' '+(cy-16)+' L'+(cx+50)+' '+cy+' L'+(cx+34)+' '+(cy+10)+' L'+(cx-14)+' '+(cy+10)+' Z" fill="currentColor" fill-opacity=".12" stroke="currentColor" stroke-width="1.3" vector-effect="non-scaling-stroke"/>';
+  o+='<circle cx="'+cx+'" cy="'+cy+'" r="3" fill="currentColor"/>';
+  return '<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">'+o+'</svg>';
+}
 function artFor(p,big){
-  if(p.domain==='air')return big?contourSVG(p.seed,900,420,10):contourSVG(p.seed,400,300,9);
+  if(p.domain==='air'||p.domain==='ground')return big?contourSVG(p.seed,900,420,10):contourSVG(p.seed,400,300,9);
+  if(p.domain==='sea')return waveSVG(p.seed);
   return spaceSVG(p.seed);
 }
 
@@ -1040,7 +1332,7 @@ var DragDemo=(function(){
   var stage=$('dragStage'),cv=$('dragCanvas'),ctx=cv&&cv.getContext&&cv.getContext('2d');
   if(!ctx)return{init:function(){}};
   var W=0,H=0,dpr=1,key='desert',L=null,marks=[],px=.5,py=.5,ready=false,hintOff=false;
-  var elM=$('dMatched'),elS=$('dStatus'),elT=$('dTerrain'),elB=$('dBar');
+  var elM=$('dMatched'),elS=$('dStatus'),elT=$('dTerrain'),elB=$('dBar'),lastN=0;
   function fw(){return Math.min(Math.max(W*.3,150),320)}
   function build(){
     W=stage.clientWidth;H=stage.clientHeight;if(!W||!H)return false;
@@ -1078,6 +1370,8 @@ var DragDemo=(function(){
       }
     });
     var conf=Math.min(1,n/4);
+    if(n>lastN&&typeof Sound!=='undefined')Sound.match();
+    lastN=n;
     if(elM)elM.textContent=n;
     if(elS)elS.textContent=n===0?'No fix':(n<2?'Coarse':(n<4?'Fix held':'Fix held (tight)'));
     if(elB)elB.style.width=Math.round(conf*100)+'%';
@@ -1198,6 +1492,7 @@ function Board(el,fixedDomain){
     });
     grid.innerHTML=list.length?list.map(card).join(''):'<p class="board-empty">No programs match these filters.</p>';
     count.textContent='['+list.length+' of '+projects.length+' programs shown'+(state.year<ROADMAP[1]?' \u00B7 started by '+state.year:'')+']';
+    reveal(grid);
   }
   el.addEventListener('click',function(e){
     var b=e.target.closest('.chip');if(!b)return;
@@ -1222,11 +1517,12 @@ function initRoadmap(el){
       return '<a class="rm-row '+p.domain+'" href="#/project/'+p.id+'">'+
         '<span class="rm-lbl"><span class="tag">['+p.label+']</span><b>'+esc(p.name)+'</b></span>'+
         '<span class="rm-track">'+
-          '<span class="rm-bar'+(p.stage==='built'?' solid':'')+'" style="grid-column:'+(a+1)+' / '+(b+1)+'">'+
+          '<span class="rm-bar reveal'+(p.stage==='built'?' solid':'')+'" style="grid-column:'+(a+1)+' / '+(b+1)+'">'+
             '<i>'+esc(STAGES[p.stage])+'</i></span>'+
         '</span></a>';
     }).join('')+'</div>'+
     '<p class="fineprint">[Dates are indicative and will move as programs are confirmed]</p>';
+  reveal(el);
 }
 
 /* ---------------- News ---------------- */
@@ -1381,6 +1677,59 @@ function initAudience(){
   }
   btns.addEventListener('click',function(e){var b=e.target.closest('[data-k]');if(b)show(b.getAttribute('data-k'),true)});
   try{var saved=localStorage.getItem('ks-aud');if(saved)show(saved,false)}catch(e){}
+}
+
+/* ---------------- Sound ---------------- */
+var Sound=(function(){
+  var ctx=null,master=null,enabled=true;
+  try{enabled=localStorage.getItem('ks-sound')!=='off'}catch(e){}
+  function ensure(){
+    if(ctx)return ctx;
+    var AC=window.AudioContext||window.webkitAudioContext;if(!AC)return null;
+    ctx=new AC();master=ctx.createGain();master.gain.value=.16;master.connect(ctx.destination);
+    return ctx;
+  }
+  function tone(freq,dur,type,gainMul,glideTo){
+    if(!enabled)return;
+    var c=ensure();if(!c)return;
+    if(c.state==='suspended')c.resume();
+    var t0=c.currentTime,osc=c.createOscillator(),g=c.createGain();
+    osc.type=type||'sine';osc.frequency.setValueAtTime(freq,t0);
+    if(glideTo)osc.frequency.exponentialRampToValueAtTime(glideTo,t0+dur);
+    g.gain.setValueAtTime(0,t0);g.gain.linearRampToValueAtTime((gainMul||1),t0+.006);
+    g.gain.exponentialRampToValueAtTime(.0001,t0+dur);
+    osc.connect(g);g.connect(master);osc.start(t0);osc.stop(t0+dur+.02);
+  }
+  return{
+    click:function(){tone(720,.05,'square',.5)},
+    toggle:function(){tone(520,.06,'square',.5,760)},
+    confirm:function(){tone(500,.09,'sine',.6,900)},
+    match:function(){tone(880,.07,'sine',.5,1180)},
+    open:function(){tone(600,.05,'triangle',.5,340)},
+    setEnabled:function(v){enabled=v;try{localStorage.setItem('ks-sound',v?'on':'off')}catch(e){}},
+    isEnabled:function(){return enabled}
+  };
+})();
+function initSound(){
+  var btn=$('sndBtn');if(!btn)return;
+  btn.setAttribute('aria-pressed',String(Sound.isEnabled()));
+  btn.addEventListener('click',function(){
+    var v=!Sound.isEnabled();Sound.setEnabled(v);btn.setAttribute('aria-pressed',String(v));
+    if(v)Sound.confirm();
+  });
+  document.addEventListener('click',function(e){
+    if(e.target.closest('.sndbtn'))return;
+    var t=e.target.closest('.btn,.chip,.tb,.kbtn,.card,.aud button,.hot,.navdrop-menu a,.roles a');
+    if(t)Sound.click();
+  },true);
+}
+
+/* ---------------- Footer socials ---------------- */
+function initSocials(){
+  var el=$('footerSocials');if(!el)return;
+  el.innerHTML=SOCIALS.map(function(s){
+    return '<span class="social">'+esc(s[0])+'<span class="soon">Coming soon</span></span>';
+  }).join('');
 }
 
 /* ---------------- 3D aircraft viewer ---------------- */
@@ -1566,7 +1915,7 @@ function statusTrack(p){
   }).join('')+'</ol>';
 }
 function projectView(p){
-  var dn=p.domain==='air'?'Air':'Space',idx=projects.indexOf(p),more=[],k;
+  var dn=DOMAINS[p.domain].label,idx=projects.indexOf(p),more=[],k;
   for(k=1;k<=3;k++)more.push(projects[(idx+k)%projects.length]);
   var first=p.id==='air-01';
   var visual=first?'<div class="panel">'+AIRCRAFT+'</div>':'<div class="art big"><span class="tag">['+p.label+']</span>'+artFor(p,true)+'</div>';
@@ -1663,11 +2012,16 @@ var PAL=(function(){
   var index=[
     {k:'Page',n:'Home',d:'Kourashi Systems',h:'#/'},
     {k:'Page',n:'Air',d:'Aircraft and autonomy',h:'#/air'},
+    {k:'Page',n:'Sea',d:'Surface and subsurface vessels',h:'#/sea'},
+    {k:'Page',n:'Ground',d:'Ground vehicles and logistics',h:'#/ground'},
     {k:'Page',n:'Space',d:'Space programs',h:'#/space'},
+    {k:'Page',n:'Our Mission',d:'Why the company exists',h:'#/mission'},
     {k:'Page',n:'Leadership',d:'The team',h:'#/leadership'},
     {k:'Page',n:'Careers',d:'Open roles',h:'#/careers'},
-    {k:'Page',n:'Investors',d:'The company and the raise',h:'#/investors'},
-    {k:'Page',n:'Updates',d:'Company news',h:'#/news'},
+    {k:'Page',n:'Investor Relations',d:'The company and the raise',h:'#/investors'},
+    {k:'Page',n:'Newsroom',d:'Company news',h:'#/news'},
+    {k:'Page',n:'Privacy Policy',d:'How we handle data',h:'#/privacy'},
+    {k:'Page',n:'Terms of Service',d:'Terms for using this site',h:'#/terms'},
     {k:'Demo',n:'Move the camera',d:'Interactive position fix',h:'#/?try'},
     {k:'Demo',n:'Aim the orbital aperture',d:'Interactive satellite',h:'#/project/space-01'},
     {k:'Section',n:'Roadmap',d:'Every program by year',h:'#/?roadmap'},
@@ -1691,6 +2045,7 @@ var PAL=(function(){
   }
   function open(){
     lastFocus=document.activeElement;pal.classList.add('open');input.value='';render('');
+    if(typeof Sound!=='undefined')Sound.open();
     setTimeout(function(){input.focus()},20);
   }
   function close(){pal.classList.remove('open');if(lastFocus&&lastFocus.focus)lastFocus.focus()}
@@ -1918,7 +2273,47 @@ var Hero=(function(){
   if(!ctx)return{start:function(){},stop:function(){}};
   var W=0,H=0,dpr=1,active=false,visible=true,raf=0,t0=performance.now(),lastCount=-1;
   var NX=52,NY=40,AX=7.2,DEPTH=17,EX=0,EY=-2.05,EZ=1.28,PITCH=0.30,CP=Math.cos(PITCH),SP=Math.sin(PITCH),FOC=600;
-  var AY=3.5,ALT=1.15,HW=1.25,HD=0.95;
+  var AY=3.5,ALT=1.15,HW=1.25,HD=0.95,ACC='#E8FF3D';
+  function readAccent(){
+    var v=getComputedStyle(document.documentElement).getPropertyValue('--accent');
+    if(v&&v.trim())ACC=v.trim();
+  }
+  function hexA(hex,a){
+    var h=hex.replace('#','');if(h.length===3)h=h.split('').map(function(c){return c+c}).join('');
+    var n=parseInt(h,16);return 'rgba('+((n>>16)&255)+','+((n>>8)&255)+','+(n&255)+','+a+')';
+  }
+  function drawGlyph(cx,cy,s,ang,alpha,color){
+    ctx.save();ctx.globalAlpha=alpha;ctx.translate(cx,cy);ctx.rotate(ang);
+    ctx.fillStyle=color;ctx.strokeStyle=color;ctx.lineWidth=Math.max(1,s*0.03);
+    ctx.beginPath();
+    ctx.moveTo(s*1.3,0);ctx.lineTo(-s*0.6,-s*0.9);ctx.lineTo(-s*0.15,-s*0.18);
+    ctx.lineTo(-s*0.85,-s*0.08);ctx.lineTo(-s*0.85,s*0.08);ctx.lineTo(-s*0.15,s*0.18);
+    ctx.lineTo(-s*0.6,s*0.9);ctx.closePath();ctx.fill();
+    ctx.restore();
+  }
+  /* flyby: an aircraft rushing from the horizon toward the viewer, on a loop */
+  function flyby(t){
+    var period=6.4,phase=(t%period)/period,ease=phase*phase*phase;
+    var farY=DEPTH*0.92,nearY=EY-1.0,y=farY+(nearY-farY)*ease;
+    var x=0.6*Math.sin(t*0.15+1.4),z=ALT*0.7;
+    var dz=z-EZ,dy=y-EY,f=dy*CP-dz*SP;
+    if(f<=0.04)return;
+    var k=FOC/f,sx=W/2+(x-EX)*k,sy=H*0.54-(dy*SP+dz*CP)*k;
+    var size=Math.min(Math.max(10,k*0.11),Math.max(W,H)*1.15);
+    var fadeIn=Math.min(1,phase/0.05),fadeOut=Math.min(1,Math.max(0,(f-0.04)/0.55));
+    var alpha=Math.min(fadeIn,fadeOut);if(alpha<=0.015)return;
+    /* speed trail */
+    var trail=4,i;
+    for(i=trail;i>=1;i--){
+      var ph2=Math.max(0,phase-i*0.014),ea2=ph2*ph2*ph2,y2=farY+(nearY-farY)*ea2;
+      var x2=0.6*Math.sin((t-i*0.09)*0.15+1.4),dz2=z-EZ,dy2=y2-EY,f2=dy2*CP-dz2*SP;
+      if(f2<=0.04)continue;
+      var k2=FOC/f2,sx2=W/2+(x2-EX)*k2,sy2=H*0.54-(dy2*SP+dz2*CP)*k2;
+      var s2=Math.min(Math.max(10,k2*0.11),Math.max(W,H)*1.15);
+      drawGlyph(sx2,sy2,s2,Math.PI/2,alpha*(1-i/trail)*0.35,hexA(ACC,1));
+    }
+    drawGlyph(sx,sy,size,Math.PI/2,alpha,ACC);
+  }
   var names=['Ridgeline','Creek bend','Dam wall','Track junction','Homestead','Salt pan','Fence line','Quarry','Water tank','Rock outcrop'];
   var lms=names.map(function(n,i){return{n:'['+n.toUpperCase()+']',x:(((i*2.7)%5.4)-2.7)+(i%3-1)*0.5,b:(i*1.63)%DEPTH}});
   var xs=[],ys=[],zs=[],px=[],py=[],ins=[];
@@ -1937,6 +2332,7 @@ var Hero=(function(){
   function size(){
     W=hero.clientWidth;H=hero.clientHeight;if(!W||!H)return false;
     dpr=Math.min(window.devicePixelRatio||1,2);cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);
+    readAccent();
     FOC=Math.max(320,Math.min(W*0.52,H*0.95));
     NX=W<700?34:52;NY=W<700?28:40;
     xs=[];for(var i=0;i<=NX;i++)xs.push(-AX+i*(2*AX/NX));
@@ -2031,6 +2427,7 @@ var Hero=(function(){
       }
     });
     if(count!==lastCount&&readout){readout.textContent=count;lastCount=count}
+    flyby(t);
   }
   function loop(now){if(!active){raf=0;return}if(visible)draw(now);raf=requestAnimationFrame(loop)}
   function start(){
@@ -2070,8 +2467,10 @@ function ensure(name){
     initRoadmap($('roadmap'));initNewsHome($('newsHome'));initForm();
   });
   if(name==='air')fillOnce('air',function(){Board($('airBoard'),'air')});
+  if(name==='sea')fillOnce('sea',function(){Board($('seaBoard'),'sea')});
+  if(name==='ground')fillOnce('ground',function(){Board($('groundBoard'),'ground')});
   if(name==='space')fillOnce('space',function(){
-    $('satHome').innerHTML=satBlock('satDemo','Orbital aperture — aim it');
+    $('satHome').innerHTML=satBlock('satDemo','Orbital aperture \u2014 aim it');
     initSat($('v-space'));
     Board($('spaceBoard'),'space');
   });
@@ -2079,14 +2478,10 @@ function ensure(name){
   if(name==='news')fillOnce('news',function(){initNewsPage($('newsList'))});
   if(name==='investors')fillOnce('inv',function(){
     $('invCards').innerHTML=[byId['air-01'],byId['space-01']].map(card).join('')+
-      '<a class="card" href="#/careers"><div class="art"><span class="tag">[TEAM]</span>'+contourSVG(5,400,300,9)+
+      '<a class="card reveal" href="#/careers"><div class="art"><span class="tag">[TEAM]</span>'+contourSVG(5,400,300,9)+
       '</div><div class="meta"><div class="name">Who we are hiring</div><p class="desc">Where the first money goes.</p></div></a>';
+    reveal($('invCards'));
     initRoadmap($('invRoadmap'));
-  });
-  if(name==='investors')fillOnce('inv',function(){
-    $('invCards').innerHTML=[byId['air-01'],byId['space-01']].map(card).join('')+
-      '<a class="card" href="#/careers"><div class="art"><span class="tag">[TEAM]</span>'+contourSVG(5,400,300,9)+
-      '</div><div class="meta"><div class="name">Who we are hiring</div><p class="desc">Where the first money goes.</p></div></a>';
   });
   if(name==='leadership')fillOnce('people',function(){
     $('people').innerHTML=people.map(function(p,i){
@@ -2098,10 +2493,11 @@ function parse(){
   var h=location.hash;if(h.indexOf('#/')!==0)return{name:'home'};
   var p=h.slice(2).split('/');
   if(p[0]==='project'&&p[1])return{name:'project',id:p[1]};
-  if(['air','space','leadership','careers','investors','news'].indexOf(p[0])>-1)return{name:p[0]};
+  if(['air','sea','ground','space','leadership','careers','investors','news','mission','privacy','terms'].indexOf(p[0])>-1)return{name:p[0]};
   return{name:'home'};
 }
-var titles={home:'Kourashi Systems',air:'Air',space:'Space',leadership:'Leadership',careers:'Careers',investors:'Investors',news:'Updates'};
+var titles={home:'Kourashi Systems',air:'Air',sea:'Sea',ground:'Ground',space:'Space',leadership:'Leadership',careers:'Careers',investors:'Investor Relations',news:'Newsroom',mission:'Our Mission',privacy:'Privacy Policy',terms:'Terms of Service'};
+var THEME_DOMAINS={air:1,sea:1,ground:1,space:1};
 function render(){
   var r=parse(),view,title,navKey=r.name;
   Array.prototype.forEach.call(document.querySelectorAll('.view'),function(v){v.hidden=true});
@@ -2110,10 +2506,9 @@ function render(){
     view=$('v-project');view.innerHTML=projectView(p);title=p.label;navKey=p.domain;
   }else{ensure(r.name);view=$('v-'+r.name);title=titles[r.name]}
   view.hidden=false;
-  var isSpace=(r.name==='space')||(r.name==='project'&&byId[r.id]&&byId[r.id].domain==='space');
-  view.classList.toggle('space',!!isSpace);
-  nav.classList.toggle('light',!!isSpace);
-  document.documentElement.style.setProperty('--page-bg',isSpace?'#FFFFFF':'');
+  var themeDomain=THEME_DOMAINS[r.name]?r.name:(r.name==='project'&&byId[r.id]?byId[r.id].domain:null);
+  ['air','sea','ground','space'].forEach(function(d){view.classList.toggle(d,themeDomain===d)});
+  nav.classList.toggle('light',themeDomain==='space');
   if(!reduce){view.style.animation='none';void view.offsetWidth;view.style.animation=''}
   if(r.name==='project'){initCompare(view);initStory(view);initViewer(view);initSat(view)}
   reveal(view);
@@ -2143,6 +2538,24 @@ document.addEventListener('click',function(e){
   scrollToSel(sel);
 });
 window.addEventListener('hashchange',render);
+
+/* ---------------- Nav dropdown ---------------- */
+(function(){
+  var dd=$('progDrop');if(!dd)return;
+  var btn=dd.querySelector('button');
+  function close(){dd.setAttribute('data-open','false');btn.setAttribute('aria-expanded','false')}
+  function open(){dd.setAttribute('data-open','true');btn.setAttribute('aria-expanded','true')}
+  btn.addEventListener('click',function(e){
+    e.stopPropagation();
+    dd.getAttribute('data-open')==='true'?close():open();
+  });
+  document.addEventListener('click',function(e){if(!dd.contains(e.target))close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+  dd.querySelectorAll('a').forEach(function(a){a.addEventListener('click',close)});
+})();
+
+initSound();
+initSocials();
 render();
 })();
 
