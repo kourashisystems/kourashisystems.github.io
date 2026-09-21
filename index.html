@@ -830,11 +830,12 @@ footer .base a:hover{opacity:1;text-decoration:underline;text-underline-offset:3
       <h1 tabindex="-1">Careers</h1>
       <p class="lede">We are hiring engineers and operators to work across our air, sea, ground and space programs.</p>
     </div></div>
-    <section class="pad"><div class="wrap">
-      <div class="chips" id="roleFilter" role="group" aria-label="Filter roles by team" style="margin-bottom:1.6rem"></div>
-      <div id="roleList"></div>
-      <p class="count-line" id="roleCount"></p>
-      <p class="note">Some roles may require Australian citizenship and the ability to obtain a security clearance.</p>
+    <section class="pad"><div class="wrap" id="careersRedirect" style="max-width:640px">
+      <span class="tag gap">[REDIRECT]</span>
+      <h2 style="margin-bottom:1rem">Our roles now live on our careers site.</h2>
+      <p class="lede" style="margin-bottom:2rem">Full role details, locations and applications are handled at our dedicated careers site. Taking you there now.</p>
+      <a class="btn btn-dark" data-url href="https://claude.ai/artifact/YTt5tpjnHgzb9cLnLy2mRA" style="font-family:var(--mono)">careers.kourashisystems.com.au</a>
+      <p class="fineprint" style="margin-top:1.5rem">[If you are not redirected automatically, use the link above]</p>
     </div></section>
   </div>
 
@@ -1021,50 +1022,6 @@ footer .base a:hover{opacity:1;text-decoration:underline;text-underline-offset:3
     </div>
   </div>
 </footer>
-
-<div class="modal-wrap" id="applyModal" role="dialog" aria-modal="true" aria-label="Job application">
-  <div class="modal">
-    <div class="modal-head">
-      <div><span class="tag gap">[APPLICATION]</span><h3>Apply \u2014 <span id="applyRole">Role</span></h3></div>
-      <button class="modal-close" type="button" aria-label="Close">&times;</button>
-    </div>
-    <div class="modal-body">
-      <form id="applyForm" novalidate>
-        <input type="hidden" name="role" value="">
-        <div class="form">
-          <label><span class="lab">[Name]</span><input name="name" type="text" autocomplete="name" required></label>
-          <label><span class="lab">[Email]</span><input name="email" type="email" autocomplete="email" required></label>
-          <label><span class="lab">[Phone]</span><input name="phone" type="tel" autocomplete="tel"></label>
-          <label><span class="lab">[LinkedIn / portfolio]</span><input name="link" type="text" placeholder="https://"></label>
-          <label><span class="lab">[Right to work]</span>
-            <select name="rtw">
-              <option>Australian citizen</option>
-              <option>Australian permanent resident</option>
-              <option>Visa holder</option>
-              <option>Other</option>
-            </select>
-          </label>
-          <label><span class="lab">[Clearance held]</span>
-            <select name="clr">
-              <option>None</option>
-              <option>Baseline</option>
-              <option>NV1</option>
-              <option>NV2</option>
-              <option>Other</option>
-            </select>
-          </label>
-          <label class="full"><span class="lab">[Cover note]</span><textarea name="cover" placeholder="Why this role, and what you'd bring to it"></textarea></label>
-          <div class="form-actions">
-            <button class="btn btn-dark" type="submit">Send application</button>
-            <button class="btn" type="button" data-copy>Copy instead</button>
-            <span class="form-note" id="applyNote"></span>
-          </div>
-        </div>
-      </form>
-      <p class="fineprint" style="margin-top:1.2rem">[This opens a message in your own email app \u2014 attach your resume there before sending. No file leaves your device through this form.]</p>
-    </div>
-  </div>
-</div>
 
 <div class="pal" id="pal" role="dialog" aria-modal="true" aria-label="Search Kourashi Systems">
   <div class="box">
@@ -1256,42 +1213,6 @@ var people=[
   {name:'Name to come',role:'Head of Air Programs'},
   {name:'Name to come',role:'Head of Space Programs'}
 ];
-var roles=[
-  {label:'ROLE-01',title:'Computer vision engineer',team:'Autonomy',location:'Melbourne, VIC',type:'Full-time',clearance:'Baseline',
-   summary:'Build the terrain-recognition software that lets our vehicles work out where they are without a satellite fix.',
-   responsibilities:['Develop and test the visual terrain-matching pipeline used across our air, sea and ground programs','Improve recognition performance in poor light, weather and degraded imagery','Work closely with flight test to diagnose real-world navigation failures','Bring research-grade computer vision techniques into production code that flies']},
-  {label:'ROLE-02',title:'Flight software engineer',team:'Software',location:'Melbourne, VIC',type:'Full-time',clearance:'Baseline',
-   summary:'Write the software that flies the aircraft: flight control, navigation integration and safety systems.',
-   responsibilities:['Develop flight control and navigation software for uncrewed aircraft','Integrate the visual-navigation stack with flight controllers','Build simulation and hardware-in-the-loop test environments','Support flight test with rapid debugging and fixes']},
-  {label:'ROLE-03',title:'Airframe and structures engineer',team:'Hardware',location:'Melbourne, VIC',type:'Full-time',clearance:'None required',
-   summary:'Design and refine the physical airframes our aircraft programs are built around.',
-   responsibilities:['Design airframe structures for manufacturability and flight loads','Run structural analysis and coordinate physical testing','Work with manufacturing partners on tooling and production','Support the transition from concept airframes to flight articles']},
-  {label:'ROLE-04',title:'Flight test lead',team:'Operations',location:'Regional Victoria',type:'Full-time',clearance:'NV1',
-   summary:'Plan and run flight test campaigns for our aircraft programs, from first flight through to operational testing.',
-   responsibilities:['Plan and execute flight test campaigns against defined test objectives','Own airworthiness and safety-of-flight sign-off for test aircraft','Coordinate range bookings, safety cases and regulatory approvals','Report results back into the engineering team for the next iteration']},
-  {label:'ROLE-05',title:'Guidance and controls engineer',team:'Autonomy',location:'Melbourne, VIC',type:'Full-time',clearance:'Baseline',
-   summary:'Design the control loops and guidance logic that keep our vehicles on their intended path.',
-   responsibilities:['Design guidance, navigation and control algorithms across air, sea and ground platforms','Tune controllers against simulation and real flight or vehicle data','Work with the vision team to fuse terrain-matching output into the control loop','Validate control performance across a range of operating conditions']},
-  {label:'ROLE-06',title:'Maritime systems engineer',team:'Sea',location:'Melbourne, VIC',type:'Full-time',clearance:'Baseline',
-   summary:'Lead systems engineering for our uncrewed surface and underwater vehicle programs.',
-   responsibilities:['Define system architecture for uncrewed surface and underwater vehicles','Coordinate hull, power, sensor and communications subsystems','Plan and support sea trials','Work with the autonomy team on marine-specific navigation and control']},
-  {label:'ROLE-07',title:'Ground robotics engineer',team:'Ground',location:'Melbourne, VIC',type:'Full-time',clearance:'Baseline',
-   summary:'Build the uncrewed ground vehicles behind our logistics and perimeter programs.',
-   responsibilities:['Design and integrate ground vehicle platforms from chassis to sensors','Adapt the visual-navigation stack to road and off-road environments','Run field trials across a range of terrain types','Work with manufacturing partners on vehicle production']},
-  {label:'ROLE-08',title:'Spacecraft systems engineer',team:'Space',location:'Melbourne, VIC',type:'Full-time',clearance:'NV1',
-   summary:'Work across our satellite programs, from concept through to spacecraft bus and payload integration.',
-   responsibilities:['Define spacecraft bus and payload architecture for early-stage space programs','Coordinate with launch and ground segment providers','Support mission design, orbit selection and payload trade studies','Work with the ground segment team on tasking and downlink operations']},
-  {label:'ROLE-09',title:'Systems security engineer',team:'Software',location:'Melbourne, VIC',type:'Full-time',clearance:'NV1',
-   summary:'Own the security posture of software running on platforms operating in contested environments.',
-   responsibilities:['Assess and harden onboard and ground software against a range of threats','Lead secure-by-design practices across engineering teams','Run security testing against flight and ground software','Work with Defence stakeholders on accreditation requirements']},
-  {label:'ROLE-10',title:'Business development manager',team:'Business',location:'Melbourne, VIC',type:'Full-time',clearance:'None required',
-   summary:'Build relationships with Defence and industry stakeholders across our air, sea, ground and space programs.',
-   responsibilities:['Develop and manage relationships with Defence and industry partners','Support capture of new program opportunities across all four domains','Coordinate proposal development with the engineering team','Represent Kourashi Systems at industry events and briefings']},
-  {label:'ROLE-11',title:"Don't see your role?",team:'General',location:'Melbourne, VIC',type:'Varies',clearance:TBC,
-   sub:'Send us a general application',
-   summary:'We are growing quickly across four domains. If your background fits the company but not a specific listing, we would still like to hear from you.',
-   responsibilities:['Tell us what you do and where you think you would fit','We will route your application to the closest matching team']}
-];
 /* Updates — newest first. Replace these with real entries. */
 var NEWS=[
   {date:'2026-09-18',tag:'GROUND',title:'Ground programs opened',body:'Two ground programs have been opened: an autonomous logistics rover and a perimeter sentry vehicle, both built on the same navigation approach as the aircraft.'},
@@ -1332,6 +1253,8 @@ var SITES=[
 ];
 var ROADMAP=[2026,2031];
 var EMAILS={general:'contact@kourashisystems.com.au',careers:'careers@kourashisystems.com.au',investors:'investors@kourashisystems.com.au'};
+var CAREERS_URL='https://claude.ai/artifact/YTt5tpjnHgzb9cLnLy2mRA';
+var CAREERS_LABEL='careers.kourashisystems.com.au';
 var SOCIALS=[['LinkedIn','#'],['X','#'],['YouTube','#']];
 
 var byId={};projects.forEach(function(p){byId[p.id]=p});
@@ -1808,91 +1731,13 @@ function initForm(){
   });
 }
 
-/* ---------------- Careers: full listings + application modal ---------------- */
-function roleCard(r,i){
-  var badges=[r.location,r.type,(r.clearance&&r.clearance!==TBC?r.clearance+' clearance':null)].filter(Boolean);
-  return '<div class="job" id="job-'+i+'"><div class="job-head" data-toggle="'+i+'">'+
-    '<div><span class="tag">['+r.label+']</span><h3>'+esc(r.title)+'</h3>'+
-      '<div class="job-meta">'+badges.map(function(b){return '<span>'+esc(b)+'</span>'}).join('')+'</div></div>'+
-    '<button class="job-toggle" type="button" aria-expanded="false" aria-controls="job-body-'+i+'">Details'+
-      '<svg viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>'+
-    '</div>'+
-    '<div class="job-body" id="job-body-'+i+'"><div class="job-body-in">'+
-      '<p>'+esc(r.summary)+'</p>'+
-      (r.responsibilities?'<ul>'+r.responsibilities.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul>':'')+
-      '<div class="job-actions">'+
-        '<button class="btn btn-dark" type="button" data-apply="'+esc(r.title)+'">'+(r.sub?'Send application':'Apply for this role')+'</button>'+
-        '<a class="btn" href="mailto:'+EMAILS.careers+'?subject='+encodeURIComponent(r.title)+'">Email instead</a>'+
-      '</div>'+
-    '</div></div></div>';
-}
-function initCareers(){
-  var wrap=$('roleFilter'),list=$('roleList'),count=$('roleCount'),cur='All';
-  var teams=['All'].concat(roles.map(function(r){return r.team}).filter(function(v,i,a){return a.indexOf(v)===i}));
-  wrap.innerHTML=teams.map(function(t,i){return '<button class="chip" type="button" data-v="'+esc(t)+'" aria-pressed="'+(i===0)+'">'+esc(t)+'</button>'}).join('');
-  function apply(){
-    var l=roles.filter(function(r){return cur==='All'||r.team===cur});
-    list.innerHTML=l.map(roleCard).join('');
-    count.textContent='['+l.length+' of '+roles.length+' roles shown]';
-  }
-  wrap.addEventListener('click',function(e){
-    var b=e.target.closest('.chip');if(!b)return;
-    Array.prototype.forEach.call(wrap.querySelectorAll('.chip'),function(c){c.setAttribute('aria-pressed',String(c===b))});
-    cur=b.getAttribute('data-v');apply();
-  });
-  list.addEventListener('click',function(e){
-    var ap=e.target.closest('[data-apply]');
-    if(ap){openApply(ap.getAttribute('data-apply'));return}
-    var h=e.target.closest('.job-head');if(!h)return;
-    var job=h.closest('.job'),open=job.classList.toggle('open');
-    h.querySelector('.job-toggle').setAttribute('aria-expanded',String(open));
-  });
-  apply();
-}
-
-/* ---------------- Application modal ---------------- */
-function openApply(role){
-  var m=$('applyModal');if(!m)return;
-  $('applyRole').textContent=role;
-  m.querySelector('[name=role]').value=role;
-  m.classList.add('open');
-  document.body.style.overflow='hidden';
-  var f=m.querySelector('#applyForm');if(f)f.reset();
-  m.querySelector('[name=role]').value=role;
-  setTimeout(function(){var n=m.querySelector('[name=name]');if(n)n.focus()},20);
-}
-function closeApply(){
-  var m=$('applyModal');if(!m)return;
-  m.classList.remove('open');document.body.style.overflow='';
-}
-function initApplyModal(){
-  var m=$('applyModal');if(!m||m.dataset.on)return;m.dataset.on='1';
-  m.addEventListener('click',function(e){if(e.target===m)closeApply()});
-  m.querySelector('.modal-close').addEventListener('click',closeApply);
-  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&m.classList.contains('open'))closeApply()});
-  var f=m.querySelector('#applyForm'),note=$('applyNote');
-  function compose(){
-    var d=new FormData(f);
-    var body='Applying for: '+(d.get('role')||'')+'\n\nName: '+(d.get('name')||'')+'\nEmail: '+(d.get('email')||'')+
-      '\nPhone: '+(d.get('phone')||'')+'\nLinkedIn / portfolio: '+(d.get('link')||'')+
-      '\nRight to work: '+(d.get('rtw')||'')+'\nClearance held: '+(d.get('clr')||'')+
-      '\n\nCover note:\n'+(d.get('cover')||'')+
-      '\n\n[Attach your resume to this email before sending]';
-    return{subject:'Application — '+(d.get('role')||'General'),body:body};
-  }
-  f.addEventListener('submit',function(e){
-    e.preventDefault();
-    var msg=compose();
-    location.href='mailto:'+EMAILS.careers+'?subject='+encodeURIComponent(msg.subject)+'&body='+encodeURIComponent(msg.body);
-    note.textContent='[Opening your email app — attach your resume before sending. If nothing happens, use copy instead]';
-  });
-  m.querySelector('[data-copy]').addEventListener('click',function(){
-    var msg=compose(),text=EMAILS.careers+'\n'+msg.subject+'\n\n'+msg.body;
-    if(navigator.clipboard&&navigator.clipboard.writeText){
-      navigator.clipboard.writeText(text).then(function(){note.textContent='[Copied — paste it into an email to '+EMAILS.careers+' with your resume attached]'},
-        function(){note.textContent='[Copy failed — email '+EMAILS.careers+' directly]'});
-    }else note.textContent='[Email '+EMAILS.careers+' directly]';
-  });
+/* ---------------- Careers redirect ---------------- */
+function initCareersRedirect(){
+  var el=$('careersRedirect');if(!el||el.dataset.on)return;el.dataset.on='1';
+  var label=el.querySelector('[data-url]');if(label){label.textContent=CAREERS_LABEL;label.href=CAREERS_URL}
+  setTimeout(function(){
+    if(location.hash==='#/careers')window.location.href=CAREERS_URL;
+  },900);
 }
 
 /* ---------------- Counters ---------------- */
@@ -2072,6 +1917,12 @@ function initViewer(root){
   var cv=el.querySelector('canvas'),ctx=cv.getContext('2d');if(!ctx)return;
   var mesh=buildMesh(),yaw=-0.7,pitch=-0.5,auto=!reduce,W=0,H=0,dpr=1,raf=0,vis=true;
   var card=el.querySelector('.hot-card'),hots=Array.prototype.slice.call(el.querySelectorAll('.hot')),sel=-1;
+  var INK=[255,255,255];
+  function readTheme(){
+    var m=/(\d+)[,\s]+(\d+)[,\s]+(\d+)/.exec(getComputedStyle(el).color||'');
+    if(m)INK=[+m[1],+m[2],+m[3]];
+  }
+  function ink(a){return 'rgba('+INK[0]+','+INK[1]+','+INK[2]+','+a+')'}
   function proj(p){
     var cy=Math.cos(yaw),sy=Math.sin(yaw),cp=Math.cos(pitch),sp=Math.sin(pitch);
     var x=p[0]*cy-p[1]*sy,y=p[0]*sy+p[1]*cy,z=p[2];
@@ -2081,13 +1932,14 @@ function initViewer(root){
   }
   function size(){
     W=el.clientWidth;H=el.clientHeight;if(!W||!H)return false;
-    dpr=Math.min(window.devicePixelRatio||1,2);cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);return true;
+    dpr=Math.min(window.devicePixelRatio||1,2);cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);
+    readTheme();return true;
   }
   function draw(){
     if(!W)return;
     ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
     /* ground grid */
-    ctx.strokeStyle='rgba(255,255,255,.10)';ctx.lineWidth=1;
+    ctx.strokeStyle=ink(.10);ctx.lineWidth=1;
     var g,i;
     for(i=-3;i<=3;i++){
       ctx.beginPath();
@@ -2102,19 +1954,19 @@ function initViewer(root){
     /* top surface fill */
     ctx.beginPath();
     mesh.top.forEach(function(p,n){var q=proj(p);n?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1])});
-    ctx.closePath();ctx.fillStyle='rgba(255,255,255,.07)';ctx.fill();
+    ctx.closePath();ctx.fillStyle=ink(.07);ctx.fill();
     /* edges, depth-shaded */
     mesh.edges.forEach(function(e){
       var a=proj(e[0]),b=proj(e[1]),z=(a[2]+b[2])/2;
-      ctx.strokeStyle='rgba(255,255,255,'+(0.45+0.45*Math.min(1,Math.max(0,(z+.8)/1.6))).toFixed(2)+')';
+      ctx.strokeStyle=ink((0.45+0.45*Math.min(1,Math.max(0,(z+.8)/1.6))).toFixed(2));
       ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();
     });
     /* camera cone from the belly */
     var c0=proj(HOTS[0].p),f1=proj([0.15+0.5,0.5,-0.55]),f2=proj([0.15-0.5,0.5,-0.55]),f3=proj([0.15-0.5,-0.5,-0.55]),f4=proj([0.15+0.5,-0.5,-0.55]);
-    ctx.strokeStyle='rgba(255,255,255,.35)';ctx.setLineDash([4,4]);ctx.lineWidth=1;
+    ctx.strokeStyle=ink(.35);ctx.setLineDash([4,4]);ctx.lineWidth=1;
     [f1,f2,f3,f4].forEach(function(f){ctx.beginPath();ctx.moveTo(c0[0],c0[1]);ctx.lineTo(f[0],f[1]);ctx.stroke()});
     ctx.setLineDash([]);
-    ctx.strokeStyle='rgba(255,255,255,.5)';ctx.beginPath();
+    ctx.strokeStyle=ink(.5);ctx.beginPath();
     [f1,f2,f3,f4].forEach(function(f,n){n?ctx.lineTo(f[0],f[1]):ctx.moveTo(f[0],f[1])});
     ctx.closePath();ctx.stroke();
     /* hotspots */
@@ -2351,7 +2203,7 @@ var PAL=(function(){
     {k:'Page',n:'Space',d:'Space programs',h:'#/space'},
     {k:'Page',n:'Our Mission',d:'Why the company exists',h:'#/mission'},
     {k:'Page',n:'Leadership',d:'The team',h:'#/leadership'},
-    {k:'Page',n:'Careers',d:'Open roles',h:'#/careers'},
+    {k:'Page',n:'Careers',d:'Open roles \u2014 careers.kourashisystems.com.au',h:'#/careers'},
     {k:'Page',n:'Investor Relations',d:'The company and the raise',h:'#/investors'},
     {k:'Page',n:'Newsroom',d:'Company news',h:'#/news'},
     {k:'Page',n:'Privacy Policy',d:'How we handle data',h:'#/privacy'},
@@ -2361,7 +2213,6 @@ var PAL=(function(){
     {k:'Section',n:'Roadmap',d:'Every program by year',h:'#/?roadmap'},
     {k:'Section',n:'Contact form',d:'Send us a message',h:'#/?contact'}
   ].concat(projects.filter(function(p){return !p.redacted}).map(function(p){return{k:p.label,n:p.name,d:p.short,h:'#/project/'+p.id}}))
-   .concat(roles.map(function(r){return{k:'Role',n:r.title,d:r.team,h:'#/careers'}}))
    .concat(NEWS.map(function(n){return{k:'Update',n:n.title,d:fmtDate(n.date),h:'#/news'}}));
   function render(q){
     var s=q.trim().toLowerCase();
@@ -2809,7 +2660,7 @@ function ensure(name){
     initSat($('v-space'));
     Board($('spaceBoard'),'space');
   });
-  if(name==='careers')fillOnce('careers',initCareers);
+  if(name==='careers')fillOnce('careers',initCareersRedirect);
   if(name==='news')fillOnce('news',function(){initNewsPage($('newsList'))});
   if(name==='investors')fillOnce('inv',function(){
     $('invCards').innerHTML=[byId['air-01'],byId['space-01']].map(card).join('')+
@@ -2843,7 +2694,6 @@ function render(){
   view.hidden=false;
   var themeDomain=THEME_DOMAINS[r.name]?r.name:(r.name==='project'&&byId[r.id]?byId[r.id].domain:null);
   ['air','sea','ground','space'].forEach(function(d){view.classList.toggle(d,themeDomain===d)});
-  nav.classList.toggle('light',themeDomain==='space');
   if(!reduce){view.style.animation='none';void view.offsetWidth;view.style.animation=''}
   if(r.name==='project'){initCompare(view);initStory(view);initViewer(view);initSat(view);initSchem(view)}
   reveal(view);
@@ -2890,7 +2740,6 @@ window.addEventListener('hashchange',render);
 })();
 
 initSocials();
-initApplyModal();
 render();
 })();
 
