@@ -343,15 +343,6 @@ footer .base a:hover{opacity:1;text-decoration:underline;text-underline-offset:3
 /* ================= v3: domain themes, detail pages, roadmap, news, form ================= */
 :root{--scrim:rgba(15,15,15,.6)}
 
-/* Air = lightish stealth grey, F-35-style. Dark text, light scrim for contrast. */
-.air,.card.air{
-  --panel:#9CA3A6;--panel-deep:#7E8588;--on-panel:#14171A;--mute-panel:#41474A;--rule-panel:#B7BCBE;
-  --scrim:rgba(244,245,245,.8);
-}
-.card.air{--panel:#A7AEB0;--panel-deep:#A7AEB0}
-.card.air .art{border:1px solid var(--rule)}
-.air .page-head{border-bottom:1px solid var(--rule-panel)}
-.air .demo,.air .viewer,.air .map-wrap,.air .panel,.air .story-panel,.air .art{border:1px solid var(--rule-panel)}
 .art,.panel,.map-wrap,.story-panel{color:var(--on-panel)}
 .art .tag{color:var(--on-panel);text-shadow:0 0 8px var(--panel)}
 .art .stage{color:var(--on-panel);border-color:currentColor;background:var(--scrim)}
@@ -423,7 +414,7 @@ footer .base a:hover{opacity:1;text-decoration:underline;text-underline-offset:3
 
 
 
-/* ================= v4: 4 domains, neon accent, cut-corner cards, nav dropdown, sound, socials, motion ================= */
+/* ================= v4: 4 domains, neon accent, cut-corner cards, nav dropdown, socials, motion ================= */
 :root{--accent:#E8FF3D;--accent-ink:#141A00}
 
 /* Ground = dark military green. Sea = dark navy. Both stay dark-panel/light-text like Air. */
@@ -593,6 +584,68 @@ footer .base a:hover{opacity:1;text-decoration:underline;text-underline-offset:3
 .rmap-info p{color:#A6A6A6;font-size:.9rem;margin-top:.3rem;line-height:1.4}
 .rmap-info .cat{font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:#E8FF3D}
 
+
+/* ================= Pegasus 3D viewer (real WebGL model) ================= */
+.pv{position:relative;background:var(--panel-deep);overflow:hidden}
+.pv-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab}
+.pv-canvas.dragging{cursor:grabbing}
+.pv-hud{position:absolute;inset:0;pointer-events:none;color:var(--on-panel)}
+.pv-corner{position:absolute;top:0;right:0;width:52px;height:52px;background:color-mix(in srgb,var(--on-panel) 20%,transparent);
+  clip-path:polygon(100% 0,0 0,100% 100%);opacity:.5}
+.pv-brand{position:absolute;top:1.1rem;left:1.2rem;pointer-events:none}
+.pv-mark{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;color:var(--accent);margin-bottom:.3rem}
+.pv-brand h4{margin:0;font-size:1.35rem;letter-spacing:.03em;font-weight:700;color:var(--on-panel)}
+.pv-sub{margin-top:.15rem;font-family:var(--mono);font-size:.66rem;letter-spacing:.07em;color:var(--mute-panel);text-transform:uppercase}
+.pv-specs{display:flex;gap:1rem;margin-top:.8rem;flex-wrap:wrap;max-width:320px}
+.pv-specs .v{font-family:var(--mono);font-size:.8rem;color:var(--on-panel);font-weight:600}
+.pv-specs .v.tbc{color:var(--mute-panel);font-weight:500}
+.pv-specs .k{font-family:var(--mono);font-size:.6rem;letter-spacing:.06em;color:var(--mute-panel);text-transform:uppercase;margin-top:.1rem}
+.pv-controls{position:absolute;top:1.1rem;right:1.2rem;display:flex;gap:.5rem;pointer-events:auto}
+.pv-btn{font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--on-panel);
+  background:color-mix(in srgb,var(--panel-deep) 80%,transparent);border:1px solid var(--rule-panel);padding:.5rem .75rem;
+  border-radius:2px;cursor:pointer;backdrop-filter:blur(6px);transition:border-color .15s,transform .12s}
+.pv-btn:hover{border-color:var(--accent)}
+.pv-btn:active{transform:scale(.96)}
+.pv-markers{position:absolute;inset:0}
+.pv-hotspot{position:absolute;top:0;left:0;width:23px;height:23px;margin:-12px 0 0 -12px;border-radius:50%;
+  background:color-mix(in srgb,var(--panel-deep) 85%,transparent);border:1.3px solid color-mix(in srgb,var(--on-panel) 55%,transparent);
+  color:var(--on-panel);font-family:var(--mono);font-size:.66rem;font-weight:600;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;pointer-events:auto;user-select:none;--tx:0px;--ty:0px;--s:1;transform:translate(var(--tx),var(--ty)) scale(var(--s));
+  transition:opacity .25s,background .15s,color .15s,border-color .15s,transform .15s}
+.pv-hotspot:hover{border-color:var(--accent);--s:1.08}
+.pv-hotspot.active{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);--s:1.12}
+.pv-hotspot.dim{opacity:.32}
+.pv-hotspot.occluded{opacity:.12;pointer-events:none}
+.pv-hotspot.hidden-off{display:none}
+.pv-bl{position:absolute;left:1.2rem;bottom:1.1rem;display:flex;flex-direction:column-reverse;gap:.6rem;
+  align-items:flex-start;max-width:min(340px,calc(100% - 2.4rem));pointer-events:none}
+.pv-hint{font-family:var(--mono);font-size:.66rem;letter-spacing:.04em;color:var(--mute-panel);
+  background:color-mix(in srgb,var(--panel-deep) 82%,transparent);border:1px solid var(--rule-panel);padding:.5rem .7rem;
+  border-radius:2px;backdrop-filter:blur(6px);transition:opacity .2s}
+.pv-panel{pointer-events:auto;background:color-mix(in srgb,var(--panel-deep) 88%,transparent);border:1px solid var(--rule-panel);
+  border-left:2.5px solid var(--accent);backdrop-filter:blur(10px);padding:1rem 1.1rem .9rem;border-radius:2px;width:320px;
+  max-width:100%;opacity:0;transform:translateY(8px);transition:opacity .22s,transform .22s}
+.pv-panel.show{opacity:1;transform:none}
+.pv-row1{display:flex;justify-content:space-between;align-items:flex-start;gap:.6rem}
+.pv-kicker{font-family:var(--mono);font-size:.64rem;letter-spacing:.08em;color:var(--accent);text-transform:uppercase}
+.pv-close{background:none;border:0;cursor:pointer;color:var(--mute-panel);font-size:1rem;line-height:1;padding:.1rem .2rem;margin:-.2rem -.3rem 0 0}
+.pv-close:hover{color:var(--on-panel)}
+.pv-panel h3{margin:.4rem 0 .5rem;font-size:1.02rem;letter-spacing:0;color:var(--on-panel)}
+.pv-panel p{margin:0 0 .6rem;font-size:.86rem;line-height:1.5;color:var(--mute-panel)}
+.pv-spec{font-family:var(--mono);font-size:.7rem;color:var(--on-panel);background:color-mix(in srgb,var(--on-panel) 10%,transparent);
+  display:inline-block;padding:.3rem .55rem;border-radius:2px;letter-spacing:.02em}
+.pv-footer{position:absolute;left:0;right:0;bottom:.5rem;text-align:center;font-family:var(--mono);font-size:.62rem;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--mute-panel);opacity:.55}
+.pv-loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--mono);
+  font-size:.7rem;letter-spacing:.1em;color:var(--mute-panel);background:var(--panel-deep);z-index:5;transition:opacity .4s}
+.pv-loading.gone{opacity:0;pointer-events:none}
+@media (max-width:640px){
+  .pv-specs{display:none}
+  .pv-brand h4{font-size:1.15rem}
+  .pv-panel{width:calc(100% - 2.4rem)}
+  .pv-hint{display:none}
+}
+
 </style>
 </head>
 <body>
@@ -696,8 +749,8 @@ footer .base a:hover{opacity:1;text-decoration:underline;text-underline-offset:3
         <div class="stats" id="stats"></div>
         <div style="margin-top:clamp(3rem,6vw,5rem)">
           <span class="tag gap">[FOOTPRINT-01]</span>
-          <h3 style="font-size:clamp(1.6rem,2.6vw,2.4rem);max-width:20ch;margin-bottom:1rem">Offices, manufacturing, test ranges and radar sites across Australia.</h3>
-          <p style="color:var(--mute-panel);max-width:60ch;margin-bottom:2rem">We're headquartered in Melbourne. Click a marker for what's there, or use the filters to narrow the map down. Positions are approximate.</p>
+          <h3 style="font-size:clamp(1.6rem,2.6vw,2.4rem);max-width:20ch;margin-bottom:1rem">Offices, manufacturing and illustrative site types across Australia.</h3>
+          <p style="color:var(--mute-panel);max-width:60ch;margin-bottom:2rem">We're headquartered in Melbourne. Office and manufacturing locations are real; test, sensing and naval markers are illustrative only — exact sites are not publicly disclosed. Click a marker for detail, or use the filters to narrow the map down.</p>
           <div class="map-wrap" id="mapWrap"></div>
         </div>
       </div>
@@ -889,7 +942,7 @@ footer .base a:hover{opacity:1;text-decoration:underline;text-underline-offset:3
       <h2>How we use it</h2>
       <p>Information you send us is used to respond to your enquiry and, where relevant, to keep records of our communications with you. We do not sell or share your information with third parties for their own marketing purposes.</p>
       <h2>Cookies and local storage</h2>
-      <p>This site uses your browser's local storage to remember small preferences, such as whether sound effects are enabled and which audience option you last selected. This information stays on your device and is not sent to us.</p>
+      <p>This site uses your browser's local storage to remember small preferences, such as which audience option you last selected. This information stays on your device and is not sent to us.</p>
       <h2>Contact</h2>
       <p>Questions about this policy can be sent to <a href="mailto:contact@kourashisystems.com.au" style="text-decoration:underline;text-underline-offset:4px">contact@kourashisystems.com.au</a>.</p>
       <p class="fineprint">[This is placeholder text and has not been reviewed by a lawyer. It should not be relied on until it has been.]</p>
@@ -945,8 +998,8 @@ footer .base a:hover{opacity:1;text-decoration:underline;text-underline-offset:3
       <span class="tag gap">[POSITION-02]</span>
       <h2>Where the company is today.</h2>
       <ol class="steps">
-        <li><span class="tag">[NOW-01]</span><h3>One aircraft built.</h3><p>AIR-01 exists. Its navigation approach is the thing the rest of the company is built around.</p></li>
-        <li><span class="tag">[NOW-02]</span><h3>Nine programs behind it.</h3><p>Further programs across air, sea, ground and space, including a satellite with a steerable aperture. Scope and dates are being set.</p></li>
+        <li><span class="tag">[NOW-01]</span><h3>One aircraft built.</h3><p>Pegasus (AIR-01) exists. Its navigation approach is the thing the rest of the company is built around.</p></li>
+        <li><span class="tag">[NOW-02]</span><h3>Ten programs behind it.</h3><p>Further programs across air, sea, ground and space, including a satellite with a steerable aperture. Scope and dates are being set.</p></li>
         <li><span class="tag">[NOW-03]</span><h3>Team forming.</h3><p>We are hiring across autonomy, software, hardware and flight operations. Leadership is being announced.</p></li>
       </ol>
     </div></section>
@@ -1031,6 +1084,7 @@ footer .base a:hover{opacity:1;text-decoration:underline;text-underline-offset:3
   </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 (function(){
 "use strict";
@@ -1216,8 +1270,8 @@ var people=[
 /* Updates — newest first. Replace these with real entries. */
 var NEWS=[
   {date:'2026-09-18',tag:'GROUND',title:'Ground programs opened',body:'Two ground programs have been opened: an autonomous logistics rover and a perimeter sentry vehicle, both built on the same navigation approach as the aircraft.'},
-  {date:'2026-09-12',tag:'AIR-01',title:'First aircraft complete',body:'The AIR-01 airframe is built and in ground testing. The navigation software is running on the aircraft rather than on a bench.'},
-  {date:'2026-08-20',tag:'SPACE',title:'Space programs opened',body:'Two space programs have been opened: a satellite with a steerable aperture, and a payload that builds the reference terrain our aircraft navigate against.'},
+  {date:'2026-09-12',tag:'AIR-01',title:'First aircraft complete',body:'Pegasus (AIR-01) is built and in ground testing. The navigation software is running on the aircraft rather than on a bench.'},
+  {date:'2026-08-20',tag:'SPACE',title:'Space programs opened',body:'Three space programs are now open: a satellite with a steerable aperture, and two further programs that have not been publicly disclosed.'},
   {date:'2026-08-05',tag:'SEA',title:'Sea programs opened',body:'Two sea programs have been opened: an autonomous surface vessel and a seabed mapping vehicle, extending the company beyond air and land.'},
   {date:'2026-07-02',tag:'COMPANY',title:'Hiring across four teams',body:'Roles are open in autonomy, software, hardware and flight operations. Some will require Australian citizenship and a security clearance.'},
   {date:'2026-06-10',tag:'COMPANY',title:'Kourashi Systems formed',body:'The company was formed in Australia to build aircraft and space systems that keep working when satellite navigation does not.'}
@@ -1225,7 +1279,7 @@ var NEWS=[
 /* Numbers: set value to a number once confirmed. null renders as TBC. */
 var STATS=[
   {label:'Aircraft built',value:1},
-  {label:'Programs running',value:10},
+  {label:'Programs running',value:11},
   {label:'Domains active',value:4},
   {label:'Test flights',value:null}
 ];
@@ -1233,8 +1287,8 @@ var STATS=[
 var SITE_CATS={
   office:{label:'Offices',color:'#F1F1F0'},
   manufacturing:{label:'Manufacturing',color:'#E8A33D'},
-  testrange:{label:'Test ranges',color:'#4FB6C9'},
-  radar:{label:'Radar and surveillance',color:'#E8FF3D'},
+  testrange:{label:'Test sites',color:'#4FB6C9'},
+  radar:{label:'Sensing and detection',color:'#E8FF3D'},
   naval:{label:'Naval facilities',color:'#5B7FD6'}
 };
 var SITES=[
@@ -1243,13 +1297,12 @@ var SITES=[
   {name:'Cairns',kind:'Northern operations base',cat:'office',lon:145.7781,lat:-16.9186,note:'Forward operations base for northern test and trial work.'},
   {name:'Adelaide',kind:'Manufacturing hub',cat:'manufacturing',lon:138.6007,lat:-34.9285,note:'Airframe and vehicle manufacturing.'},
   {name:'Brisbane',kind:'Manufacturing hub',cat:'manufacturing',lon:153.0251,lat:-27.4698,note:'Payload and sensor assembly.'},
-  {name:'Woomera',kind:'Flight test range',cat:'testrange',lon:136.8272,lat:-31.1999,note:'Primary flight test range for air programs.'},
-  {name:'Port Augusta',kind:'Ground vehicle test range',cat:'testrange',lon:137.7645,lat:-32.4927,note:'Off-road and endurance testing for ground programs.'},
-  {name:'Darwin',kind:'Northern radar site',cat:'radar',lon:130.8456,lat:-12.4634,note:'Northern approach radar and surveillance trial site.'},
-  {name:'Exmouth',kind:'Anti-drone radar site',cat:'radar',lon:114.1281,lat:-21.9341,note:'Counter-drone radar and detection trial site.'},
-  {name:'Alice Springs',kind:'Satellite ground segment',cat:'radar',lon:133.8807,lat:-23.6980,note:'Ground station for tasking and downlink of space programs.'},
-  {name:'Nowra',kind:'Naval test facility',cat:'naval',lon:150.6019,lat:-34.8797,note:'Sea trial support for surface vessel programs.'},
-  {name:'Rockingham',kind:'Naval facility',cat:'naval',lon:115.7290,lat:-32.2767,note:'Fleet base support for uncrewed underwater vehicle trials.'}
+  {name:'Illustrative site',kind:'Flight test site',cat:'testrange',lon:143.0,lat:-29.5,note:'Illustrative location. Exact test sites are not publicly disclosed.'},
+  {name:'Illustrative site',kind:'Ground vehicle test site',cat:'testrange',lon:140.5,lat:-33.8,note:'Illustrative location. Exact test sites are not publicly disclosed.'},
+  {name:'Illustrative site',kind:'Sensing and detection trial site',cat:'radar',lon:122.0,lat:-25.5,note:'Illustrative location. Exact trial sites are not publicly disclosed.'},
+  {name:'Illustrative site',kind:'Satellite ground segment',cat:'radar',lon:135.0,lat:-27.0,note:'Illustrative location. Ground segment sites are not publicly disclosed.'},
+  {name:'Illustrative site',kind:'Sea trial support facility',cat:'naval',lon:149.5,lat:-37.5,note:'Illustrative location. Exact facilities are not publicly disclosed.'},
+  {name:'Illustrative site',kind:'Underwater vehicle trial facility',cat:'naval',lon:116.5,lat:-35.0,note:'Illustrative location. Exact facilities are not publicly disclosed.'}
 ];
 var ROADMAP=[2026,2031];
 var EMAILS={general:'contact@kourashisystems.com.au',careers:'careers@kourashisystems.com.au',investors:'investors@kourashisystems.com.au'};
@@ -1616,8 +1669,18 @@ function initCompare(root){
 }
 
 /* ---------------- Cards + program board ---------------- */
+function redactBar(w){return '<span class="rbar" style="width:'+w+'%"></span>'}
 function card(p){
-  return '<a class="card '+p.domain+'" href="#/project/'+p.id+'"><div class="art"><span class="tag">['+p.label+']</span>'+
+  if(p.redacted){
+    return '<a class="card reveal redacted" href="#/project/'+p.id+'"><div class="art"><span class="tag">[REDACTED]</span>'+artFor(p,false)+'</div>'+
+      '<div class="meta"><div class="name">[REDACTED]</div>'+
+      '<dl class="rfacts">'+
+        '<div><dt>Missions</dt><dd>'+redactBar(46)+'</dd></div>'+
+        '<div><dt>Use cases</dt><dd>'+redactBar(58)+'</dd></div>'+
+        '<div><dt>Status</dt><dd>'+redactBar(22)+'</dd></div>'+
+      '</dl></div></a>';
+  }
+  return '<a class="card reveal '+p.domain+'" href="#/project/'+p.id+'"><div class="art"><span class="tag">['+p.label+']</span>'+
     '<span class="stage">'+esc(STAGES[p.stage])+'</span>'+artFor(p,false)+'</div>'+
     '<div class="meta"><div class="name">'+esc(p.name)+'</div><p class="desc">'+esc(p.short)+'</p></div></a>';
 }
@@ -1884,134 +1947,420 @@ function initSocials(){
   }).join('');
 }
 
-/* ---------------- 3D aircraft viewer ---------------- */
-var PLAN=[[1.05,0],[0.30,.10],[-0.30,.95],[-0.52,.95],[-0.46,.22],[-0.72,.18],[-0.85,0]];
-var HOTS=[
-  {p:[0.15,0,-0.075],t:'Downward-facing camera',d:'A camera aimed straight at the ground. Its view is what the aircraft navigates by.'},
-  {p:[1.02,0,0],t:'Nose',d:'Forward bay. Contents to be confirmed.'},
-  {p:[-0.40,0.95,0],t:'Wing',d:'Span, airfoil and control surfaces to be confirmed.'},
-  {p:[-0.15,0,0.075],t:'Payload bay',d:'Payload and capacity to be confirmed.'}
-];
-function buildMesh(){
-  var loop=[],i;
-  for(i=0;i<PLAN.length;i++)loop.push([PLAN[i][0],PLAN[i][1]]);
-  for(i=PLAN.length-2;i>0;i--)loop.push([PLAN[i][0],-PLAN[i][1]]);
-  function th(y){return 0.085*(1-Math.min(1,Math.abs(y)/0.95))+0.008}
-  var top=loop.map(function(p){return[p[0],p[1],th(p[1])]});
-  var bot=loop.map(function(p){return[p[0],p[1],-th(p[1])]});
-  var edges=[],n=loop.length;
-  for(i=0;i<n;i++){
-    edges.push([top[i],top[(i+1)%n]]);
-    edges.push([bot[i],bot[(i+1)%n]]);
-    edges.push([top[i],bot[i]]);
+/* ================= Pegasus 3D viewer (real WebGL model, generic systems) ================= */
+function initPegasusViewer(root){
+  var wrap=root.querySelector('.pv');if(!wrap||wrap.dataset.on||typeof THREE==='undefined')return;wrap.dataset.on='1';
+  var canvas=wrap.querySelector('.pv-canvas');
+  var markersLayer=wrap.querySelector('.pv-markers');
+  var panelEl=wrap.querySelector('.pv-panel'),kickerEl=wrap.querySelector('.pv-kicker'),titleEl=wrap.querySelector('.pv-title'),
+      descEl=wrap.querySelector('.pv-desc'),specEl=wrap.querySelector('.pv-spec'),hintEl=wrap.querySelector('.pv-hint'),
+      loadingEl=wrap.querySelector('.pv-loading');
+
+  function cssVar(name){return getComputedStyle(wrap).getPropertyValue(name).trim()}
+  function hexFromCss(name){var v=cssVar(name);if(!v)return 0xffffff;try{return new THREE.Color(v).getHex()}catch(e){return 0xffffff}}
+
+  var scene=new THREE.Scene();
+  var camera=new THREE.PerspectiveCamera(42,2,0.05,200);
+  var renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true,alpha:false});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+
+  var lineMat=new THREE.LineBasicMaterial({color:0xffffff});
+  var occluderMat=new THREE.MeshBasicMaterial({visible:false});
+  var gridMat=new THREE.LineBasicMaterial({color:0xffffff,transparent:true,opacity:0.12});
+  var dashMat=new THREE.LineDashedMaterial({color:0xffffff,dashSize:0.08,gapSize:0.06,transparent:true,opacity:0.3});
+
+  function applyTheme(){
+    var lineColor=hexFromCss('--on-panel'),bg=cssVar('--panel-deep')||'#0F0F0F';
+    scene.background=new THREE.Color(bg);
+    scene.fog=new THREE.Fog(new THREE.Color(bg).getHex(),9,22);
+    lineMat.color.setHex(lineColor);
+    gridMat.color.setHex(lineColor);
+    dashMat.color.setHex(hexFromCss('--accent'));
   }
-  [0.55,-0.55].forEach(function(y){
-    var f=[[-0.40,y,0.02],[-0.62,y,0.02],[-0.66,y,0.30],[-0.48,y,0.28]];
-    for(i=0;i<4;i++)edges.push([f[i],f[(i+1)%4]]);
-  });
-  edges.push([[1.05,0,0.01],[-0.85,0,0.01]]);
-  return{top:top,edges:edges};
-}
-function initViewer(root){
-  var el=root.querySelector('.viewer');if(!el||el.dataset.on)return;el.dataset.on='1';
-  var cv=el.querySelector('canvas'),ctx=cv.getContext('2d');if(!ctx)return;
-  var mesh=buildMesh(),yaw=-0.7,pitch=-0.5,auto=!reduce,W=0,H=0,dpr=1,raf=0,vis=true;
-  var card=el.querySelector('.hot-card'),hots=Array.prototype.slice.call(el.querySelectorAll('.hot')),sel=-1;
-  var INK=[255,255,255];
-  function readTheme(){
-    var m=/(\d+)[,\s]+(\d+)[,\s]+(\d+)/.exec(getComputedStyle(el).color||'');
-    if(m)INK=[+m[1],+m[2],+m[3]];
+
+  function rotZ(v,rad){var c=Math.cos(rad),s=Math.sin(rad);return new THREE.Vector3(v.x*c-v.y*s,v.x*s+v.y*c,v.z)}
+  function rotX(v,rad){var c=Math.cos(rad),s=Math.sin(rad);return new THREE.Vector3(v.x,v.y*c-v.z*s,v.y*s+v.z*c)}
+
+  var occluders=[],aircraft=new THREE.Group();
+
+  function buildPanel(corners,thickness,parent){
+    var p0=corners[0],p1=corners[1],p2=corners[2],p3=corners[3];
+    var e1=p1.clone().sub(p0),e2=p2.clone().sub(p0);
+    var normal=new THREE.Vector3().crossVectors(e1,e2);
+    if(normal.lengthSq()<1e-8){normal.set(0,1,0)}else{normal.normalize()}
+    var off=normal.multiplyScalar(thickness/2);
+    var top=corners.map(function(p){return p.clone().add(off)});
+    var bot=corners.map(function(p){return p.clone().sub(off)});
+    var verts=[];
+    function tri(a,b,c){verts.push(a.x,a.y,a.z,b.x,b.y,b.z,c.x,c.y,c.z)}
+    tri(top[0],top[1],top[3]);tri(top[0],top[3],top[2]);
+    tri(bot[0],bot[3],bot[1]);tri(bot[0],bot[2],bot[3]);
+    tri(top[0],top[1],bot[1]);tri(top[0],bot[1],bot[0]);
+    tri(top[2],bot[2],bot[3]);tri(top[2],bot[3],top[3]);
+    tri(top[0],bot[0],bot[2]);tri(top[0],bot[2],top[2]);
+    tri(top[1],top[3],bot[3]);tri(top[1],bot[3],bot[1]);
+    var geo=new THREE.BufferGeometry();
+    geo.setAttribute('position',new THREE.Float32BufferAttribute(verts,3));
+    var edgesGeo=new THREE.EdgesGeometry(geo,1);
+    var lines=new THREE.LineSegments(edgesGeo,lineMat);
+    parent.add(lines);
+    var occ=new THREE.Mesh(geo,occluderMat);
+    parent.add(occ);occluders.push(occ);
+    return lines;
   }
-  function ink(a){return 'rgba('+INK[0]+','+INK[1]+','+INK[2]+','+a+')'}
-  function proj(p){
-    var cy=Math.cos(yaw),sy=Math.sin(yaw),cp=Math.cos(pitch),sp=Math.sin(pitch);
-    var x=p[0]*cy-p[1]*sy,y=p[0]*sy+p[1]*cy,z=p[2];
-    var y2=y*cp-z*sp,z2=y*sp+z*cp;
-    var d=4.2,f=Math.min(W,H*1.9)*0.42,k=d/(d-z2*0.9+1.2);
-    return[W/2+x*f*k*0.55,H/2-y2*f*k*0.38,z2];
+  function addEdgesFromGeometry(geo,parent,threshold){
+    var edgesGeo=new THREE.EdgesGeometry(geo,threshold===undefined?1:threshold);
+    var lines=new THREE.LineSegments(edgesGeo,lineMat);
+    parent.add(lines);
+    var occ=new THREE.Mesh(geo,occluderMat);
+    parent.add(occ);occluders.push(occ);
+    return lines;
   }
-  function size(){
-    W=el.clientWidth;H=el.clientHeight;if(!W||!H)return false;
-    dpr=Math.min(window.devicePixelRatio||1,2);cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);
-    readTheme();return true;
+
+  var FUS_HALF_W=0.42,ROOT_LE_Z=0.65,ROOT_TE_Z=-0.55,KINK_SPAN=1.5,KINK_LE_Z=0.60,KINK_TE_Z=-0.50;
+  var TIP_SPAN_TOTAL=6.0,TIP_LE_Z=0.10,TIP_TE_Z=-0.60;
+  var DIHEDRAL_INNER=24*Math.PI/180,DIHEDRAL_OUTER=1*Math.PI/180;
+  var OUTER_SPAN_LEN=TIP_SPAN_TOTAL-(FUS_HALF_W+KINK_SPAN);
+  var BOOM_START=-1.0,BOOM_END=-4.6,BOOM_R=0.075;
+  var VTAIL_ROOT_LE=BOOM_END,VTAIL_ROOT_CHORD=0.65,VTAIL_TIP_CHORD=0.45,VTAIL_SPAN=1.3,VTAIL_SWEEP=0.5,VTAIL_CANT_DEG=42;
+
+  function mirrorX(p){return new THREE.Vector3(-p.x,p.y,p.z)}
+
+  function buildWingRaw(){
+    var innerLocal=[new THREE.Vector3(0,0,ROOT_LE_Z),new THREE.Vector3(0,0,ROOT_TE_Z),
+      new THREE.Vector3(KINK_SPAN,0,KINK_LE_Z),new THREE.Vector3(KINK_SPAN,0,KINK_TE_Z)];
+    var innerRot=innerLocal.map(function(p){return rotZ(p,DIHEDRAL_INNER)});
+    var rootOffset=new THREE.Vector3(FUS_HALF_W,0,0);
+    var innerWorld=innerRot.map(function(p){return p.clone().add(rootOffset)});
+    var outerLocal=[new THREE.Vector3(0,0,KINK_LE_Z),new THREE.Vector3(0,0,KINK_TE_Z),
+      new THREE.Vector3(OUTER_SPAN_LEN,0,TIP_LE_Z),new THREE.Vector3(OUTER_SPAN_LEN,0,TIP_TE_Z)];
+    var outerRotLocal=outerLocal.map(function(p){return rotZ(p,DIHEDRAL_OUTER)});
+    var kinkLocal=new THREE.Vector3(KINK_SPAN,0,0);
+    var kinkWorld=rotZ(kinkLocal,DIHEDRAL_INNER).add(rootOffset);
+    var outerWorld=outerRotLocal.map(function(p){return p.clone().add(kinkWorld)});
+    return{inner:innerWorld,outer:outerWorld,kink:kinkWorld};
   }
-  function draw(){
-    if(!W)return;
-    ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
-    /* ground grid */
-    ctx.strokeStyle=ink(.10);ctx.lineWidth=1;
-    var g,i;
-    for(i=-3;i<=3;i++){
-      ctx.beginPath();
-      g=proj([i*0.6,-2,-0.55]);ctx.moveTo(g[0],g[1]);
-      g=proj([i*0.6,2,-0.55]);ctx.lineTo(g[0],g[1]);
-      ctx.stroke();
-      ctx.beginPath();
-      g=proj([-2,i*0.6,-0.55]);ctx.moveTo(g[0],g[1]);
-      g=proj([2,i*0.6,-0.55]);ctx.lineTo(g[0],g[1]);
-      ctx.stroke();
+  var WING_RAW=null;
+  function computeWingSide(sign){
+    if(!WING_RAW)WING_RAW=buildWingRaw();
+    if(sign>0)return{inner:WING_RAW.inner.map(function(p){return p.clone()}),outer:WING_RAW.outer.map(function(p){return p.clone()}),kink:WING_RAW.kink.clone()};
+    return{inner:WING_RAW.inner.map(mirrorX),outer:WING_RAW.outer.map(mirrorX),kink:mirrorX(WING_RAW.kink)};
+  }
+  function buildBlade(parent,len,rootW,tipW){
+    var corners=[new THREE.Vector3(0.025,rootW/2,0),new THREE.Vector3(0.025,-rootW/2,0),
+      new THREE.Vector3(len,tipW/2,0),new THREE.Vector3(len,-tipW/2,0)];
+    buildPanel(corners,0.01,parent);
+  }
+
+  var hotspotDefs=[],propGroups=[],GROUND_Y=-0.95;
+
+  function buildAircraft(){
+    var profile=[new THREE.Vector2(0.02,1.80),new THREE.Vector2(0.16,1.34),new THREE.Vector2(0.30,0.94),
+      new THREE.Vector2(0.42,0.44),new THREE.Vector2(0.41,0.04),new THREE.Vector2(0.35,-0.36),
+      new THREE.Vector2(0.20,-0.74),new THREE.Vector2(0.10,-0.94),new THREE.Vector2(BOOM_R,-1.00)];
+    var latheGeo=new THREE.LatheGeometry(profile,8);
+    latheGeo.rotateX(Math.PI/2);
+    addEdgesFromGeometry(latheGeo,aircraft,1);
+
+    var boomLen=BOOM_START-BOOM_END;
+    var boomGeo=new THREE.CylinderGeometry(BOOM_R,BOOM_R*0.8,boomLen,8,1);
+    boomGeo.rotateX(Math.PI/2);
+    boomGeo.translate(0,0,(BOOM_START+BOOM_END)/2);
+    addEdgesFromGeometry(boomGeo,aircraft,1);
+
+    [1,-1].forEach(function(sign){
+      var w=computeWingSide(sign);
+      buildPanel(w.inner,0.05,aircraft);
+      buildPanel(w.outer,0.045,aircraft);
+
+      var nacBase=w.kink.clone().add(new THREE.Vector3(0,0.15,0.32));
+      var nacGeo=new THREE.CylinderGeometry(0.075,0.095,0.52,8);
+      nacGeo.rotateX(Math.PI/2);
+      nacGeo.translate(nacBase.x,nacBase.y,nacBase.z+0.06);
+      addEdgesFromGeometry(nacGeo,aircraft,1);
+
+      var noseGeo=new THREE.ConeGeometry(0.075,0.16,8);
+      noseGeo.rotateX(-Math.PI/2);
+      noseGeo.translate(nacBase.x,nacBase.y,nacBase.z+0.06+0.26+0.08);
+      addEdgesFromGeometry(noseGeo,aircraft,1);
+
+      var propCenter=new THREE.Vector3(nacBase.x,nacBase.y,nacBase.z+0.06+0.26+0.17);
+      var propGroup=new THREE.Group();
+      propGroup.position.copy(propCenter);
+      var b1=new THREE.Group();buildBlade(b1,0.34,0.045,0.075);propGroup.add(b1);
+      var b2=new THREE.Group();b2.rotation.z=Math.PI;buildBlade(b2,0.34,0.045,0.075);propGroup.add(b2);
+      propGroup.userData.spin=sign>0?1:-1;
+      aircraft.add(propGroup);
+      propGroups.push(propGroup);
+
+      var hubGeo=new THREE.CylinderGeometry(0.035,0.035,0.05,6);
+      hubGeo.rotateX(Math.PI/2);
+      hubGeo.translate(propCenter.x,propCenter.y,propCenter.z);
+      addEdgesFromGeometry(hubGeo,aircraft,1);
+
+      var escPos=w.kink.clone().add(new THREE.Vector3(0,0.05,-0.10));
+      var motorPos=propCenter.clone();
+      var aileronPos=w.outer[1].clone().lerp(w.outer[3],0.62);
+
+      var side=sign>0?'R':'L',sideName=sign>0?'Right':'Left';
+      hotspotDefs.push({id:'esc'+side,pos:escPos,
+        kicker:'AVIONICS \u00B7 SPEED CONTROLLER \u2014 '+sideName.toUpperCase(),
+        title:'Speed Controller \u2014 '+sideName+' Wing',
+        desc:'Wing-mounted speed controller. It reads the throttle command the flight computer sends and converts it into power for the '+sideName.toLowerCase()+' motor.',
+        spec:'Wing-mounted \u00B7 to be confirmed'});
+      hotspotDefs.push({id:'motor'+side,pos:motorPos,
+        kicker:'PROPULSION \u00B7 '+sideName.toUpperCase()+' MOTOR',
+        title:'Motor \u0026 Propeller \u2014 '+sideName,
+        desc:'Motor mounted at the wing bend, ahead of the leading edge. One side spins clockwise and the other counter-clockwise so torque cancels across the airframe.',
+        spec:(sign>0?'Clockwise':'Counter-clockwise')+' \u00B7 to be confirmed'});
+      hotspotDefs.push({id:'aileron'+side,pos:aileronPos,
+        kicker:'FLIGHT SURFACE \u00B7 AILERON '+side,
+        title:'Aileron \u2014 '+sideName,
+        desc:'Outboard trailing-edge surface. A servo drives it through a linkage for roll control.',
+        spec:'Servo-actuated'});
+    });
+
+    var VTAIL_RAW=(function(){
+      var root=[new THREE.Vector3(0,0,0),new THREE.Vector3(0,0,-VTAIL_ROOT_CHORD)];
+      var tip=[new THREE.Vector3(VTAIL_SPAN,0,-VTAIL_SWEEP),new THREE.Vector3(VTAIL_SPAN,0,-VTAIL_SWEEP-VTAIL_TIP_CHORD)];
+      var corners=[root[0],root[1],tip[0],tip[1]];
+      var ang=(Math.PI/2-VTAIL_CANT_DEG*Math.PI/180);
+      corners=corners.map(function(p){return rotX(p,ang)});
+      corners=corners.map(function(p){return p.clone().add(new THREE.Vector3(0,0,VTAIL_ROOT_LE))});
+      return corners;
+    })();
+    [1,-1].forEach(function(sign){
+      var corners=sign>0?VTAIL_RAW.map(function(p){return p.clone()}):VTAIL_RAW.map(mirrorX);
+      buildPanel(corners,0.03,aircraft);
+      var mid=new THREE.Vector3();
+      corners.forEach(function(p){mid.add(p)});
+      mid.multiplyScalar(0.25);
+      var side=sign>0?'R':'L',sideName=sign>0?'Right':'Left';
+      hotspotDefs.push({id:'vtail'+side,pos:mid,
+        kicker:'FLIGHT SURFACE \u00B7 V-TAIL '+side,
+        title:'V-Tail \u2014 '+sideName,
+        desc:'One ruddervator panel. It moves together with its opposite-side panel to blend rudder and elevator into a single pitch and yaw axis.',
+        spec:'Servo-actuated'});
+    });
+
+    [-0.05,0.05].forEach(function(x,i){
+      var rodGeo=new THREE.CylinderGeometry(0.012,0.012,0.30,6);
+      rodGeo.translate(0,0.15,0);
+      rodGeo.rotateZ((i===0?-1:1)*0.12);
+      rodGeo.translate(x,0.30,1.12-i*0.10);
+      addEdgesFromGeometry(rodGeo,aircraft,1);
+    });
+    hotspotDefs.push({id:'antenna',pos:new THREE.Vector3(0,0.42,1.12),
+      kicker:'AVIONICS \u00B7 RF LINK',
+      title:'Telemetry / Control Antennas',
+      desc:'Twin masts ahead of the canopy keep the control and telemetry antennas clear of the airframe structure and motor wiring, so the link stays clean at range.',
+      spec:'Receiver \u00B7 telemetry uplink'});
+
+    var sensorGeo=new THREE.ConeGeometry(0.09,0.16,6);
+    sensorGeo.rotateX(Math.PI);
+    sensorGeo.translate(0,-0.16,1.55);
+    addEdgesFromGeometry(sensorGeo,aircraft,1);
+    hotspotDefs.push({id:'nose',pos:new THREE.Vector3(0,-0.20,1.60),
+      kicker:'AIRFRAME \u00B7 MODULAR NOSE',
+      title:'Nose / Camera Bay',
+      desc:'The nose is a detachable module, so the downward-facing navigation camera swaps or upgrades without touching the rest of the airframe.',
+      spec:'Fully detachable \u00B7 modular'});
+
+    hotspotDefs.push({id:'fc',pos:new THREE.Vector3(0.02,0.08,0.20),
+      kicker:'AVIONICS \u00B7 FLIGHT COMPUTER',
+      title:'Flight Computer',
+      desc:'Mounted mid-fuselage, equidistant from both wings. It reads every sensor, mixes all flight-surface channels, and drives both throttle outputs \u2014 including the terrain-matching navigation software.',
+      spec:'To be confirmed'});
+
+    var gpsGeo=new THREE.CylinderGeometry(0.02,0.02,0.22,6);
+    gpsGeo.translate(0,0.11,0);
+    gpsGeo.translate(0,0.12,-0.42);
+    addEdgesFromGeometry(gpsGeo,aircraft,1);
+    var gpsCapGeo=new THREE.CylinderGeometry(0.05,0.05,0.03,10);
+    gpsCapGeo.translate(0,0.34+0.12,-0.42);
+    addEdgesFromGeometry(gpsCapGeo,aircraft,1);
+    hotspotDefs.push({id:'gps',pos:new THREE.Vector3(0,0.46,-0.42),
+      kicker:'AVIONICS \u00B7 BACKUP POSITIONING',
+      title:'Backup Positioning Module',
+      desc:'Raised on a short mast just aft of the flight computer, clear of other wiring. Used as a secondary reference; the aircraft\u2019s primary navigation is visual, from the nose camera.',
+      spec:'To be confirmed'});
+
+    hotspotDefs.push({id:'battery',pos:new THREE.Vector3(0,0.02,0.85),
+      kicker:'POWER \u00B7 BATTERY BAY',
+      title:'Battery Bay',
+      desc:'Forward fuselage bay just ahead of the flight computer, sized for the primary battery pack.',
+      spec:'To be confirmed'});
+
+    hotspotDefs.push({id:'boom',pos:new THREE.Vector3(0,0,(BOOM_START+BOOM_END)/2),
+      kicker:'AIRFRAME \u00B7 STRUCTURE',
+      title:'Tail Boom',
+      desc:'A single boom spans from the wing centre section to the V-tail, keeping the empennage light and stiff without a full aft fuselage.',
+      spec:'To be confirmed'});
+
+    var ellipsePts=[],segs=48;
+    for(var i=0;i<=segs;i++){
+      var a=(i/segs)*Math.PI*2;
+      ellipsePts.push(new THREE.Vector3(Math.cos(a)*2.6,0,Math.sin(a)*1.5));
     }
-    /* top surface fill */
-    ctx.beginPath();
-    mesh.top.forEach(function(p,n){var q=proj(p);n?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1])});
-    ctx.closePath();ctx.fillStyle=ink(.07);ctx.fill();
-    /* edges, depth-shaded */
-    mesh.edges.forEach(function(e){
-      var a=proj(e[0]),b=proj(e[1]),z=(a[2]+b[2])/2;
-      ctx.strokeStyle=ink((0.45+0.45*Math.min(1,Math.max(0,(z+.8)/1.6))).toFixed(2));
-      ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();
+    var ellipseGeo=new THREE.BufferGeometry().setFromPoints(ellipsePts);
+    var ellipseLine=new THREE.Line(ellipseGeo,dashMat);
+    ellipseLine.computeLineDistances();
+    ellipseLine.position.set(0,GROUND_Y,-0.4);
+    scene.add(ellipseLine);
+  }
+
+  buildAircraft();
+  scene.add(aircraft);
+
+  (function buildGrid(){
+    var size=44,div=44,half=size/2,pos=[];
+    for(var i=0;i<=div;i++){
+      var t=-half+i*(size/div);
+      pos.push(-half,0,t,half,0,t);
+      pos.push(t,0,-half,t,0,half);
+    }
+    var geo=new THREE.BufferGeometry();
+    geo.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));
+    var grid=new THREE.LineSegments(geo,gridMat);
+    grid.position.y=GROUND_Y;
+    scene.add(grid);
+  })();
+
+  applyTheme();
+
+  var target=new THREE.Vector3(0,0.05,-0.5);
+  var radius=13,minR=5,maxR=26,theta=0.85,phi=1.15,minPhi=0.35,maxPhi=Math.PI-0.5;
+  var dragging=false,lastX=0,lastY=0,movedDuringDrag=false,autoRotate=!reduce,idleT=0,pointers={},pinchStartDist=null;
+
+  function sphericalToCamera(){
+    var sp=Math.sin(phi),cp=Math.cos(phi);
+    camera.position.set(target.x+radius*sp*Math.sin(theta),target.y+radius*cp,target.z+radius*sp*Math.cos(theta));
+    camera.lookAt(target);
+  }
+  sphericalToCamera();
+
+  function onPointerDown(e){
+    canvas.setPointerCapture&&canvas.setPointerCapture(e.pointerId);
+    pointers[e.pointerId]={x:e.clientX,y:e.clientY};
+    if(Object.keys(pointers).length===1){
+      dragging=true;movedDuringDrag=false;lastX=e.clientX;lastY=e.clientY;canvas.classList.add('dragging');
+    }
+    autoRotate=false;idleT=0;
+  }
+  function onPointerMove(e){
+    if(!pointers[e.pointerId])return;
+    pointers[e.pointerId]={x:e.clientX,y:e.clientY};
+    var ids=Object.keys(pointers);
+    if(ids.length===2){
+      var p0=pointers[ids[0]],p1=pointers[ids[1]];
+      var d=Math.hypot(p0.x-p1.x,p0.y-p1.y);
+      if(pinchStartDist!=null){radius=Math.max(minR,Math.min(maxR,radius+(pinchStartDist-d)*0.02))}
+      pinchStartDist=d;return;
+    }
+    if(!dragging)return;
+    var dx=e.clientX-lastX,dy=e.clientY-lastY;
+    lastX=e.clientX;lastY=e.clientY;
+    if(Math.abs(dx)+Math.abs(dy)>2)movedDuringDrag=true;
+    theta-=dx*0.0062;phi=Math.max(minPhi,Math.min(maxPhi,phi-dy*0.0062));
+  }
+  function onPointerUp(e){
+    delete pointers[e.pointerId];
+    if(Object.keys(pointers).length<2)pinchStartDist=null;
+    if(Object.keys(pointers).length===0){
+      dragging=false;canvas.classList.remove('dragging');
+      if(!movedDuringDrag)selectHotspot(null);
+    }
+    idleT=0;
+  }
+  canvas.addEventListener('pointerdown',onPointerDown);
+  canvas.addEventListener('pointermove',onPointerMove);
+  canvas.addEventListener('pointerup',onPointerUp);
+  canvas.addEventListener('pointercancel',onPointerUp);
+  canvas.addEventListener('wheel',function(e){
+    e.preventDefault();
+    radius=Math.max(minR,Math.min(maxR,radius+e.deltaY*0.012));
+    autoRotate=false;idleT=0;
+  },{passive:false});
+
+  wrap.querySelector('.pv-reset').addEventListener('click',function(){
+    radius=13;theta=0.85;phi=1.15;autoRotate=!reduce;idleT=0;selectHotspot(null);
+  });
+
+  var activeId=null,raycaster=new THREE.Raycaster();
+  hotspotDefs.forEach(function(h,idx){
+    var el=document.createElement('div');
+    el.className='pv-hotspot';
+    el.textContent=String(idx+1);
+    el.setAttribute('tabindex','0');
+    el.setAttribute('role','button');
+    el.setAttribute('aria-label',h.title);
+    el.addEventListener('click',function(ev){ev.stopPropagation();selectHotspot(h.id===activeId?null:h.id)});
+    el.addEventListener('keydown',function(ev){if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();selectHotspot(h.id===activeId?null:h.id)}});
+    markersLayer.appendChild(el);
+    h.el=el;
+  });
+
+  function selectHotspot(id){
+    activeId=id;
+    hotspotDefs.forEach(function(h){
+      h.el.classList.remove('active','dim');
+      if(id===null)return;
+      if(h.id===id)h.el.classList.add('active');else h.el.classList.add('dim');
     });
-    /* camera cone from the belly */
-    var c0=proj(HOTS[0].p),f1=proj([0.15+0.5,0.5,-0.55]),f2=proj([0.15-0.5,0.5,-0.55]),f3=proj([0.15-0.5,-0.5,-0.55]),f4=proj([0.15+0.5,-0.5,-0.55]);
-    ctx.strokeStyle=ink(.35);ctx.setLineDash([4,4]);ctx.lineWidth=1;
-    [f1,f2,f3,f4].forEach(function(f){ctx.beginPath();ctx.moveTo(c0[0],c0[1]);ctx.lineTo(f[0],f[1]);ctx.stroke()});
-    ctx.setLineDash([]);
-    ctx.strokeStyle=ink(.5);ctx.beginPath();
-    [f1,f2,f3,f4].forEach(function(f,n){n?ctx.lineTo(f[0],f[1]):ctx.moveTo(f[0],f[1])});
-    ctx.closePath();ctx.stroke();
-    /* hotspots */
-    hots.forEach(function(b,n){
-      var q=proj(HOTS[n].p);
-      b.style.left=q[0]+'px';b.style.top=q[1]+'px';
+    if(id===null){
+      panelEl.classList.remove('show');hintEl.style.opacity='1';idleT=0;
+    }else{
+      var h=hotspotDefs.filter(function(x){return x.id===id})[0];
+      kickerEl.textContent=h.kicker;titleEl.textContent=h.title;descEl.textContent=h.desc;specEl.textContent=h.spec;
+      panelEl.classList.add('show');hintEl.style.opacity='0';autoRotate=false;
+    }
+  }
+  wrap.querySelector('.pv-close').addEventListener('click',function(ev){ev.stopPropagation();selectHotspot(null)});
+  wrap.addEventListener('click',function(e){if(e.target===wrap||e.target.classList.contains('pv-hud'))selectHotspot(null)});
+
+  function updateMarkers(){
+    var rect=canvas.getBoundingClientRect(),camPos=camera.position;
+    hotspotDefs.forEach(function(h){
+      var p=h.pos,ndc=p.clone().project(camera);
+      var behind=ndc.z>1||ndc.z<-1;
+      var x=(ndc.x*0.5+0.5)*rect.width,y=(1-(ndc.y*0.5+0.5))*rect.height;
+      var within=x>-30&&x<rect.width+30&&y>-30&&y<rect.height+30;
+      if(behind||!within){h.el.classList.add('hidden-off');return}
+      h.el.classList.remove('hidden-off');
+      h.el.style.setProperty('--tx',x+'px');h.el.style.setProperty('--ty',y+'px');
+      var occluded=false;
+      try{
+        var dist=camPos.distanceTo(p),dir=p.clone().sub(camPos).normalize();
+        raycaster.set(camPos,dir);raycaster.far=Math.max(dist-0.04,0.01);raycaster.near=0.01;
+        occluded=raycaster.intersectObjects(occluders,false).length>0;
+      }catch(err){occluded=false}
+      h.el.classList.toggle('occluded',occluded);
     });
   }
-  function loop(){
-    if(!el.isConnected){cancelAnimationFrame(raf);raf=0;return}
-    if(auto&&vis){yaw+=0.004;draw()}
-    raf=requestAnimationFrame(loop);
+
+  function onResize(){
+    var w=wrap.clientWidth,h=wrap.clientHeight;if(!w||!h)return;
+    camera.aspect=w/h;camera.updateProjectionMatrix();renderer.setSize(w,h);
   }
-  function pick(n){
-    sel=n;
-    hots.forEach(function(b,i){b.setAttribute('aria-pressed',String(i===n))});
-    card.innerHTML='<span class="t">'+esc(HOTS[n].t)+'</span><p>'+esc(HOTS[n].d)+'</p>';
-    card.hidden=false;
+  var ro=('ResizeObserver' in window)?new ResizeObserver(onResize):null;
+  if(ro)ro.observe(wrap);
+  onResize();
+
+  var clock=new THREE.Clock(),raf=0,vis=true;
+  function frame(){
+    raf=requestAnimationFrame(frame);
+    if(!vis)return;
+    var dt=Math.min(clock.getDelta(),0.05);
+    if(!dragging){idleT+=dt;if(idleT>1.4&&activeId===null&&!reduce)autoRotate=true}
+    if(autoRotate&&!dragging)theta+=dt*0.09;
+    sphericalToCamera();
+    propGroups.forEach(function(pg){pg.rotation.z+=dt*7.5*pg.userData.spin});
+    renderer.render(scene,camera);
+    updateMarkers();
+    if(loadingEl)loadingEl.classList.add('gone');
   }
-  hots.forEach(function(b,n){b.addEventListener('click',function(e){e.stopPropagation();auto=false;pick(n)})});
-  var down=false,lx=0,ly=0;
-  el.addEventListener('pointerdown',function(e){
-    if(e.target.closest('.hot')||e.target.closest('.vtools'))return;
-    down=true;auto=false;lx=e.clientX;ly=e.clientY;el.classList.add('dragging');el.setPointerCapture(e.pointerId);
-  });
-  el.addEventListener('pointermove',function(e){
-    if(!down)return;
-    yaw+=(e.clientX-lx)*0.01;pitch=Math.max(-1.35,Math.min(0.5,pitch+(e.clientY-ly)*0.006));
-    lx=e.clientX;ly=e.clientY;draw();
-  });
-  ['pointerup','pointercancel'].forEach(function(t){el.addEventListener(t,function(e){down=false;el.classList.remove('dragging');try{el.releasePointerCapture(e.pointerId)}catch(_){}})});
-  el.setAttribute('tabindex','0');
-  el.addEventListener('keydown',function(e){
-    var s=0.12;
-    if(e.key==='ArrowLeft')yaw-=s;else if(e.key==='ArrowRight')yaw+=s;
-    else if(e.key==='ArrowUp')pitch=Math.max(-1.35,pitch-s*.6);else if(e.key==='ArrowDown')pitch=Math.min(0.5,pitch+s*.6);
-    else return;
-    auto=false;draw();e.preventDefault();
-  });
-  var rb=el.querySelector('[data-reset]');
-  if(rb)rb.addEventListener('click',function(){yaw=-0.7;pitch=-0.5;auto=!reduce;sel=-1;card.hidden=true;hots.forEach(function(b){b.setAttribute('aria-pressed','false')});draw()});
-  if('IntersectionObserver' in window)new IntersectionObserver(function(en){vis=en[0].isIntersecting}).observe(el);
-  var rt;window.addEventListener('resize',function(){if(!el.isConnected)return;clearTimeout(rt);rt=setTimeout(function(){if(el.isConnected&&size())draw()},200)});
-  if(size())draw();
-  if(!reduce)raf=requestAnimationFrame(loop);
+  if('IntersectionObserver' in window)new IntersectionObserver(function(en){vis=en[0].isIntersecting}).observe(wrap);
+  frame();
 }
 
 /* ---------------- Scroll story ---------------- */
@@ -2133,13 +2482,32 @@ function projectView(p){
       '</div><p class="fineprint">[Illustration only \u2014 not flight data]</p></div></section>'+
       '<section class="pad" style="padding-top:0"><div class="wrap"><span class="tag gap">[AIRFRAME-05]</span>'+
       '<h2 style="margin-bottom:1.2rem">Look around the aircraft.</h2>'+
-      '<p class="lede" style="margin-bottom:2rem">Drag to rotate. Tap a marker for detail. The geometry here is a placeholder until the flight article is released.</p>'+
-      '<div class="viewer" role="application" aria-label="Rotatable 3D view of the aircraft. Arrow keys also rotate it.">'+
-        '<canvas aria-hidden="true"></canvas>'+
-        HOTS.map(function(h,i){return '<button class="hot" type="button" aria-pressed="false" aria-label="'+esc(h.t)+'">'+(i+1)+'</button>'}).join('')+
-        '<div class="vtools"><button class="tb" type="button" data-reset>Reset</button></div>'+
-        '<div class="hot-card" hidden></div>'+
-      '</div><p class="fineprint">[Placeholder geometry \u2014 not the flight article]</p></div></section>';
+      '<p class="lede" style="margin-bottom:2rem">Drag to rotate, scroll to zoom, and select a numbered system for detail. The geometry here is illustrative until the flight article is released.</p>'+
+      '<div class="viewer pv" style="aspect-ratio:16/10" role="application" aria-label="Rotatable 3D model of the aircraft with numbered systems. Drag to orbit, scroll to zoom.">'+
+        '<canvas class="pv-canvas"></canvas>'+
+        '<div class="pv-loading">[INITIALIZING AIRFRAME]</div>'+
+        '<div class="pv-hud">'+
+          '<div class="pv-corner"></div>'+
+          '<div class="pv-brand">'+
+            '<div class="pv-mark">AIR-01 // FIXED WING</div><h4>PEGASUS</h4>'+
+            '<div class="pv-sub">Interactive systems viewer</div>'+
+            '<div class="pv-specs">'+
+              '<div><div class="v tbc">TBC</div><div class="k">Wingspan</div></div>'+
+              '<div><div class="v tbc">TBC</div><div class="k">Length</div></div>'+
+              '<div><div class="v tbc">TBC</div><div class="k">Cruise</div></div>'+
+              '<div><div class="v tbc">TBC</div><div class="k">Endurance</div></div>'+
+            '</div></div>'+
+          '<div class="pv-controls"><button class="pv-btn pv-reset" type="button">Reset view</button></div>'+
+          '<div class="pv-markers"></div>'+
+          '<div class="pv-bl">'+
+            '<div class="pv-hint">Drag to orbit \u00B7 scroll to zoom \u00B7 select a system</div>'+
+            '<div class="pv-panel">'+
+              '<div class="pv-row1"><div class="pv-kicker">System</div><button class="pv-close" type="button" aria-label="Close">&times;</button></div>'+
+              '<h3 class="pv-title">\u2014</h3><p class="pv-desc"></p><div class="pv-spec"></div>'+
+            '</div></div>'+
+          '<div class="pv-footer">Pegasus \u00B7 Fixed-wing UAV \u00B7 Illustrative systems schematic</div>'+
+        '</div>'+
+      '</div><p class="fineprint">[Illustrative geometry \u2014 not the flight article]</p></div></section>';
   }
   if(p.id==='space-01'){
     demo+='<section class="pad"><div class="wrap">'+
@@ -2695,7 +3063,7 @@ function render(){
   var themeDomain=THEME_DOMAINS[r.name]?r.name:(r.name==='project'&&byId[r.id]?byId[r.id].domain:null);
   ['air','sea','ground','space'].forEach(function(d){view.classList.toggle(d,themeDomain===d)});
   if(!reduce){view.style.animation='none';void view.offsetWidth;view.style.animation=''}
-  if(r.name==='project'){initCompare(view);initStory(view);initViewer(view);initSat(view);initSchem(view)}
+  if(r.name==='project'){initCompare(view);initStory(view);initPegasusViewer(view);initSat(view);initSchem(view)}
   reveal(view);
   if(r.name==='home')Hero.start();else Hero.stop();
   Array.prototype.forEach.call(document.querySelectorAll('.links a[data-route]'),function(a){
